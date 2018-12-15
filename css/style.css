@@ -1,0 +1,130 @@
+@import url(fonts.css);
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: roboto-regular;
+}
+a{
+    text-decoration: none;
+    /* color: #000000; */
+}
+.container-fluid{
+ display: flex;
+ /* background-color: rgba(32, 52, 94,1) */
+ background-color: rgb(249, 249, 255,0.5); 
+}
+/* .container{
+
+} */
+
+/*********************
+    NAVIGATION
+**********************/
+nav{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    background-color: rgb(249, 249, 255,0.5); 
+    position: sticky;
+    height: auto;
+}
+nav h3::first-letter{
+    font-size: 40px;
+    color: rgb(119, 23, 23);
+}
+nav h3 a {
+    padding-left: 30px;
+    padding-top:15px;
+    padding-bottom:15px;
+    color: rgb(21, 33, 80,1);
+}
+nav p a{
+    color: rgb(21, 33, 80,1);
+}
+nav p a:hover{
+    color: rgb(236, 53, 53);
+    border-bottom: 1px solid #000000;
+}
+nav p{
+    padding-right: 50px;
+    padding-top: 30px;
+}
+/**********************
+    SIGN IN AND SIGN UP
+***********************/
+.leftside{
+    width: 50%;
+    height: auto;
+    height: 93vh;
+}
+.rightside{
+    width: 50%;
+    height: 93vh;
+}
+.signin{
+    width: 60%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    border: 1px #C1CDCD;
+    margin-top: 160px;
+    margin-left: 100px;
+    background-color: white;
+}
+.signin .title{
+    /* padding: 20px  */
+    margin: 20px auto 10px 20px; 
+    text-transform: uppercase;
+}
+
+.form-control-lg{
+    width: 380px;
+    height: 40px;
+    text-align: left;
+    /* border-radius: 5px; */
+    /* border: 1px solid; */
+    outline: none;
+    font-family: roboto-thin;
+    font-size: 18px;
+    padding-left: 10px;
+}
+.form-control-md{
+    width: 300px;
+    height: 40px;
+    text-align: left;
+    /* border-radius: 5px; */
+    /* border: 1px solid; */
+    outline: none;
+    font-size: 18px;
+    padding-left: 10px;
+}
+.form-control{
+    width: 300px;
+    height: 40px;
+    text-align: left;
+    font-size: 18px;
+    padding-left: 10px;
+}
+.form-element{
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+.form-label{
+ margin-bottom: 5px;
+}
+.btn{
+    width: 150px;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+.btn-primary{
+    background-color: rgb(21, 33, 80); /*blue velvet*/
+    color: #fff;
+}
+.btn-center{
+    padding: 20px 0px; 
+    margin: 0 auto;
+}

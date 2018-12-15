@@ -1,0 +1,16 @@
+@font-face{
+    font-family: roboto-light;
+    src: url(../resources/fonts/roboto/Roboto-Light.ttf);
+}
+@font-face{
+    font-family: roboto-thin;
+    src: url(../resources/fonts/roboto/Roboto-Thin.ttf);
+}
+@font-face{
+    font-family: roboto-regular;
+    src: url(../resources/fonts/roboto/Roboto-Regular.ttf);
+}
+@font-face{
+    font-family: roboto-italicthin;
+    src: url(../resources/fonts/roboto/Roboto-ThinItalic.ttf)
+}
