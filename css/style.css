@@ -77,7 +77,39 @@ nav p{
     margin: 20px auto 10px 20px; 
     text-transform: uppercase;
 }
-
+.signup{
+    width: auto;
+    height: auto;
+    margin:  0 auto;
+    display: flex;
+    /* border: 1px solid black; */
+    flex-direction: column;
+    /* border: 1px #C1CDCD; */
+    margin-top: 100px;
+    margin-bottom: 30px;
+    background-color: white;
+}
+#signup-logo{
+    margin-left: 100px; 
+    font-size: 30px;
+    color: rgb(21, 33, 80,1);
+}
+#signup-logo-subtitle{
+    margin-left: 70px; 
+    padding-bottom: 30px;
+    color: rgb(21, 33, 80,1);
+}
+#signup-logo::first-letter{
+    font-size: 50px;
+    color: rgb(119, 23, 23);
+}
+#signup-logo-subtitle a{
+    color: rgb(21, 33, 80,1);
+}
+#signup-logo-subtitle a:hover{
+    color: rgb(236, 53, 53);
+    border-bottom: 1px solid #000000;
+}
 .form-control-lg{
     width: 380px;
     height: 40px;
