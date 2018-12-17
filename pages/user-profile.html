@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>user profile - Questioner</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <li class="navlink">
+                <a href="" id="navlink">
+                    <b>DashBoard</b>
+                </a>
+            </li>
+            <li class="logo">
+                <a href="" id="logo">
+                    Questioner
+                </a>
+            </li>
+            <div class="dropdown img_btn">
+                <button class="dropbtn ">
+                    <img src="../resources/img/profile-placeholder.png" alt="img" id="nav_img" width="40px" height="40px" />
+                    <!-- <i class="fa fa-caret-down"></i> -->
+                    <i class="fa fa-caret-down fa-lg"></i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="user-profile.html" class="icon user">Your Profile
+                    </a>
+                    <a href="#" class="icon signout">Sign Out
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="sidebar">
+            <div class="profile_img">
+                <img src="../resources/img/profile-placeholder.png" alt="profile image" width="200px" height="200px">
+            </div>
+            <div class="profile_details">
+                <span>Name</span> <br>
+                <span>Username</span>
+            </div>
+        </div>
+        <div class="profile_dash">
+            <div class="top">
+                <div class="ques_posted">
+                    <p>TOTAL QUESTIONS POSTED</p>
+                    <p class="posted">10</p>
+                </div>
+                <div class="ques_comm">
+                    <p>TOTAL QUESTIONS COMMENTED</p>
+                    <p class="comments">10</p>
+                </div>
+            </div>
+            <div class="bottom">
+                <div class="feeds">
+                    <div class="feedlinks">
+                        <button class="tablink" id="defaultOpen" onclick="openPage('schedule_meetups', this, '#DEDBD2')">Scheduled
+                            Meetups</button>
+                        <button class="tablink" id="tab_2" onclick="openPage('top_feed', this, '#DEDBD2')">Top
+                            Questions Feed(s)</button>
+                    </div>
+                    <div id="schedule_meetups" class="tabcontent">
+                        <div class="tabtext">
+                            <h3>Home</h3>
+                            <p>meetups</p>
+                        </div>
+                    </div>
+                    <div id="top_feed" class="tabcontent">
+                        <div class="tabtext">
+                            <h3>Home</h3>
+                            <p>meetups</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../js/main.js"></script>
+
+</html>
