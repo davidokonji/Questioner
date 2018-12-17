@@ -1,15 +1,115 @@
-@media (min-width: 768px) {
+@media screen and (max-width: 768px) {
     .container {
       width: 750px;
     }
+    .leftside{
+      width: auto;
+      height: auto;
+      /* height: 93vh; */
+  }
+  .rightside{
+      width: auto;
+      height: auto;
+  }
+  .signin{
+    width: 60%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    border: 1px #C1CDCD;
+    margin-top: 160px;
+    margin-left: 100px;
+    background-color: white;
+}
+    .form-control-lg{
+      width: 20px;
+      height: 40px;
+      text-align: left;
+      /* border-radius: 5px; */
+      /* border: 1px solid; */
+      outline: none;
+      font-family: roboto-thin;
+      font-size: 18px;
+      padding-left: 10px;
+  }
+  .form-control-md{
+      width: 300px;
+      height: 40px;
+      text-align: left;
+      /* border-radius: 5px; */
+      /* border: 1px solid; */
+      outline: none;
+      font-size: 18px;
+      padding-left: 10px;
+  }
   }
   @media (min-width: 992px) {
     .container {
       width: 970px;
     }
+    .leftside{
+      width: 50%;
+      height: auto;
+      height: 93vh;
+  }
+  .rightside{
+      width: 50%;
+      height: 93vh;
+  }
+    .form-control-lg{
+      width: 380px;
+      height: 40px;
+      text-align: left;
+      /* border-radius: 5px; */
+      /* border: 1px solid; */
+      outline: none;
+      font-family: roboto-thin;
+      font-size: 18px;
+      padding-left: 10px;
+  }
+  .form-control-md{
+      width: 300px;
+      height: 40px;
+      text-align: left;
+      /* border-radius: 5px; */
+      /* border: 1px solid; */
+      outline: none;
+      font-size: 18px;
+      padding-left: 10px;
+  }
   }
   @media (min-width: 1200px) {
     .container {
       width: 1170px;
     }
+    .leftside{
+      width: 50%;
+      height: auto;
+      height: 93vh;
+  }
+  .rightside{
+      width: 50%;
+      height: 93vh;
+  }
+    .form-control-lg{
+      width: 380px;
+      height: 40px;
+      text-align: left;
+      /* border-radius: 5px; */
+      /* border: 1px solid; */
+      outline: none;
+      font-family: roboto-thin;
+      font-size: 18px;
+      padding-left: 10px;
+  }
+  .form-control-md{
+      width: 300px;
+      height: 40px;
+      text-align: left;
+      /* border-radius: 5px; */
+      /* border: 1px solid; */
+      outline: none;
+      font-size: 18px;
+      padding-left: 10px;
+  }
   }
