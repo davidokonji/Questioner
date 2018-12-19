@@ -11,13 +11,14 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
         crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/responsive.css">
 </head>
 
 <body>
     <header>
         <nav>
             <li class="navlink">
-                <a href="" id="navlink">
+                <a href="./dashboard.html" id="navlink">
                     <b>DashBoard</b>
                 </a>
             </li>
@@ -30,7 +31,7 @@
                 <button class="dropbtn ">
                     <img src="../resources/img/profile-placeholder.png" alt="img" id="nav_img" width="40px" height="40px" />
                     <!-- <i class="fa fa-caret-down"></i> -->
-                    <i class="fa fa-caret-down fa-lg"></i>
+                    <i class="fa fa-caret-down fa-lg" id="img_icon"></i>
                 </button>
                 <div class="dropdown-content">
                     <a href="user-profile.html" class="icon user">Your Profile
@@ -44,7 +45,7 @@
     <div class="container">
         <div class="sidebar">
             <div class="profile_img">
-                <img src="../resources/img/profile-placeholder.png" alt="profile image" width="200px" height="200px">
+                <img src="../resources/img/profile-placeholder.png" alt="profile image" width="150px" height="150px">
             </div>
             <div class="profile_details">
                 <span>Name</span> <br>
@@ -86,6 +87,20 @@
             </div>
         </div>
     </div>
+    <footer class="footer">
+            <div class="footerTop">
+                <a href="./dashboard.html" id="">
+                    Questioner
+                </a>
+                <div>
+                    <li><a href="./dashboard.html">Dashboard</a></li>
+                    <li><a href="./user-profile.html">User Profile</a></li>
+                </div>
+            </div>
+            <div class="footerBottom">
+                <p>created with <i class="fa fa-heart fa-sm"></i> by Okonji Chukwunonso</p>
+            </div>
+    </footer>
 </body>
 <script src="../js/main.js"></script>
 
