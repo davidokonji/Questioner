@@ -51,10 +51,7 @@ html{
 .footerBottom i{
     color: #BA1200;
 }
-.container-fluid{
- display: flex;
- background-color: #000022 /*#170312 #538083;*/
-}
+
 /* 
     ICONS
  */
@@ -84,94 +81,94 @@ html{
 } */
 
 /*********************
-    NAVIGATION
+    NAVIGATION LANDING
 **********************/
 .nav_landing{
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    /* background-color: rgb(249, 249, 255,0.5);  */
-    background-color: #000022; /*#170312; #39375B;*/
-    position: sticky;
     height: auto;
 }
 .nav_landing h3::first-letter{
     font-size: 2.5em;
-    color: rgb(119, 23, 23);
+    color: rgb(19, 9, 6);
+    /* color: rgb(119, 23, 23); */
 }
 .nav_landing h3 a {
     padding-left: 1.8em;
     padding-top:0.9em;
     padding-bottom:0.9em;
-    /* color: rgb(21, 33, 80,1); */
-    color: #FBF5F3;
+    color: rgb(19, 9, 6);
 }
 .nav_landing p a{
-    /* color: rgb(21, 33, 80,1); */
-    color: #FBF5F3;
+    color: rgb(14, 8, 6);
 }
 .nav_landing p a:hover{
     color: rgb(236, 53, 53);
     border-bottom: 1px solid #000000;
 }
 .nav_landing p{
-    padding-right: 3.1em;
+    padding-right: 3em;
     padding-top: 1.8em;
-    color: #FBF5F3;
+    color: rgb(12, 9, 8);
 
 }
 /**********************
     SIGN IN AND SIGN UP
 ***********************/
+.container-fluid{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* background-color: #000022 #170312 #538083; */
+   }
 .leftside{
-    width: 50%;
     height: auto;
-    height: 93vh;
 }
 .rightside{
-    width: 50%;
-    height: 93vh;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    justify-content: center;
+    margin-right: 30px;
+
 }
 .signin{
-    width: 60%;
+    max-width: 500px;
     height: auto;
     display: flex;
     flex-direction: column;
-    border: 1px #C1CDCD;
     margin-top: 160px;
-    margin-left: 100px;
+    margin-right: 100px;
+    box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
     background-color: #FCFCFC /*#89909F;*/
 }
 .signin .title{
     /* padding: 20px  */
-    margin: 20px auto 10px 20px; 
+    /* margin: 20px auto 10px 20px;  */
+    padding-top:20px;
+    padding-left: 15px;
+    padding-bottom: 20px;
     text-transform: uppercase;
 }
 .signup{
-    width: auto;
-    height: auto;
-    margin:  0 auto;
     display: flex;
     flex-wrap: wrap;
     /* border: 1px solid black; */
     flex-direction: column;
-    /* border: 1px #C1CDCD; */
-    margin-top: 1em;
-    font-size: medium;
-    margin-bottom: 9em;
-    background-color: white;
+    width: auto;
+    height: auto;
+    margin:  0 auto;
+    box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
+    margin-top: 100px; 
+    border-radius: 5px;
+    padding-bottom: 50px;
 }
-#signup-logo{
-    margin-left:0.5em; 
-    font-size: 1.9em;
-    color: rgb(21, 33, 80,1);
-}
-#signup-logo::first-letter{
-    font-size:2.5em ;
-    color: rgb(119, 23, 23);
+.show{
+    padding-top:20px;
 }
 .btn-full{
-    width: 20em;
+    width: 320px;
     height: 2.5em;
     background-color: rgb(21, 33, 80); /*blue velvet*/
     color: #fff;
@@ -181,8 +178,8 @@ html{
     Form elements
  ************************/
 .form-control-lg{
-    max-width: 23.8em;
-    min-width: 18.8em;
+    /* max-width: 320px; */
+    /* min-width: 18.8em; */
     height: 2.5em;
     text-align: left;
     /* border-radius: 5px; */
@@ -193,11 +190,9 @@ html{
     padding-left: 10px;
 }
 .form-control-md{
-    width: 18.8em;
+    width: 330px;
     height: 2.5em;
-    text-align: left;
-    /* border-radius: 5px; */
-    /* border: 1px solid; */
+    border-radius: 5px;
     outline: none;
     font-size: 18px;
     padding-left: 10px;
@@ -236,7 +231,6 @@ html{
 }
 .btn-md{
     width: 80px;
-    /* height: 1.9em; */
     border-radius: 5px;
     font-size: 14px;
     padding-bottom:0.9em;
