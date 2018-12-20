@@ -1,34 +1,4 @@
-// SIGNUP
-var show = document.getElementById('show');
-show.addEventListener('click',showPassword);
-
-function showPassword(){
- var pass = document.getElementById('password'); 
- if (pass.type === "password") {
-    pass.type = "text";
-  } else {
-    pass.type = "password";
-  }
-}
-//USER PROFILE TAB
-function openPage(pageName,elmnt,color) {
-  var i, tabcontent, tablinks;
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("tablink");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].style.backgroundColor = "";
-  }
-  document.getElementById(pageName).style.display = "block";
-  elmnt.style.backgroundColor = color;
-}
-document.getElementById("defaultOpen").click();
-
-//MEET UP
-
-// 'use strict';
+'use strict';
 var btnAsk = document.querySelector(".btnAsk");
 var counter = document.querySelector("#num");
 var upvote = document.getElementById("up");
@@ -51,15 +21,13 @@ quesList.onclick = e => {
     e.target.parentNode.children[2].style.display = "block";
   } else if (action == "postCom") {
     // add a new comment
-    e.target.parentNode.parentNode.parentNode.children[1].innerText +=
-      e.target.parentNode.children[1].value;
+    e.target.parentNode.parentNode.parentNode.children[1].innerHTML +=`<div class="commentPost">${e.target.parentNode.children[1].value}</div>`;
       // e.target.parentNode.children[1].innerText;
     e.target.parentNode.parentNode.parentNode.children[1].style.display =
       "block";
   }
 };
 btnAsk.addEventListener("click", addQuestion);
-
 function addQuestion(e) {
   e.preventDefault();
   //picks the value in the question input box
@@ -91,4 +59,16 @@ function addQuestion(e) {
     </li>`;
   //appends the question list
   quesList.innerHTML += domManipulation;
+  //queslist.appendChild(domManipulation);
 }
+
+// SIGNUP
+var show = document.querySelector('#show_password');
+show.addEventListener('click',function (){
+  var pass = document.getElementById('password'); 
+  if (pass.type === "password") {
+     pass.type = "text";
+   } else {
+     pass.type = "password";
+   }
+ });

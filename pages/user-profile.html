@@ -8,10 +8,10 @@
     <title>user profile - Questioner</title>
 
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
         crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../css/responsive.css">
 </head>
 
 <body>
@@ -44,46 +44,39 @@
     </header>
     <div class="container">
         <div class="sidebar">
-            <div class="profile_img">
-                <img src="../resources/img/profile-placeholder.png" alt="profile image" width="150px" height="150px">
+            <div>
+                <img src="../resources/img/profile-placeholder.png" alt="profile image" width="200px" class="profile_img" height="200px">
             </div>
             <div class="profile_details">
-                <span>Name</span> <br>
-                <span>Username</span>
+                <div class="profile_name">John Doe</div>
+                <div class="profile_username">johndoe123</div>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec
+                        odio.</p>
+                <p><i class="fas fa-map-marker-alt"></i> location</p>
+                <button class="editBtn btn-primary">Edit Profile <i class="fas fa-edit"></i> </button>
             </div>
+            
         </div>
         <div class="profile_dash">
-            <div class="top">
-                <div class="ques_posted">
-                    <p>TOTAL QUESTIONS POSTED</p>
-                    <p class="posted">10</p>
+            <div class="update">
+                <div class="upBox update_1">
+                    Total questions posted
+                    <b class="update_val1"></b>
                 </div>
-                <div class="ques_comm">
-                    <p>TOTAL QUESTIONS COMMENTED</p>
-                    <p class="comments">10</p>
+                <div class="upBox update_2">
+                    Total questions commented
+                    <b class="update_val2"></b>
+                </div>
+                <div class="upBox update_3">
+                    Total meet-up RSVP
+                    <b class="update_val3"></b>
                 </div>
             </div>
-            <div class="bottom">
-                <div class="feeds">
-                    <div class="feedlinks">
-                        <button class="tablink" id="defaultOpen" onclick="openPage('schedule_meetups', this, '#DEDBD2')">Scheduled
-                            Meetups</button>
-                        <button class="tablink" id="tab_2" onclick="openPage('top_feed', this, '#DEDBD2')">Top
-                            Questions Feed(s)</button>
-                    </div>
-                    <div id="schedule_meetups" class="tabcontent">
-                        <div class="tabtext">
-                            <h3>Home</h3>
-                            <p>meetups</p>
-                        </div>
-                    </div>
-                    <div id="top_feed" class="tabcontent">
-                        <div class="tabtext">
-                            <h3>Home</h3>
-                            <p>meetups</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="schedule">
+               <h4>Scheduled Meet Ups</h4>
+            </div>
+            <div class="topQues">
+               <h4>Top Questions Feed</h4>
             </div>
         </div>
     </div>
