@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>User(username) Dashboard </title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <li class="navlink">
+                <a href="" id="navlink">
+                    <b>DashBoard</b>
+                </a>
+            </li>
+            <li class="logo">
+                <a href="" id="logo">
+                    Questioner
+                </a>
+            </li>
+            <div class="dropdown img_btn">
+                <button class="dropbtn ">
+                    <img src="../resources/img/profile-placeholder.png" alt="img" id="nav_img" width="40px" height="40px" />
+                    <!-- <i class="fa fa-caret-down"></i> -->
+                    <i class="fa fa-caret-down fa-lg" id="img_icon"></i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="user-profile.html" class="icon user">Your Profile
+                    </a>
+                    <a href="#" class="icon signout">Sign Out
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="dashboard-container">
+        <div class="top-dash">
+            <div class="box box-1">
+               <p>Recent Meetups</p> 
+            </div>
+            <div class="box box-2">
+                <input type="search" name="" id="dash_search" placeholder="SEARCH">
+            </div>
+            <div class="box box-3">
+                <button class="btn">
+                        Filter By
+                        <i class="fa fa-filter"></i>
+                </button> 
+            </div>
+        </div>
+        <div class="bottom_dash">
+            <div class="dash_card">
+                <div class="card_img">
+                    <img src="../resources/img/placeholder.jpg" alt="image" width="300px" height="300px" class="card_img">
+                </div>
+                <div class="card_body">
+                    <span>
+                        <a href=""></a>Title</a>
+                        <p>time</p>
+                        <p>venue</p>
+                    </span>
+                    <div class="details">
+                        details of meetup
+                    </div>
+                </div>
+            </div>
+            <div class="dash_card">
+                    <div class="card_img">
+                        <img src="../resources/img/placeholder.jpg" alt="image" width="300px" height="300px" class="card_img">
+                    </div>
+                    <div class="card_body">
+                        <span>
+                            <a href=""></a>Title</a>
+                            <p>time</p>
+                            <p>venue</p>
+                        </span>
+                        <div class="details">
+                            details of meetup
+                        </div>
+                    </div>
+                </div>
+                <div class="dash_card">
+                        <div class="card_img">
+                            <img src="../resources/img/placeholder.jpg" alt="image" width="300px" height="300px" class="card_img">
+                        </div>
+                        <div class="card_body">
+                            <span>
+                                <a href=""></a>Title</a>
+                                <p>time</p>
+                                <p>venue</p>
+                            </span>
+                            <div class="details">
+                                details of meetup
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dash_card">
+                            <div class="card_img">
+                                <img src="../resources/img/placeholder.jpg" alt="image" width="300px" height="300px" class="card_img">
+                            </div>
+                            <div class="card_body">
+                                <span>
+                                    <a href=""></a>Title</a>
+                                    <p>time</p>
+                                    <p>venue</p>
+                                </span>
+                                <div class="details">
+                                    details of meetup
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dash_card">
+                                <div class="card_img">
+                                    <img src="../resources/img/placeholder.jpg" alt="image" width="300px" height="300px" class="card_img">
+                                </div>
+                                <div class="card_body">
+                                    <span>
+                                        <a href=""></a>Title</a>
+                                        <p>time</p>
+                                        <p>venue</p>
+                                    </span>
+                                    <div class="details">
+                                        details of meetup
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dash_card">
+                                    <div class="card_img">
+                                        <img src="../resources/img/placeholder.jpg" alt="image" width="300px" height="300px" class="card_img">
+                                    </div>
+                                    <div class="card_body">
+                                        <span>
+                                            <a href=""></a>Title</a>
+                                            <p>time</p>
+                                            <p>venue</p>
+                                        </span>
+                                        <div class="details">
+                                            details of meetup
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="loadBtn">
+                            <button class="btn btn-primary">Load More</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+            <div class="footerTop">
+                <a href="./dashboard.html" id="">
+                    Questioner
+                </a>
+                <div>
+                    <li><a href="./dashboard.html">Dashboard</a></li>
+                    <li><a href="./user-profile.html">User Profile</a></li>
+                </div>
+            </div>
+            <div class="footerBottom">
+                <p>created with <i class="fa fa-heart fa-sm"></i> by Okonji Chukwunonso</p>
+            </div>
+    </footer>
+</body>
+<script src="../js/main.js"></script>
+
+</html>

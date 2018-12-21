@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>user profile - Questioner</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <li class="navlink">
+                <a href="./dashboard.html" id="navlink">
+                    <b>DashBoard</b>
+                </a>
+            </li>
+            <li class="logo">
+                <a href="" id="logo">
+                    Questioner
+                </a>
+            </li>
+            <div class="dropdown img_btn">
+                <button class="dropbtn ">
+                    <img src="../resources/img/profile-placeholder.png" alt="img" id="nav_img" width="40px" height="40px" />
+                    <!-- <i class="fa fa-caret-down"></i> -->
+                    <i class="fa fa-caret-down fa-lg" id="img_icon"></i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="user-profile.html" class="icon user">Your Profile
+                    </a>
+                    <a href="#" class="icon signout">Sign Out
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="sidebar">
+            <div>
+                <img src="../resources/img/profile-placeholder.png" alt="profile image" width="200px" class="profile_img" height="200px">
+            </div>
+            <div class="profile_details">
+                <div class="profile_name">John Doe</div>
+                <div class="profile_username">johndoe123</div>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec
+                        odio.</p>
+                <p><i class="fas fa-map-marker-alt"></i> location</p>
+                <button class="editBtn btn-primary">Edit Profile <i class="fas fa-edit"></i> </button>
+            </div>
+            
+        </div>
+        <div class="profile_dash">
+            <div class="update">
+                <div class="upBox update_1">
+                    Total questions posted
+                    <b class="update_val1"></b>
+                </div>
+                <div class="upBox update_2">
+                    Total questions commented
+                    <b class="update_val2"></b>
+                </div>
+                <div class="upBox update_3">
+                    Total meet-up RSVP
+                    <b class="update_val3"></b>
+                </div>
+            </div>
+            <div class="schedule">
+               <h4>Scheduled Meet Ups</h4>
+            </div>
+            <div class="topQues">
+               <h4>Top Questions Feed</h4>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+            <div class="footerTop">
+                <a href="./dashboard.html" id="">
+                    Questioner
+                </a>
+                <div>
+                    <li><a href="./dashboard.html">Dashboard</a></li>
+                    <li><a href="./user-profile.html">User Profile</a></li>
+                </div>
+            </div>
+            <div class="footerBottom">
+                <p>created with <i class="fa fa-heart fa-sm"></i> by Okonji Chukwunonso</p>
+            </div>
+    </footer>
+</body>
+<script src="../js/main.js"></script>
+
+</html>

@@ -1,0 +1,38 @@
+/* all navs and footers*/
+@font-face{
+    font-family:Montserrat-Regular ;
+    src: url(../resources/fonts/montserrat/Montserrat-Regular.otf);
+}
+@font-face{
+    font-family: roboto-thin;
+    src: url(../resources/fonts/roboto/Roboto-Thin.ttf);
+}
+@font-face{
+    font-family: roboto-regular;
+    src: url(../resources/fonts/roboto/Roboto-Regular.ttf);
+}
+@font-face{
+    font-family: raleway-regular;
+    src: url(../resources/fonts/raleway/Raleway-Regular.ttf);
+}
+@font-face{
+    font-family:raleway-thin ;
+    src: url(../resources/fonts/raleway/Raleway-Thin.ttf);
+}
+@font-face{
+    font-family: Catamaran-ExtraLight;
+    src: url(../resources/fonts/catamaran/Catamaran-ExtraLight.ttf);
+}
+@font-face{
+    font-family:Catamaran-regular ;
+    src: url(../resources/fonts/catamaran/Catamaran-SemiBold.ttf);
+}
+@font-face{
+    font-family:Montserrat-Bold ;
+    src: url(../resources/fonts/montserrat/Montserrat-Bold.otf);
+}
+
+@font-face{
+    font-family:MontserratAlternates-Regular ;
+    src: url(../resources/fonts/montserrat/MontserratAlternates-Regular.otf);
+}
