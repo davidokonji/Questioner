@@ -55,50 +55,7 @@ html{
 .footerBottom i{
     color: #BA1200;
 }
-/* 
- CSS MODAL
- */
- .modal {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    opacity: 0;
-    visibility: hidden;
-    transform: scale(1.1);
-    transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
-}
-.modal-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    width: 400px;
-    border-radius: 0.5rem;
-}
-.close-button {
-    float: right;
-    width: 1.5rem;
-    line-height: 1.5rem;
-    text-align: center;
-    cursor: pointer;
-    border-radius: 0.25rem;
-    background-color: lightgray;
-}
-.close-button:hover {
-    background-color: darkgray;
-}
-.show-modal {
-    opacity: 1;
-    visibility: visible;
-    transform: scale(1.0);
-    transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
-}
+
 /* 
     ICONS
  */
@@ -150,11 +107,13 @@ html{
 .nav_landing p a{
     /* color: rgb(14, 8, 6); */
     color: #ffffff;
+    opacity: 0.75;
 
 }
 .nav_landing p a:hover{
-    color: #29648a;
-    border-bottom: 2px solid #000000;
+    color: #ffffff;
+    /* border-bottom: 2px solid #000000; */
+    opacity: 1;
 }
 .nav_landing p{
     padding-right: 3em;
@@ -855,65 +814,160 @@ html{
 }
 .admin_logo{
     flex-basis: 250px;
+    padding-top: 23px;
     padding-left: 20px;
-}
-.admin_logo::first-letter{
-    font-size: 28px;
-    color: rgb(19, 9, 6);
+    padding-bottom:23px;
+    background-color:#ffffff;
+    font-family:Montserrat-Regular;
 }
 #admin_logo{
-    color: rgb(19, 9, 6);
+    color: black;
+    font-size: 18px;
+}
+.admin_link{
+    color: white;
+    font-family:Montserrat-Regular;
 }
 .admin-container{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     height: auto;
-    border: 1px solid black;
-    width: 80%;
 }
-.admin_side_bar{
-    display: flex;
-    flex-direction: column;
+.admin_sidebar{
+    display:flex;
+    flex-direction:column;
     flex-wrap: wrap;
-    border: 1px solid black;
-    width:250px;
-    justify-content: center;
-     /* padding-bottom: 50px; */
-    padding:30px; 
-    font-size: 18px;
-
+    height:auto;
+    flex-basis: 250px;
+    order:1;
+    border-right: 1px solid rgba(0,0,0,0.1);
+    font-family:Montserrat-Regular;
+    /* align-items: center; */
+}
+.sidebar_item{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left:50px;
+    color: white;
+    background-color: #25274d;
+    margin-top:100px;
+    margin-bottom: 150px; 
 }
 .admin_body{
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    width: 70%;
-    border: 1px solid black;
+    /* border: 1px solid red; */
+    font-family:raleway-regular;
+    order:2;
 }
-.admin_body p{
-    padding: 30px;
-    order: 1;
+.admin_top{
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    margin:50px;
+    justify-content: space-evenly;
+    order:1;
 }
-.admin_body p button{
-    color:rgb(0, 89, 255);
-    outline: none;
-    border: none;
-    cursor: pointer;
+.admin_box{
+    display:flex;
+    flex-direction:column;
+    flex-basis:300px;
+    width:400px;
+    height: 200px;
+    box-shadow: 0px 1px 5px rgba(0,0,0,0.2);
+    border-radius: 5px;
 }
-/* .admin_body p button:hover{
-    transform: scale(1.5);
-} */
-.admin_display_meetup{
-    display: flex;
-    flex-direction: row;
+.note_down{
+    padding-left:110px;
+    font-size:14px;
+}
+.boxtop{
+    display:flex;
+    flex-direction:row;
+    /* align-content: flex-end; */
+    padding-top:50px;
+    padding-left:60px;
+}
+.boxtop i{
+    color: #464866;
+}
+.boxcount{
+    padding:10px;
+    font-size: 42px;
+}
+.admin_box:hover{
+    box-shadow: 0px 1px 5px rgba(0,0,0,0.5);
+}
+.admin_bottom{
+    display:flex;
+    flex-direction: column;
     flex-wrap: wrap;
     order:2;
-    width:50%;
-    border: 1px solid black;
-
+    margin-bottom: 40px; 
 }
-.admin_display_meetup p{
- box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
-padding:10px;
+.createBtn{
+    display: flex;
+    flex-direction: row;
+    width: 150px;
+    margin-left: 120px;
+    padding-bottom:50px; 
+}
+.view_meetup{
+    margin-left: 120px;
+    box-shadow: 0px 1px 5px rgba(0,0,0,0.5);
+    height: 200px;
+    max-width: 680px;
+    overflow-wrap:break-word;
+    border-radius: 5px;
+}
+.view_meetup p{
+    /* border: 1px solid black; */
+    box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
+    padding: 20px;
+    font-size: 16px;
+}
+/* 
+ CSS MODAL
+ */
+ .modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.1);
+    transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+}
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 1rem 1.5rem;
+    width: 24rem;
+    border-radius: 0.5rem;
+}
+.close-button {
+    float: right;
+    width: 1.5rem;
+    line-height: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    background-color: lightgray;
+}
+.close-button:hover {
+    background-color: darkgray;
+}
+.show-modal {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1.0);
+    transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
 }

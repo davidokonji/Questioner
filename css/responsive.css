@@ -1,12 +1,12 @@
 @media screen  and (max-width: 979px) /* Tablet */ {
   /* body {
-    background: blue;
+    background: gray;
   }
    */
-
 /*********************
   NAVIGATION LANDING
 **********************/
+
 .nav_landing{
 display: flex;
 justify-content: space-between;
@@ -28,16 +28,17 @@ padding-bottom:20px;
 font-family:Montserrat-Regular;
 /* color: rgb(19, 9, 6); */
 color: #ffffff;
-
 }
 .nav_landing p a{
-/* color: rgb(14, 8, 6); */
-color: #ffffff;
+  /* color: rgb(14, 8, 6); */
+font-family:Montserrat-Regular;
+  color: #ffffff;
+  opacity: 0.75;
 
 }
 .nav_landing p a:hover{
-  color: #29648a;
-border-bottom: 2px solid #000000;
+  color: #ffffff;
+  opacity: 1;
 }
 .nav_landing p{
 padding-right: 3em;
@@ -710,6 +711,165 @@ align-items: center;
  box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
  padding: 10px 15px;
 }
+/**************************
+   ADMIN DASHBOARD
+***************************/
+.admin_nav{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
+  align-items: center;
+  flex-wrap: wrap;
+ }
+ .admin_logo{
+     flex-basis: 250px;
+     padding-top: 23px;
+     padding-left: 20px;
+     padding-bottom:23px;
+     background-color:#25274d;
+     font-family:Montserrat-Regular;
+ }
+ #admin_logo{
+     color: #ffffff;
+     font-size: 12px;
+     display:none;
+ }
+ .admin_link{
+     color: white;
+     font-family:Montserrat-Regular;
+ }
+ .admin-container{
+     display: flex;
+     flex-direction: row;
+     flex-wrap: wrap;
+     height: auto;
+ }
+ .admin_sidebar{
+     order:1;
+     border-right: 1px solid rgba(0,0,0,0.1);
+     font-family:Montserrat-Regular;
+     border:1px solid black;
+     display:none;
+ }
+ .admin_body{
+     display: flex;
+     flex-direction: column;
+     flex-wrap: wrap;
+     /* border: 1px solid red; */
+     border:1px solid black;
+     font-family:raleway-regular;
+     order:2;
+ }
+ .admin_top{
+     display:flex;
+     flex-direction:row;
+     flex-wrap:wrap;
+     margin:50px;
+     justify-content: space-evenly;
+     order:1;
+ }
+ .admin_box{
+     display:flex;
+     flex-direction:column;
+     flex-basis:300px;
+     width:400px;
+     height: 200px;
+     box-shadow: 0px 1px 5px rgba(0,0,0,0.2);
+     border-radius: 5px;
+ }
+ .note_down{
+     padding-left:110px;
+     font-size:14px;
+ }
+ .boxtop{
+     display:flex;
+     flex-direction:row;
+     /* align-content: flex-end; */
+     padding-top:50px;
+     padding-left:60px;
+ }
+ .boxtop i{
+     color: #464866;
+ }
+ .boxcount{
+     padding:10px;
+     font-size: 42px;
+ }
+ .admin_box:hover{
+     box-shadow: 0px 1px 5px rgba(0,0,0,0.5);
+ }
+ .admin_bottom{
+     display:flex;
+     flex-direction: column;
+     flex-wrap: wrap;
+     order:2;
+     margin-bottom: 40px; 
+ }
+ .createBtn{
+     display: flex;
+     flex-direction: row;
+     width: 150px;
+     margin-left: 120px;
+     padding-bottom:50px; 
+ }
+ .view_meetup{
+     margin-left: 120px;
+     box-shadow: 0px 1px 5px rgba(0,0,0,0.5);
+     height: 200px;
+     max-width: 680px;
+     overflow-wrap:break-word;
+     border-radius: 5px;
+ }
+ .view_meetup p{
+     /* border: 1px solid black; */
+     box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
+     padding: 20px;
+     font-size: 16px;
+ }
+ /* 
+  CSS MODAL
+  */
+  .modal {
+     position: fixed;
+     left: 0;
+     top: 0;
+     width: 100%;
+     height: 100%;
+     background-color: rgba(0, 0, 0, 0.5);
+     opacity: 0;
+     visibility: hidden;
+     transform: scale(1.1);
+     transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+ }
+ .modal-content {
+     position: absolute;
+     top: 50%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+     background-color: white;
+     padding: 1rem 1.5rem;
+     width: 24rem;
+     border-radius: 0.5rem;
+ }
+ .close-button {
+     float: right;
+     width: 1.5rem;
+     line-height: 1.5rem;
+     text-align: center;
+     cursor: pointer;
+     border-radius: 0.25rem;
+     background-color: lightgray;
+ }
+ .close-button:hover {
+     background-color: darkgray;
+ }
+ .show-modal {
+     opacity: 1;
+     visibility: visible;
+     transform: scale(1.0);
+     transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+ }
 }
 
 @media screen and (max-width: 500px) /* Mobile */ {
@@ -738,12 +898,14 @@ color: #ffffff;
 /* font-size:16px; */
 font-family:Montserrat-Regular;
 font-size: 14px;
+opacity: 0.75;
 color: #ffffff;
 
 }
 .nav_landing p a:hover{
-  color: #29648a;
-border-bottom: 2px solid #000000;
+  color: #ffffff;
+  opacity: 1;
+/* border-bottom: 2px solid #000000; */
 }
 .nav_landing p{
 padding-right: 10px;
@@ -1425,7 +1587,6 @@ align-items: center;
     padding: 10px 15px;
 }
 .topQues{
- /* width: 100%; */
  box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
  height: 150px;
  margin-top: 20px;
@@ -1435,5 +1596,174 @@ align-items: center;
  box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
  padding: 10px 15px;
 }
-
+/**************************
+   ADMIN DASHBOARD
+***************************/
+.admin_nav{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
+  align-items: center;
+  flex-wrap: wrap;
+ }
+ .admin_logo{
+     flex-basis: 250px;
+     padding-top: 23px;
+     padding-left: 20px;
+     padding-bottom:23px;
+     background-color:#ffffff;
+     font-family:Montserrat-Regular;
+ }
+ #admin_logo{
+     color: black;
+     font-size: 18px;
+ }
+ .admin_link{
+     color: white;
+     font-family:Montserrat-Regular;
+ }
+ .admin-container{
+     display: flex;
+     flex-direction: row;
+     flex-wrap: wrap;
+     height: auto;
+ }
+ .admin_sidebar{
+     display:flex;
+     flex-direction:column;
+     flex-wrap: wrap;
+     height:auto;
+     flex-basis: 250px;
+     order:1;
+     border-right: 1px solid rgba(0,0,0,0.1);
+     font-family:Montserrat-Regular;
+     /* align-items: center; */
+ }
+ .sidebar_item{
+     padding-top: 20px;
+     padding-bottom: 20px;
+     padding-left:50px;
+     color: white;
+     background-color: #25274d;
+     margin-top:100px;
+     margin-bottom: 150px; 
+ }
+ .admin_body{
+     display: flex;
+     flex-direction: column;
+     flex-wrap: wrap;
+     /* border: 1px solid red; */
+     font-family:raleway-regular;
+     order:2;
+ }
+ .admin_top{
+     display:flex;
+     flex-direction:row;
+     flex-wrap:wrap;
+     margin:50px;
+     justify-content: space-evenly;
+     order:1;
+ }
+ .admin_box{
+     display:flex;
+     flex-direction:column;
+     flex-basis:300px;
+     width:400px;
+     height: 200px;
+     box-shadow: 0px 1px 5px rgba(0,0,0,0.2);
+     border-radius: 5px;
+ }
+ .note_down{
+     padding-left:110px;
+     font-size:14px;
+ }
+ .boxtop{
+     display:flex;
+     flex-direction:row;
+     /* align-content: flex-end; */
+     padding-top:50px;
+     padding-left:60px;
+ }
+ .boxtop i{
+     color: #464866;
+ }
+ .boxcount{
+     padding:10px;
+     font-size: 42px;
+ }
+ .admin_box:hover{
+     box-shadow: 0px 1px 5px rgba(0,0,0,0.5);
+ }
+ .admin_bottom{
+     display:flex;
+     flex-direction: column;
+     flex-wrap: wrap;
+     order:2;
+     margin-bottom: 40px; 
+ }
+ .createBtn{
+     display: flex;
+     flex-direction: row;
+     width: 150px;
+     margin-left: 120px;
+     padding-bottom:50px; 
+ }
+ .view_meetup{
+     margin-left: 120px;
+     box-shadow: 0px 1px 5px rgba(0,0,0,0.5);
+     height: 200px;
+     max-width: 680px;
+     overflow-wrap:break-word;
+     border-radius: 5px;
+ }
+ .view_meetup p{
+     /* border: 1px solid black; */
+     box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
+     padding: 20px;
+     font-size: 16px;
+ }
+ /* 
+  CSS MODAL
+  */
+  .modal {
+     position: fixed;
+     left: 0;
+     top: 0;
+     width: 100%;
+     height: 100%;
+     background-color: rgba(0, 0, 0, 0.5);
+     opacity: 0;
+     visibility: hidden;
+     transform: scale(1.1);
+     transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+ }
+ .modal-content {
+     position: absolute;
+     top: 50%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+     background-color: white;
+     padding: 1rem 1.5rem;
+     width: 24rem;
+     border-radius: 0.5rem;
+ }
+ .close-button {
+     float: right;
+     width: 1.5rem;
+     line-height: 1.5rem;
+     text-align: center;
+     cursor: pointer;
+     border-radius: 0.25rem;
+     background-color: lightgray;
+ }
+ .close-button:hover {
+     background-color: darkgray;
+ }
+ .show-modal {
+     opacity: 1;
+     visibility: visible;
+     transform: scale(1.0);
+     transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+ }
 }
