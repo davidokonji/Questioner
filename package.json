@@ -1,0 +1,24 @@
+{
+  "name": "questioner",
+  "version": "1.0.0",
+  "description": "This application helps the meetup organizer prioritize questions to be answered. It allows users to create meetups, delete meetups and other functionalities",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidokonji/Questioner.git"
+  },
+  "author": "Okonji Chukwunonso",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/davidokonji/Questioner/issues"
+  },
+  "homepage": "https://github.com/davidokonji/Questioner#readme",
+  "devDependencies": {
+    "eslint": "^5.11.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0"
+  }
+}
