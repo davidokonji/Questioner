@@ -3,7 +3,8 @@ node_js:
   - "8"
 script:
 - npm test
-- npm install
+- npm ci
+cache: npm
 branches:
   only:
   - develop
