@@ -8,3 +8,4 @@ cache: npm
 branches:
   only:
   - develop
+install: travis_wait mvn install
