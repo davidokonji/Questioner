@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+  - "iojs"
+  - "8"
+  env:
+  global:
+    - export NODE_ENV=test
+script:
+- npm test
+branches:
+  only:
+  - develop
