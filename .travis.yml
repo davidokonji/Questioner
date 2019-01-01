@@ -4,6 +4,7 @@ node_js:
 script:
 - npm test
 - npm ci
+- npm run coveralls
 cache: npm
 branches:
   only:
