@@ -2,6 +2,18 @@ import uuid from 'uuid';
 
 import QuestionerModel from '../model/questioner';
 
+function meetupMap(meetup, arrname) {
+  meetup.map((meet) => {
+    const meetups = {
+      id: meet.id,
+      title: meet.topic,
+      location: meet.location,
+      happeningOn: meet.happeningOn,
+      tags: meet.tags,
+    };
+    return arrname.push(meetups);
+  });
+}
 const Questioner = {
   createMeetup(req, res) {
     if (!req.body.id && !req.body.location
@@ -43,7 +55,6 @@ const Questioner = {
         message: 'Unable to find meetup with given ID',
       });
     }
-
     return res.status(200).send({
       status: 200,
       data: [
@@ -63,16 +74,7 @@ const Questioner = {
 
     const newMeetup = [];
 
-    meetup.map((meet) => {
-      const meetups = {
-        id: meet.id,
-        title: meet.topic,
-        location: meet.location,
-        happeningOn: meet.happeningOn,
-        tags: meet.tags,
-      };
-      return newMeetup.push(meetups);
-    });
+    meetupMap(meetup, newMeetup);
 
     if (meetup.length === 0) {
       return res.status(200).send({
@@ -80,6 +82,7 @@ const Questioner = {
         message: 'no meetup created',
       });
     }
+
     return res.status(200).send({
       status: 200,
       data: newMeetup,
@@ -90,16 +93,7 @@ const Questioner = {
     const meetups = QuestionerModel.getUpcomingMeetup();
 
     const newUpcoming = [];
-    meetups.map((meets) => {
-      const meetup = {
-        id: meets.id,
-        title: meets.title,
-        location: meets.location,
-        happeningOn: meets.happeningOn,
-        tags: meets.tags,
-      };
-      return newUpcoming.push(meetup);
-    });
+    meetupMap(meetups, newUpcoming);
 
     if (meetups.length === 0) {
       return res.status(200).send({
@@ -138,7 +132,7 @@ const Questioner = {
       ],
     });
   },
-  patchQuestionUpvote(req, res) {
+  patchQuestionvote(req, res) {
     const question = QuestionerModel.getOneQuestion(req.params.id);
     if (!question) {
       return res.status(404).send({
@@ -146,29 +140,7 @@ const Questioner = {
         message: 'Unable to find question with ID',
       });
     }
-    const updateVote = QuestionerModel.updateUpVotes(req.params.id, req.body);
-
-    return res.status(200).send({
-      status: 200,
-      data: [{
-        meetup: uuid.v4(),
-        title: updateVote.title,
-        body: updateVote.body,
-        votes: updateVote.votes,
-      }],
-    });
-  },
-
-  patchQuestionDownvote(req, res) {
-    const question = QuestionerModel.getOneQuestion(req.params.id);
-
-    if (!question) {
-      return res.status(404).send({
-        status: 404,
-        message: 'Unable to find question with ID',
-      });
-    }
-    const updateVote = QuestionerModel.updateDownVotes(req.params.id, req.body);
+    const updateVote = QuestionerModel.updateVotes(req.params.id, req.body);
 
     return res.status(200).send({
       status: 200,
