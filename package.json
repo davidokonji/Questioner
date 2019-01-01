@@ -10,7 +10,7 @@
     "build": "babel server/server.js  --out-dir build",
     "dev-start": "babel-watch server/server.js",
     "compile": "babel --presets es2015,stage-0 -d lib/ server/",
-    "coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls"
+    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
