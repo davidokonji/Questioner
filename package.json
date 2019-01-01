@@ -4,10 +4,12 @@
   "description": "This application helps the meetup organizer prioritize questions to be answered. It allows users to create meetups, delete meetups and other functionalities",
   "main": "index.js",
   "scripts": {
-    "start": "babel-watch server/server.js",
+    "start": "npm run build && node ./build/server.js",
+    "build": "npm run clean && npm run build-babel",
+    "build-babel": "babel -d ./build ./server -s",
+    "clean": "rm -rf build && mkdir build",
     "test": " mocha --require babel-core/register ./server/test/*.test.js --exit",
     "test-watch": "nodemon --exec 'npm test' ",
-    "build": "babel server/server.js  --out-dir build",
     "dev-start": "babel-watch server/server.js",
     "compile": "babel --presets es2015,stage-0 -d lib/ server/",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
