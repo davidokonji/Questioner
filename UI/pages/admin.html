@@ -6,60 +6,83 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Questioner - Admin</title>
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/responsive/admin.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
         crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../css/responsive.css">
 </head>
 <body>
         <header>
                 <nav class="admin_nav">
                     <li class="admin_logo">
                         <a href="admin.html" id="admin_logo">
-                            Questioner Admin
+                            Questioner
                         </a>
                     </li>
                     <div class="dropdown img_btn">
                         <button class="dropbtn ">
-                            <b class="admin_link">Admin</b> 
-                            <img src="../resources/img/profile-placeholder.png" alt="img" id="nav_img" width="40px" height="40px" />
+                            <span id="nav_img">Admin</span>
+                            <!-- <img src="../resources/img/profile-placeholder.png" alt="img" id="nav_img" width="40px" height="40px" /> -->
+                            <!-- <i class="fa fa-caret-down"></i> -->
+                            <i class="fa fa-caret-down fa-lg" id="img_icon"></i>
                         </button>
                         <div class="dropdown-content">
-                            <a href="#" class="icon signout">Sign Out
+                            <a href="../../index.html" class="icon signout">Sign Out
                             </a>
                         </div>
                     </div>
                 </nav>
             </header>
             <div class="admin-container">
-                <div class="admin_sidebar">
-                    <div class="sidebar_item">
-                        Dashboard 
-                    </div>
-                </div>
                 <div class="admin_body">
+                        <div class="createBtn">
+                                <button class="trigger btn btn-primary">create a meetup <i class="fas fa-plus-circle fa-sm"></i> </button>
+                           </div>
                     <div class="admin_top">
                             <div class="admin_box">
                                 <div class="boxtop">
-                                     <i class="fas fa-network-wired fa-3x"></i>
+                                     <i class="fas fa-network-wired fa-2x"></i>
                                      <p class="boxcount">100</p>
                                 </div>
                                <p class="note_down">organized meetups</p> 
                             </div>
                             <div class="admin_box">
                                     <div class="boxtop">
-                                            <i class="fas fa-users fa-3x"></i>
+                                            <i class="fas fa-users fa-2x"></i>
                                             <p class="boxcount">100</p>
                                        </div>
                                       <p class="note_down">regitered users</p>
                             </div>
                     </div>
                    <div class="admin_bottom">
-                       <div class="createBtn">
-                            <button class="trigger btn btn-primary">create a meetup <i class="fas fa-plus-circle fa-sm"></i> </button>
-                       </div>
+                      
                        <div class="view_meetup">
-                           <p>Available Meetups</p>
+                        <div class="adm_title">Available Meet-Ups</div>
+                        <a href="" class="adm_link">
+                             <div class="adm_tab">
+                                     <div class="adm_tab_img">
+                                          <img  class= "tab_img" src="../resources/img/profile-placeholder.png" width= "50px" height="50px"alt="">
+                                     </div>
+                                     <div class="adm_details">
+                                         <div class="adm_details_title">Title</div>
+                                         <div class="adm_date">date</div>
+                                         <button class="del_btn">X</button>
+                                     </div>
+                                 </div>
+                        </a>
+                        <a href="" class="adm_link">
+                            <div class="adm_tab">
+                                    <div class="adm_tab_img">
+                                         <img  class= "tab_img" src="../resources/img/profile-placeholder.png" width= "50px" height="50px"alt="">
+                                    </div>
+                                    <div class="adm_details">
+                                        <div class="adm_details_title">Title</div>
+                                        <div class="adm_date">date</div>
+                                        <button class="del_btn">X</button>
+                                    </div>
+                                </div>
+                       </a>
                        </div>
                    </div>
                 </div>
@@ -83,10 +106,6 @@
                                 <label for="" class="form-label">Start Time</label>
                                 <input type="time" name="" class="form-control-sm" id="" required>
                         </div>
-                        <!-- <div class="form-element">
-                                <label for="" class="form-label">End Time</label>
-                                <input type="time" name="" class="form-control-sm" id="" >
-                        </div> -->
                         <div class="form-element">
                                 <label for="" class="form-label">seats available</label>
                                 <input type="number" name="" class="form-control-sm" id="" >

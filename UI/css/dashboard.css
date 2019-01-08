@@ -1,0 +1,202 @@
+/********************* 
+    USER DASHBOARD
+ *********************/
+ nav{
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  align-items: center;
+ background-color: #25274d;
+ font-family:Montserrat-Regular;
+ color: #ffffff;
+ height: 60px;
+
+}
+.navlink{
+ order: 1;
+ flex-grow: 1;
+}
+#navlink b{
+  margin-left: 50px;
+  padding-right: 10px;
+ border-right: 1px solid #000000;
+ /* color: rgb(21, 33, 80,1); */
+ color: #ffffff;
+
+}
+#nav_img{
+    color: #fff;
+    padding-bottom: 20px;
+}
+.logo{
+ flex-grow: 1;
+ order: 2;
+ padding-bottom:0.9em;
+}
+#logo{
+ color: #ffffff;
+ font-size: 22px;
+ flex-grow: 1;
+}
+.img_btn{
+ flex-basis: 150px;
+ margin-right: 10px;
+ order: 4;    
+}
+/* .dropbtn{
+    border-radius: 50%;
+    width: 30px;
+    height: 30px; 
+} */
+
+.dropbtn i{
+ color: #ffffff;
+}
+.dropdown {
+ overflow: hidden;
+}
+
+.dropdown .dropbtn {
+ font-size: 16px;  
+ border: none;
+ outline: none;
+ color: rgb(10, 10, 10);
+ padding: 14px 16px;
+ background-color: inherit;
+ font-family: inherit;
+ margin: 0;
+}
+.dropdown-content {
+ display: none;
+ position: absolute;
+ background-color: #f9f9f9;
+ min-width: 160px;
+ box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+ z-index: 1;
+}
+
+.dropdown-content a {
+ float: none;
+ color: black;
+ padding: 12px 16px;
+ text-decoration: none;
+ display: block;
+ text-align: left;
+}
+
+.dropdown-content a:hover {
+ background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+ display: block;
+}
+.dashboard-container{
+   display: flex;
+   width: 90%;
+   height: auto;
+   margin: 0 auto;
+   flex-direction: column;
+   flex-wrap: wrap;
+}
+.top-dash{
+ display: flex;
+ display: -webkit-flex;
+ flex-wrap: wrap;
+ flex-direction: row;
+ justify-content: space-between;
+ margin: 15px;
+ align-items: center;
+}
+.box{
+   flex-basis: 200px;
+   justify-content: space-between;
+   font-family:Montserrat-Regular;
+}
+.box-1{
+   order: 1;
+   font-size:18px;
+   color:#25274d;
+}
+ .box-2{
+     order: 2;
+ }
+ .box-3{
+     order: 3;
+   border: 2px solid #25274d;
+
+ }
+ .box-3 .btn{
+     border: 0px;
+     outline: none;
+     font-size: 16px;
+ }
+ .box-3 .btn i{
+     color: rgb(21, 33, 80,1);
+ }
+ #dash_search{
+     outline: none;
+     padding: 20px 10px;
+     font-size: 16px;         
+     width: 400px;
+    border: 2px solid #25274d;
+     border-radius: 15px;
+ }
+ .bottom_dash{
+   display:flex;
+   flex-direction: row;
+   justify-content: space-between;
+   margin: 15px;
+   font-family:raleway-regular;
+   flex-wrap: wrap;
+ }
+ .dash_card{
+   margin: 15px;
+   max-width: 400px;
+   font-family:raleway-regular;
+   overflow-wrap: break-word;      
+   display: flex;
+   flex-direction: column;
+   color: black;
+ }
+ #card_img{
+   margin-bottom: 20px;
+   margin-left: 20px;
+   margin-top: 20px;
+ }
+
+ .card_body{
+   max-width: 350px;
+   margin:10px;
+   color: black;
+ }
+ .card_body a{
+  color: black;
+  text-decoration: underline;
+  margin-bottom: 10px;
+ }
+ .loadBtn{
+     display: flex;
+     flex-direction: row;
+     justify-content: center;
+     margin:20px;
+ }
+ .loadBtn .btn{
+     outline: none;
+ }
+ .loadBtn .btn:hover{
+     background-color: #fff; 
+     border:2px solid rgb(21, 33, 80);
+     color: #111010;
+     cursor: pointer;
+     box-shadow: 0px 1px 5px rgba(0,0,0,0.5);
+ }
+ .details{
+     padding-top:20px;
+     padding-bottom:20px;
+     font-family:raleway-regular;
+     max-width: 350px;
+     max-height: 300px;
+     text-overflow: ellipsis;
+     overflow: hidden; 
+ }

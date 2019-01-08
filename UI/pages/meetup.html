@@ -8,7 +8,9 @@
         <title></title>
 
         <link rel="stylesheet" href="../css/style.css">
-        <link rel="stylesheet" href="../css/responsive.css">
+        <link rel="stylesheet" href="../css/meetup.css">
+
+        <link rel="stylesheet" href="../css/responsive/meetup.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
                 crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -16,43 +18,41 @@
 
 <body>
         <header>
-                <nav>
-                        <li class="navlink">
-                                <a href="" id="navlink">
-                                        <b>DashBoard</b>
-                                </a>
-                        </li>
-                        <li class="logo">
-                                <a href="" id="logo">
-                                 Questioner
-                                </a>
-                        </li>
-                        <div class="dropdown img_btn">
-                                <button class="dropbtn ">
-                                        <img src="../resources/img/profile-placeholder.png" alt="img" id="nav_img"
-                                                width="40px" height="40px" />
-                                        <!-- <i class="fa fa-caret-down"></i> -->
-                                        <i class="fa fa-caret-down fa-lg" id="img_icon"></i>
-                                </button>
-                                <div class="dropdown-content">
-                                        <a href="user-profile.html" class="icon user">Your Profile
-                                        </a>
-                                        <a href="#" class="icon signout">Sign Out
-                                        </a>
-                                </div>
+        <nav>
+                <li class="navlink">
+                        <a href="" id="navlink">
+                        <b>DashBoard</b>
+                        </a>
+                </li>
+                <li class="logo">
+                        <a href="" id="logo">
+                        Questioner
+                        </a>
+                </li>
+                <div class="dropdown img_btn">
+                        <button class="dropbtn ">
+                        <span id="nav_img">UN</span>
+                        <!-- <img src="../resources/img/profile-placeholder.png" alt="img" id="nav_img" width="40px" height="40px" /> -->
+                        <!-- <i class="fa fa-caret-down"></i> -->
+                        <i class="fa fa-caret-down fa-lg" id="img_icon"></i>
+                        </button>
+                        <div class="dropdown-content">
+                        <a href="user-profile.html" class="icon user">Your Profile
+                        </a>
+                        <a href="../../index.html" class="icon signout">Sign Out
+                        </a>
                         </div>
-                </nav>
+                </div>
+        </nav>
         </header>
         <div class="dashboard-container">
         <div class="flexcontainer">
                         <div class="fixed">
                                 <div class="post_title">
-                                        <b>This is the title of a selected meetup</b>
+                                        <b>This is the title of a selected meetup This is the title of a selected meetup</b>
                                 </div>
                                 <div class="post_img">
-                                        <!-- <img src="../resources/img/placeholder2.jpg" alt="img" width='400px' height="400px" id="post_img"> -->
-                                        <img src="../resources/img/placeholder2.jpg" alt="img" width='300px' height="300px" id="post_img">
-
+                                        <img src="../resources/img/event.jpg" alt="img" width="400px" height="300px" id="post_img">
                                 </div>
                                         <div class="post_details">
                                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec
@@ -72,14 +72,15 @@
                                         </div>
                                 <div class="post_vt">
                                         <div>
-                                                venue: <b id="venue">this is the venue </b>
+                                                Venue: <b id="venue">Lagos Nigeria</b>
                                         </div>
                                         <div>
-                                                time: <b id="time">18:00 </b>
+                                                Time: <b id="time">18:00 January 31st, 2019 </b>
                                         </div>
                                 </div>
                         </div>
                 <div class="content">
+                                <p id="q_head">Post Comment<p>                        
                         <div class="question">
                                 <textarea name="question" id="question"  rows="5"></textarea>
                                 <button class="btnAsk">Post Question</button>
@@ -144,7 +145,7 @@
         </div>
         <footer class="footer">
                 <div class="footerTop">
-                        <a href="./dashboard.html" id="">
+                        <a href="../../index.html" id="">
                                 Questioner
                         </a>
                         <div>
