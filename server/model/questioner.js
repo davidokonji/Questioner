@@ -1,6 +1,6 @@
 import uuid from 'uuid';
 
-class Questioner {
+class Questionermodel {
   constructor() {
     this.users = [];
     this.meetups = [];
@@ -36,10 +36,10 @@ class Questioner {
       id: uuid.v4(),
       createdOn: new Date(),
       location: data.location,
-      images: [data.images] || [],
+      images: data.images || [],
       topic: data.topic,
       happeningOn: new Date(data.happeningOn),
-      tags: [data.tags],
+      tags: data.tags,
     };
 
     this.meetups.push(newMeetup);
@@ -107,10 +107,10 @@ class Questioner {
 
     const index = this.questions.indexOf(question);
 
-    this.questions[index].votes = data.votes || question.vote;
+    this.questions[index].votes = data.votes;
 
     return this.questions[index];
   }
 }
 
-export default new Questioner();
+export default new Questionermodel();

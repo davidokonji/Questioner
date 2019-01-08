@@ -27,6 +27,13 @@ const test = [{
   title: 'question title',
   body: 'question body note',
   votes: 1,
+}, {
+  createdOn: new Date(),
+  location: '  ',
+  images: [],
+  topic: '     ',
+  happeningOn: new Date('2019-01-01'),
+  tags: ['cool', 'nice'],
 }];
 
 describe('POST /api/v1/meetups', () => {
@@ -46,10 +53,10 @@ describe('POST /api/v1/meetups', () => {
         return done();
       });
   });
-  it('should return 400 if any necessary fields are empty', (done) => {
+  it('should return 400 if fields are empty', (done) => {
     chai.request(app)
       .post('/api/v1/meetups')
-      .send({})
+      .send(test[2])
       .end((err, res) => {
         if (err) {
           expect(res).to.throw(err);
@@ -75,7 +82,7 @@ describe('GET /api/v1/meetups/:id', () => {
         return done();
       });
   });
-  it('should return 404 if not found', (done) => {
+  it('should return 404 if ID is not found', (done) => {
     const id = uuid.v4();
     chai.request(app)
       .get(`/api/v1/meetups/${id}`)
