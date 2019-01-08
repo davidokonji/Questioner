@@ -8,37 +8,70 @@
     <title>Questioner</title>
 
     <link rel="stylesheet" href="UI/css/style.css">
-    <link rel="stylesheet" href="UI/css/responsive.css">
+    <link rel="stylesheet" href="UI/css/index.css">
+    <link rel="stylesheet" href="UI/css/responsive/index.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
+    crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body class="body_landing">
     <nav class="nav_landing">
-        <h3> <a href="">Questioner.</a></h3>
-        <p>Don't have a Questioner account? <a href="UI/pages/siginup.html">Signup</a></p>
+        <h3> <a href="">Questioner</a></h3>
+        <p>  <button class="nav_btn" onclick="location.href='UI/pages/signin.html';">SIGN IN</button> | <button class="nav_btn" onclick="location.href='UI/pages/signup.html';">SIGN UP</button></p>
     </nav>
     <div class="container-fluid">
-        <div class="leftside">
+        <div class="topLanding ">
+                        <p class="item item-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 
-        </div>
-        <div class="rightside">
-            <div class="signin">
-                <p class="title">Sign In </p>
-                <div class="form-element">
-                        <label for="" class="form-label">Username or Email</label>
-                        <input type="text" name="name" class="form-control-md" id="name" required>
+                        <p class="item item-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        
+                        <p class="item item-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+
+                        <button class="slider_btn btn btn-primary" onclick="location.href='UI/pages/signup.html';" >BECOME A USER</button>
+        
+                <div class="steps " >
+                        <div class="step">
+                                <span class="step_img"><img src="./UI/resources/svg/register.svg" alt="" width="70px" height="90px"></span>
+                                <p class="step_text">
+                                    Register as a Questioner user
+                                </p>
+                        </div>
+                        <div class="step">
+                                <span class="step_img"><img src="./UI/resources/svg/sign-in.svg" alt="" width="70px" height="90px"></span>
+                                <p class="step_text">
+                                    Sign In as a Regitered User
+                                </p>
+                        </div>
+                        <div class="step">
+                                <span class="step_img"><img src="./UI/resources/svg/conference.svg" alt="" width="70px" height="90px"></span>
+                                <p class="step_text">
+                                    You can view Meet Ups and RSVP for any meetup
+                                </p>
+                        </div>
+                        <div class="step">
+                                <span class="step_img"><img src="./UI/resources/svg/asking.svg" alt="" width="70px" height="90px"></span>
+                                <p class="step_text">
+                                    Ask Question? any information concerning a Meet Up
+                                </p>
+                        </div>
                 </div>
-                <div class="form-element">
-                        <label for="" class="form-label">Password</label>
-                        <input type="password" name="password" class="form-control-md" id="password" required>
-                </div>
-               <div class="btn-center">
-                   <button class="btn btn-primary ">SIGN IN</button>
-               </div>
-               <!-- <hr> -->
-               <!-- <p><a href="#">Forgot Password?</a></p> -->
-            </div>
         </div>
     </div>
+    <footer class="footer">
+            <div class="footerTop">
+                    <a href="./dashboard.html" id="">
+                            Questioner
+                    </a>
+                    <div>
+                            <li><a href="">Link 1</a></li>
+                            <li><a href="">Link 2</a></li>
+                    </div>
+            </div>
+            <div class="footerBottom">
+                    <p>created with <i class="fa fa-heart fa-sm"></i> by Okonji Chukwunonso</p>
+            </div>
+    </footer>
 </body>
 
 </html>

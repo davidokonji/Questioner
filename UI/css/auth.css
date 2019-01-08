@@ -1,0 +1,117 @@
+/*********************
+    NAVIGATION LANDING
+**********************/
+.nav_landing{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  height: auto;
+  background-color: #25274d;
+  /* color: #AAABB8; */
+}
+.nav_landing h3 a {
+  font-size: 22px;
+  padding-left: 1.8em;
+  font-family:Montserrat-Regular;
+  padding-top:1em;
+  padding-bottom:1em;
+  color: #ffffff;
+  /* color: rgb(19, 9, 6); */
+}
+.nav_landing p{
+  margin-right: 10px;
+  padding-top: 1em;
+  padding-bottom:1em;
+  font-family:Montserrat-Regular;
+  color: #ffffff;
+  /* color: rgb(12, 9, 8); */
+
+}
+/**********************
+    SIGN IN AND SIGN UP
+***********************/
+.body_landing{
+  /* background-color: #25274d; */
+}
+.container-fluid{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  /* background-color: #000022 #170312 #538083; */
+ }
+
+.rightside{
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  justify-content: center;
+  margin-right: 30px;
+
+}
+.signin{
+  max-width: 500px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  font-family: raleway-regular;
+  margin-top: 160px;
+  /* margin-right: 100px; */
+  box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
+  background-color: #464866;
+  color: #fff;
+  border-radius: 5px;
+}
+.signin .title{
+  font-family:Montserrat-Regular;    
+  padding-top:20px;
+  padding-left: 15px;
+  padding-bottom: 20px;
+  color: #fff;
+  text-transform: uppercase;
+}
+.signup{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  font-family: raleway-regular;
+  width: auto;
+  height: auto;
+  margin:  0 auto;
+  box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
+  margin-top: 100px; 
+  border-radius: 5px;
+  background-color: #464866;
+  color: #fff;
+  padding-bottom: 50px;
+}
+.show{
+  padding-top:20px;
+}
+.btn-full{
+  width: 320px;
+  height: 2.5em;
+  background-color: rgb(21, 33, 80); /*blue velvet*/
+  color: #fff;
+  font-size: medium;
+  font-family: raleway-regular;
+}
+.btn-full:hover{
+  background-color: #fff; 
+  border:2px solid rgb(21, 33, 80);
+  color: #111010;
+  cursor: pointer;
+}
+.nav_btn{
+  padding: 5px;
+  width: 100px;
+  border-radius: 5px;
+  font-family: raleway-regular;
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: 15px;
+  outline: #111010;
+  margin-right: 20px;
+}
+.nav_btn:hover{
+  transform: scale(1.1);
+}
