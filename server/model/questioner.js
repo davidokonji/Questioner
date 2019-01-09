@@ -5,8 +5,8 @@ class Questionermodel {
     this.users = [];
     this.meetups = [];
     this.questions = [];
-    this.rsvp = [];
-    this.upcoming = [];
+    this.rsvps = [];
+    this.upcomings = [];
   }
 
   createUser(data) {
@@ -73,14 +73,14 @@ class Questionermodel {
     return this.meetups;
   }
 
-  getUpcomingMeetup() {
+  getUpcomingMeetups() {
     const meetups = this.getAllMeetUps();
-    const upmeetups = meetups.filter((meetup) => {
-      const current = new Date().getTime();
-      return meetup.happeningOn.getTime() >= current;
+    const upcomingMeetup = meetups.filter((meetup) => {
+      const currentTimestamp = new Date().getTime();
+      return meetup.happeningOn.getTime() >= currentTimestamp;
     });
-    this.upcoming.push(upmeetups);
-    return upmeetups;
+    this.upcomings.push(upcomingMeetup);
+    return upcomingMeetup;
   }
 
   getOneUser(id) {
@@ -97,12 +97,12 @@ class Questionermodel {
       response: data.response,
     };
 
-    this.rsvp.push(newRsvp);
+    this.rsvps.push(newRsvp);
 
     return newRsvp;
   }
 
-  updateVotes(id, data) {
+  updateVote(id, data) {
     const question = this.getOneQuestion(id);
 
     const index = this.questions.indexOf(question);

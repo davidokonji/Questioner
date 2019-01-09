@@ -1,10 +1,13 @@
+import bodyParser from 'body-parser';
+
 import express from 'express';
 
 import Questioner from './questionerController';
 
+
 const app = express();
 
-app.use(express.json());
+app.use(bodyParser.json());
 
 app.post('/api/v1/meetups', Questioner.createMeetup);
 

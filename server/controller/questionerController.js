@@ -2,41 +2,50 @@ import uuid from 'uuid';
 
 import QuestionerModel from '../model/questioner';
 
+import Validation from './validation';
+
 class Questioner {
-  static meetupMap(meetup, arrname) {
-    meetup.map((meet) => {
-      const meetups = {
+  static getRequiredFields(meetups, filtered) {
+    meetups.map((meet) => {
+      const meetup = {
         id: meet.id,
         title: meet.topic,
         location: meet.location,
         happeningOn: meet.happeningOn,
         tags: meet.tags,
       };
-      return arrname.push(meetups);
+      return filtered.push(meetup);
     });
-  }
-
-  static validateEntry(body) {
-    const arr = [];
-    Object.keys(body).forEach((item) => {
-      if (typeof body[item] === 'string') {
-        const trimmed = body[item].trim();
-        arr.push(trimmed);
-      }
-    });
-    const newarr = arr.filter(val => val.length !== 0);
-    if (newarr.length !== arr.length) {
-      return false;
-    }
-    return true;
   }
 
   static createMeetup(req, res) {
-    const check = Questioner.validateEntry(req.body);
-    if (!check) {
+    const checkBody = Validation.validateEntry(req.body);
+    if (!checkBody) {
       return res.status(400).send({
         status: 400,
-        error: 'all required fields cannot be empty',
+        error: 'fill all required fields',
+      });
+    }
+    const [correctDate, actualDate] = Validation.validateDate(req.body.happeningOn);
+
+    if (!correctDate) {
+      return res.status(400).send({
+        status: 400,
+        error: `happeningOn value ${actualDate} should be in a valid date format YYYY-MM-DD`,
+      });
+    }
+    const [valid, length] = Validation.isValidLength(req.body.topic, 10);
+    if (!valid) {
+      return res.status(400).send({
+        status: 400,
+        error: `topic should have minimum length of ${length}`,
+      });
+    }
+    const [validlocation, locationLength] = Validation.isValidLength(req.body.location, 10);
+    if (!validlocation) {
+      return res.status(400).send({
+        status: 400,
+        error: `location should have minimun length of ${locationLength}`,
       });
     }
     const meetup = QuestionerModel.createMeetup(req.body);
@@ -68,7 +77,7 @@ class Questioner {
     if (!meetup) {
       return res.status(404).send({
         status: 404,
-        error: 'Unable to find meetup with given ID',
+        error: `unable to find meetup with ID ${req.params.id}`,
       });
     }
     return res.status(200).send({
@@ -88,50 +97,64 @@ class Questioner {
   static getMeetups(req, res) {
     const meetups = QuestionerModel.getAllMeetUps();
 
-    const newMeetup = [];
+    const filteredFields = [];
 
-    Questioner.meetupMap(meetups, newMeetup);
+    Questioner.getRequiredFields(meetups, filteredFields);
 
     if (meetups.length === 0) {
       return res.status(200).send({
         status: 200,
-        message: 'no meetup created',
+        message: 'no meetups found',
       });
     }
 
     return res.status(200).send({
       status: 200,
-      data: newMeetup,
+      data: filteredFields,
     });
   }
 
   static getUpcoming(req, res) {
-    const meetups = QuestionerModel.getUpcomingMeetup();
+    const meetups = QuestionerModel.getUpcomingMeetups();
 
-    const newUpcoming = [];
-    Questioner.meetupMap(meetups, newUpcoming);
+    const filteredFields = [];
+    Questioner.getRequiredFields(meetups, filteredFields);
 
     if (meetups.length === 0) {
       return res.status(200).send({
         status: 200,
-        message: 'No Upcoming meetup',
+        message: 'no upcoming meetups',
       });
     }
 
     return res.status(200).send({
       status: 200,
       data: [
-        newUpcoming,
+        filteredFields,
       ],
     });
   }
 
   static createQuestion(req, res) {
-    const check = Questioner.validateEntry(req.body);
+    const check = Validation.validateEntry(req.body);
     if (!check) {
       return res.status(400).send({
         status: 400,
-        error: 'all required fields cannot be empty',
+        error: 'fill all required fields',
+      });
+    }
+    const [validTitle, length] = Validation.isValidLength(req.body.title, 10);
+    if (!validTitle) {
+      return res.status(400).send({
+        status: 400,
+        error: `Question title should have minimun length of ${length}`,
+      });
+    }
+    const [validBody, bodyLength] = Validation.isValidLength(req.body.body, 15);
+    if (!validBody) {
+      return res.status(400).send({
+        status: 400,
+        error: `Question Body should have minimun length of ${bodyLength}`,
       });
     }
     const question = QuestionerModel.createQuestion(req.body);
@@ -180,7 +203,7 @@ class Questioner {
         error: 'unable to find question with ID',
       });
     }
-    const updateVote = QuestionerModel.updateVotes(req.params.id, req.body);
+    const updateVote = QuestionerModel.updateVote(req.params.id, req.body);
 
     return res.status(200).send({
       status: 200,
