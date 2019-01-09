@@ -10,7 +10,6 @@
    font-family:Montserrat-Regular;
    color: #ffffff;
    height: 60px;
-  
   }
   .navlink{
    order: 1;
@@ -20,9 +19,7 @@
     margin-left: 50px;
     padding-right: 10px;
    border-right: 1px solid #000000;
-   /* color: rgb(21, 33, 80,1); */
    color: #ffffff;
-  
   }
   #nav_img{
       color: #fff;
@@ -43,12 +40,6 @@
    margin-right: 10px;
    order: 4;    
   }
-  /* .dropbtn{
-      border-radius: 50%;
-      width: 30px;
-      height: 30px; 
-  } */
-  
   .dropbtn i{
    color: #ffffff;
   }
@@ -109,6 +100,7 @@
     padding-bottom: 50px;
     margin-top:60px;
     max-width: 280px;
+    max-height: 900px;
     margin-bottom: 50px;
     overflow-wrap: break-word;
     font-family:roboto-regular; 
@@ -200,7 +192,7 @@
  padding: 10px;
 }
 .schedule{
-    max-height: 350px;
+    max-height: 300px;
     margin-top: 30px;
     margin-right: 15px;
     display: flex;
@@ -209,14 +201,17 @@
 }
 .sch_title{
     box-shadow: 0px 1px 5px rgba(0,0,0,0.5);
-    padding: 10px 15px;
+    padding: 10px 20px;
+    margin-top: 50px;
     /* position: absolute; */
 }
 .sch_tab{
   display: flex;
   flex-direction: row;
   margin:10px;
+  margin-top: 0px;
   padding:10px;
+  padding-top:0px; 
   box-shadow: 0px 1px 5px rgba(0,0,0,0.2);
 
 }
@@ -243,26 +238,26 @@
   max-width: 100px;
 }
 .topQues{
- max-height: 350px;
+ max-height: 300px;
  margin-top: 20px;
  margin-right: 15px;
  display: flex;
  flex-direction: column;
 overflow: scroll;
 }
-.ques_title{
- box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
- padding: 10px 15px;
-}
+
 .ques_title{
   box-shadow: 0px 1px 5px rgba(0,0,0,0.5);
   padding: 10px 15px;
+  margin-top: 50px;
 }
 .ques_tab{
 display: flex;
 flex-direction: row;
 margin:10px;
 padding:10px;
+padding-top:0px; 
+margin-top: 0px;
 box-shadow: 0px 1px 5px rgba(0,0,0,0.2);
 
 }

@@ -395,7 +395,7 @@
    flex-wrap: wrap;
  }
  .dash_card{
-   margin: 15px;
+   /* margin: 14px; */
    max-width: 300px;
    font-family:raleway-regular;
    overflow-wrap: break-word;      
@@ -405,17 +405,16 @@
  }
  #card_img{
   margin-bottom: 20px;
-  margin-left: 20px;
-  margin-top: 20px;
+  /* margin-left: 20px; */
+  /* margin-top: 20px; */
 
 }
 .card_img{
-   
     padding-left: 0px;
 }
 
  .card_body{
-   max-width: 350px;
+   max-width: 300px;
    margin:10px;
    color: black;
  }
