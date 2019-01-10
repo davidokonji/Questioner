@@ -167,7 +167,6 @@
     max-width: 320px;
 
 }
-
 .post_img{
     max-width: 300px;
     max-height: 250px;
@@ -385,7 +384,6 @@
     max-width: 600px;
 
 }
-
 .post_img{
     max-width: 600px;
     max-height: 400px;
@@ -503,7 +501,6 @@
     flex-basis: 100%;
     max-width: 500px;
     overflow-wrap: break-word;
-
   }
   .comment {
     display: flex;
@@ -573,7 +570,6 @@
     flex-direction: column;
     flex-wrap: wrap;
     overflow-wrap: break-word;
-    /*   color: red; */
   }
 }
 
@@ -614,7 +610,6 @@
     max-width: 600px;
 
 }
-
 .post_img{
     max-width: 600px;
     max-height: 400px;
@@ -733,17 +728,9 @@
     flex-basis: 100%;
     max-width: 600px;
     overflow-wrap: break-word;
-  }
-  .comment {
-    display: flex;
-    flex-direction: column;
     padding-top: 15px;
   }
   .commentBtn {
-    margin-bottom: 10px;
-    cursor: pointer;
-  }
-  .commentBtn:hover {
     color: #25274d;
   }
   .commentBox {
@@ -832,7 +819,6 @@
     max-width: 600px;
 
 }
-
 .post_img{
     max-width: 600px;
     max-height: 400px;
@@ -950,7 +936,6 @@
     flex-basis: 100%;
     max-width: 500px;
     overflow-wrap: break-word;
-
   }
   .comment {
     display: flex;

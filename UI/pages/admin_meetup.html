@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title></title>
+
+        <link rel="stylesheet" href="../css/style.css">
+        <link rel="stylesheet" href="../css/meetup.css">
+
+        <link rel="stylesheet" href="../css/responsive/meetup.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
+                crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+        <header>
+        <nav>
+                <li class="navlink">
+                        <a href="" id="navlink">
+                        <b>DashBoard</b>
+                        </a>
+                </li>
+                <li class="logo">
+                        <a href="" id="logo">
+                        Questioner
+                        </a>
+                </li>
+                <div class="dropdown img_btn">
+                        <button class="dropbtn ">
+                        <span id="nav_img">Admin</span>
+                        <i class="fa fa-caret-down fa-lg" id="img_icon"></i>
+                        </button>
+                        <div class="dropdown-content">
+                        <a href="../../index.html" class="icon signout">Sign Out
+                        </a>
+                        </div>
+                </div>
+        </nav>
+        </header>
+        <div class="dashboard-container">
+        <div class="flexcontainer">
+                        <div class="fixed">
+                                <div class="post_title">
+                                        <b>This is the title of a selected meetup This is the title of a selected meetup</b>
+                                </div>
+                                <div class="post_img">
+                                        <img src="../resources/img/event.jpg" alt="img" width="400px" height="300px" id="post_img">
+                                </div>
+                                        <div class="post_details">
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec
+                                                odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla
+                                                quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent
+                                                mauris. Fusce nec tellus sed augue semper porta. Mauris massa.
+                                                Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad
+                                                litora torquent per conubia nostra, per inceptos himenaeos.
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec
+                                                odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla
+                                                quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent
+                                                mauris. Fusce nec tellus sed augue semper porta. Mauris massa.
+                                                Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad
+                                                litora torquent per conubia nostra, per inceptos himenaeos.
+                                                
+
+                                        </div>
+                                <div class="post_vt">
+                                        <div>
+                                                Venue: <b id="venue">Lagos Nigeria</b>
+                                        </div>
+                                        <div>
+                                                Time: <b id="time">18:00 January 31st, 2019 </b>
+                                        </div>
+                                </div>
+                        </div>
+                <div class="content">
+                                <p id="q_head">Post Question<p>                        
+                        <div class="question">
+                                <textarea name="question" id="question"  rows="5"></textarea>
+                                <button class="btnAsk btn-primary">submit</button>
+                        </div>
+                        <div class="question_asked">
+                            <p id="q_head">Questions<p>
+                                <ul id='ques_list'>
+                                        <li class='question_tab'>
+                                        <div class="vote">
+                                                <button class="voteBtn" data-action='up'>
+                                                        <i class="fa fa-caret-up fa-3x"
+                                                                id="up"></i></button>
+                                                <div id="count">
+                                                        <input type='number' min=0 id="num"
+                                                                value="0" disabled />
+                                                </div>
+                                                <button class="voteBtn" data-action='down'>
+                                                        <i class="fa fa-caret-down fa-3x"
+                                                                id="down"></i></button>
+                                        </div>
+                                        <div class="question_sess">
+                                                <div class='postQues'>
+                                                        Lorem ipsum dolor sit
+                                                        amet, consectetur
+                                                        adipiscing elit.
+                                                        Integer nec
+                                                        odio. Praesent libero.
+                                                        Sed cursus ante dapibus
+                                                        diam. Sed nisi. Nulla
+                                                        quis sem at nibh
+                                                        elementum imperdiet.
+                                                        Duis sagittis ipsum.
+                                                        Praesent
+                                                        mauris.
+                                                </div>
+                                                <div id="commentPost">
+
+                                                </div>
+                                                <div>
+                                                        <div class="comment">
+                                                                <a class='commentBtn'
+                                                                        id="commentBtn"
+                                                                        class="postC"
+                                                                        data-action='addComment'>add
+                                                                        a
+                                                                        comment
+                                                                        <i class='fa fa-comments fa-lg'></i></a>
+                                                                <textarea class='commentBox'
+                                                                        id='commentBox'></textarea>
+                                                                <button class="btn btn-primary" id='postCom'
+                                                                        data-action='postCom'>
+                                                                        submit</button>
+                                                        </div>
+                                                </div>
+                                        </li>
+                                </ul>
+                        </div>
+        </div>
+        </div>
+        </div>
+        <footer class="footer">
+                <div class="footerTop">
+                        <a href="../../index.html" id="">
+                                Questioner
+                        </a>
+                        <div>
+                                <li><a href="">Link 1</a></li>
+                                <li><a href="">Link 2</a></li>
+                        </div>
+                </div>
+                <div class="footerBottom">
+                        <p>created with <i class="fa fa-heart fa-sm"></i> by Okonji Chukwunonso</p>
+                </div>
+        </footer>
+</body>
+<script src="../js/main.js"></script>
+
+</html>
