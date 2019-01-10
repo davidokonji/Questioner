@@ -53,7 +53,7 @@ function addQuestion(e) {
           <div class="comment">
             <a class='commentBtn' id="commentBtn" class="postC" data-action='addComment'>add a comment <i class='fa fa-comments fa-lg'></i></a>
               <textarea class='commentBox' id='commentBox' ></textarea>
-            <button  id='postCom' data-action='postCom'>post comment</button>
+            <button class='btn btn-primary'  id='postCom' data-action='postCom'>submit</button>
           </div>
       </div>
     </li>`;

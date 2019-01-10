@@ -309,7 +309,6 @@
       margin-left: 50px;
       padding-right: 10px;
      border-right: 1px solid #000000;
-     /* color: rgb(21, 33, 80,1); */
      color: #ffffff;
     
     }
@@ -381,7 +380,6 @@
       flex-wrap: wrap;
       height:auto;
       width: 90%;
-      /* justify-content: center; */
   }
   .sidebar{
     display: flex;
@@ -496,7 +494,9 @@
   }
   .sch_title{
       box-shadow: 0px 1px 5px rgba(0,0,0,0.5);
-      padding: 10px 15px;
+      padding: 10px 15px !important;
+      width: 650px !important ;
+      margin-left: 50px;
   }
   .sch_tab{
     display: flex;
@@ -541,7 +541,9 @@
   }
   .ques_title{
    box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
-   padding: 10px 15px;
+   padding: 10px 15px !important;
+    width: 650px !important ;
+    margin-left: 50px;
   }
   .ques_title{
     box-shadow: 0px 1px 5px rgba(0,0,0,0.5);

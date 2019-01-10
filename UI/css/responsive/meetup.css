@@ -167,10 +167,7 @@
     max-width: 320px;
 
 }
-.post_title b:hover{
-    text-decoration: underline;
-    cursor: pointer;
-}
+
 .post_img{
     max-width: 300px;
     max-height: 250px;
@@ -234,7 +231,7 @@
     resize:none;
     outline:none;
     border-radius: 5px;
-    width: 300px;
+    width: 350px !important;
     margin-left: 20px;
     margin-top: 20px; 
     padding: 10px 5px;
@@ -388,10 +385,7 @@
     max-width: 600px;
 
 }
-.post_title b:hover{
-    text-decoration: underline;
-    cursor: pointer;
-}
+
 .post_img{
     max-width: 600px;
     max-height: 400px;
@@ -455,7 +449,7 @@
     resize:none;
     outline:none;
     border-radius: 5px;
-    width: 500px;
+    width: 500px !important;
     margin-left: 20px;
     margin-top: 20px; 
     padding: 10px 5px;
@@ -500,7 +494,7 @@
   .question_sess {
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap; /*check if needed*/
+    flex-wrap: wrap;
     padding-left: 30px;
     line-height: 20px;
     padding-top: 20px;
@@ -509,7 +503,7 @@
     flex-basis: 100%;
     max-width: 500px;
     overflow-wrap: break-word;
-    /*   border: 1px solid #000000; */
+
   }
   .comment {
     display: flex;
@@ -577,7 +571,7 @@
   .postQues {
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap; /*check if needed*/
+    flex-wrap: wrap;
     overflow-wrap: break-word;
     /*   color: red; */
   }
@@ -620,10 +614,7 @@
     max-width: 600px;
 
 }
-.post_title b:hover{
-    text-decoration: underline;
-    cursor: pointer;
-}
+
 .post_img{
     max-width: 600px;
     max-height: 400px;
@@ -687,7 +678,7 @@
     resize:none;
     outline:none;
     border-radius: 5px;
-    width: 600px;
+    width: 650px !important;
     margin-left: 20px;
     margin-top: 20px; 
     padding: 10px 5px;
@@ -716,7 +707,6 @@
   }
   #count {
     flex-basis: 50px;
-    /* padding-left: 13px; */
   }
   #num {
     width: 20px;
@@ -734,7 +724,7 @@
   .question_sess {
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap; /*check if needed*/
+    flex-wrap: wrap;
     padding-left: 30px;
     line-height: 20px;
     padding-top: 20px;
@@ -743,7 +733,6 @@
     flex-basis: 100%;
     max-width: 600px;
     overflow-wrap: break-word;
-    /*   border: 1px solid #000000; */
   }
   .comment {
     display: flex;
@@ -751,7 +740,6 @@
     padding-top: 15px;
   }
   .commentBtn {
-    /*   border-bottom:1px solid black; */
     margin-bottom: 10px;
     cursor: pointer;
   }
@@ -811,9 +799,8 @@
   .postQues {
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap; /*check if needed*/
+    flex-wrap: wrap;
     overflow-wrap: break-word;
-    /*   color: red; */
   }
 }
 
@@ -845,10 +832,7 @@
     max-width: 600px;
 
 }
-.post_title b:hover{
-    text-decoration: underline;
-    cursor: pointer;
-}
+
 .post_img{
     max-width: 600px;
     max-height: 400px;
@@ -912,7 +896,7 @@
     resize:none;
     outline:none;
     border-radius: 5px;
-    width: 500px;
+    width: 550px !important;
     margin-left: 20px;
     margin-top: 20px; 
     padding: 10px 5px;
@@ -957,7 +941,7 @@
   .question_sess {
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap; /*check if needed*/
+    flex-wrap: wrap;
     padding-left: 30px;
     line-height: 20px;
     padding-top: 20px;
@@ -966,7 +950,7 @@
     flex-basis: 100%;
     max-width: 500px;
     overflow-wrap: break-word;
-    /*   border: 1px solid #000000; */
+
   }
   .comment {
     display: flex;
@@ -974,7 +958,6 @@
     padding-top: 15px;
   }
   .commentBtn {
-    /*   border-bottom:1px solid black; */
     margin-bottom: 10px;
     cursor: pointer;
   }
@@ -1034,8 +1017,7 @@
   .postQues {
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap; /*check if needed*/
+    flex-wrap: wrap;
     overflow-wrap: break-word;
-    /*   color: red; */
   }
 }

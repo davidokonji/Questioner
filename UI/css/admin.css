@@ -34,7 +34,7 @@ nav{
     position: absolute;
     background-color: #f9f9f9;
     right:10px;
-    top: 60px;
+    top: 55px !important;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
@@ -129,7 +129,7 @@ nav{
      border-radius: 5px;
   }
   .note_down{
-     padding-left:110px;
+     padding-left:90px;
      font-size:14px;
   }
   .boxtop{
@@ -137,12 +137,14 @@ nav{
      flex-direction:row;
      padding-top:50px;
      padding-left:60px;
+     align-items: center;
   }
   .boxtop i{
      color: #464866;
+
   }
   .boxcount{
-     padding:10px;
+     padding:0px !important;
      font-size: 42px;
   }
   .admin_box:hover{
@@ -159,9 +161,10 @@ nav{
      display: flex;
      flex-direction: row;
      width: 150px;
-     margin-top: 50px;
+     font-size: 16px !important;
+     margin-top: 60px !important ;
      margin-left: 120px;
-     padding-bottom:50px; 
+     padding-bottom:20px !important ; 
   }
   .view_meetup{
      margin-left: 120px;
@@ -182,6 +185,7 @@ nav{
   .adm_tab{
   display: flex;
   flex-direction: row;
+  align-items: center;
   margin:10px;
   padding:10px;
   box-shadow: 0px 1px 5px rgba(0,0,0,0.2);

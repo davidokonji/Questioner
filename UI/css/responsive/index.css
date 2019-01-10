@@ -47,7 +47,6 @@
   flex-wrap: wrap;
   height: auto;
   background-color: #25274d;
-  /* color: #AAABB8; */
 }
 .nav_landing h3 a {
   font-size: 18px;
@@ -56,7 +55,6 @@
   padding-top:1em;
   padding-bottom:1em;
   color: #ffffff;
-  /* color: rgb(19, 9, 6); */
 }
 .nav_landing p{
   margin-right: 10px;
@@ -64,7 +62,6 @@
   padding-bottom:1em;
   font-family:Montserrat-Regular;
   color: #ffffff;
-  /* color: rgb(12, 9, 8); */
 
 }
 .nav_btn{
@@ -84,7 +81,6 @@
 .topLanding {
   height: 1300px;
   overflow: hidden;
-  /* margin-top:50px; */
   margin-bottom: 0px;
   position: relative; 
   display: flex;
@@ -179,7 +175,6 @@
   flex-wrap: wrap;
   height: auto;
   background-color: #25274d;
-  /* color: #AAABB8; */
 }
 .nav_landing h3 a {
   font-size: 22px;
@@ -188,7 +183,6 @@
   padding-top:1em;
   padding-bottom:1em;
   color: #ffffff;
-  /* color: rgb(19, 9, 6); */
 }
 .nav_landing p{
   margin-right: 10px;
@@ -196,7 +190,6 @@
   padding-bottom:1em;
   font-family:Montserrat-Regular;
   color: #ffffff;
-  /* color: rgb(12, 9, 8); */
 
 }
 .nav_btn{
@@ -216,7 +209,6 @@
 .topLanding {
   height: 880px;
   overflow: hidden;
-  /* margin-top:50px; */
   margin-bottom: 0px;
   position: relative; 
   display: flex;
@@ -314,7 +306,6 @@
   flex-wrap: wrap;
   height: auto;
   background-color: #25274d;
-  /* color: #AAABB8; */
 }
 .nav_landing h3 a {
   font-size: 22px;
@@ -323,7 +314,6 @@
   padding-top:1em;
   padding-bottom:1em;
   color: #ffffff;
-  /* color: rgb(19, 9, 6); */
 }
 .nav_landing p{
   margin-right: 10px;
@@ -331,7 +321,6 @@
   padding-bottom:1em;
   font-family:Montserrat-Regular;
   color: #ffffff;
-  /* color: rgb(12, 9, 8); */
 
 }
 .nav_btn{
@@ -351,7 +340,6 @@
 .topLanding {
   height: 780px;
   overflow: hidden;
-  /* margin-top:50px; */
   margin-bottom: 0px;
   position: relative; 
   display: flex;
@@ -449,7 +437,6 @@
   flex-wrap: wrap;
   height: auto;
   background-color: #25274d;
-  /* color: #AAABB8; */
 }
 .nav_landing h3 a {
   font-size: 22px;
@@ -458,7 +445,6 @@
   padding-top:1em;
   padding-bottom:1em;
   color: #ffffff;
-  /* color: rgb(19, 9, 6); */
 }
 .nav_landing p{
   margin-right: 10px;
@@ -466,7 +452,6 @@
   padding-bottom:1em;
   font-family:Montserrat-Regular;
   color: #ffffff;
-  /* color: rgb(12, 9, 8); */
 
 }
 .nav_btn{
@@ -486,7 +471,6 @@
 .topLanding {
   height: 780px;
   overflow: hidden;
-  /* margin-top:50px; */
   margin-bottom: 0px;
   position: relative; 
   display: flex;

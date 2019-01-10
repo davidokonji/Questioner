@@ -103,7 +103,6 @@ flex-wrap: wrap;
    flex-direction: row;
    flex-wrap: wrap;
    height: auto;
-   /* justify-content: center; */
 }
 .admin_body{
    display: flex;
@@ -115,7 +114,6 @@ flex-wrap: wrap;
    display:flex;
    flex-direction:column;
    flex-wrap:wrap;
-   /* margin-top: 50px; */
    order:1;
    margin: 0 auto;
 }
@@ -180,7 +178,6 @@ flex-wrap: wrap;
 .adm_tab{
 display: flex;
 flex-direction: row;
-/* margin:10px; */
 max-height: 60px;
 box-shadow: 0px 1px 5px rgba(0,0,0,0.2);
 

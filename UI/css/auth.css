@@ -7,7 +7,6 @@
   flex-wrap: wrap;
   height: auto;
   background-color: #25274d;
-  /* color: #AAABB8; */
 }
 .nav_landing h3 a {
   font-size: 22px;
@@ -16,7 +15,6 @@
   padding-top:1em;
   padding-bottom:1em;
   color: #ffffff;
-  /* color: rgb(19, 9, 6); */
 }
 .nav_landing p{
   margin-right: 10px;
@@ -24,20 +22,18 @@
   padding-bottom:1em;
   font-family:Montserrat-Regular;
   color: #ffffff;
-  /* color: rgb(12, 9, 8); */
 
 }
 /**********************
     SIGN IN AND SIGN UP
 ***********************/
 .body_landing{
-  /* background-color: #25274d; */
+  background-color: #25274d;
 }
 .container-fluid{
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  /* background-color: #000022 #170312 #538083; */
  }
 
 .rightside{
@@ -55,7 +51,6 @@
   flex-direction: column;
   font-family: raleway-regular;
   margin-top: 160px;
-  /* margin-right: 100px; */
   box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
   background-color: #464866;
   color: #fff;
@@ -90,7 +85,7 @@
 .btn-full{
   width: 320px;
   height: 2.5em;
-  background-color: rgb(21, 33, 80); /*blue velvet*/
+  background-color: rgb(21, 33, 80); 
   color: #fff;
   font-size: medium;
   font-family: raleway-regular;
