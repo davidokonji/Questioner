@@ -51,7 +51,7 @@ class Questionermodel {
       id: uuid.v4(),
       createdOn: new Date(),
       createdBy: uuid.v4(),
-      meetup: uuid.v4(),
+      meetup: data.meetup,
       title: data.title,
       body: data.body,
       votes: data.votes || 0,
@@ -96,18 +96,26 @@ class Questionermodel {
       user: uuid.v4(),
       response: data.response,
     };
-
     this.rsvps.push(newRsvp);
 
     return newRsvp;
   }
 
-  updateVote(id, data) {
+  updateUpVote(id) {
     const question = this.getOneQuestion(id);
 
     const index = this.questions.indexOf(question);
+    this.questions[index].votes = question.votes + 1;
+    return this.questions[index];
+  }
 
-    this.questions[index].votes = data.votes;
+  updateDownVote(id) {
+    const question = this.getOneQuestion(id);
+
+    const index = this.questions.indexOf(question);
+    if (question.votes !== 0) {
+      this.questions[index].votes = question.votes - 1;
+    }
 
     return this.questions[index];
   }
