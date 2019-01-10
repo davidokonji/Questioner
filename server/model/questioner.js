@@ -102,12 +102,22 @@ class Questionermodel {
     return newRsvp;
   }
 
-  updateVote(id, data) {
+  updateUpVote(id) {
     const question = this.getOneQuestion(id);
 
     const index = this.questions.indexOf(question);
 
-    this.questions[index].votes = data.votes;
+    this.questions[index].votes = question.votes + 1;
+
+    return this.questions[index];
+  }
+
+  updateDownVote(id) {
+    const question = this.getOneQuestion(id);
+
+    const index = this.questions.indexOf(question);
+
+    this.questions[index].votes = question.votes - 1;
 
     return this.questions[index];
   }

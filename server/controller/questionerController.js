@@ -21,10 +21,7 @@ class Questioner {
   static createMeetup(req, res) {
     const checkBody = Validation.validateEntry(req.body);
     if (!checkBody) {
-      return res.status(400).send({
-        status: 400,
-        error: 'fill all required fields',
-      });
+      Validation.validQuestionfieldLength(res);
     }
     const [correctDate, actualDate] = Validation.validateDate(req.body.happeningOn);
 
@@ -36,17 +33,11 @@ class Questioner {
     }
     const [valid, length] = Validation.isValidLength(req.body.topic, 10);
     if (!valid) {
-      return res.status(400).send({
-        status: 400,
-        error: `topic should have minimum length of ${length}`,
-      });
+      Validation.validLengthResponse(res, 'topic', length);
     }
     const [validlocation, locationLength] = Validation.isValidLength(req.body.location, 10);
     if (!validlocation) {
-      return res.status(400).send({
-        status: 400,
-        error: `location should have minimun length of ${locationLength}`,
-      });
+      Validation.validLengthResponse(res, 'location', locationLength);
     }
     const meetup = QuestionerModel.createMeetup(req.body);
 
@@ -66,19 +57,12 @@ class Questioner {
   static getMeetupById(req, res) {
     const meetups = QuestionerModel.getAllMeetUps();
     if (meetups.length === 0) {
-      return res.status(200).send({
-        status: 200,
-        message: 'no meetup found',
-      });
+      Validation.verifyMeetupCount(res, 'meetup');
     }
-
     const meetup = QuestionerModel.getOneMeetup(req.params.id);
 
     if (!meetup) {
-      return res.status(404).send({
-        status: 404,
-        error: `unable to find meetup with ID ${req.params.id}`,
-      });
+      Validation.validID(res, 'meetup');
     }
     return res.status(200).send({
       status: 200,
@@ -102,10 +86,7 @@ class Questioner {
     Questioner.getRequiredFields(meetups, filteredFields);
 
     if (meetups.length === 0) {
-      return res.status(200).send({
-        status: 200,
-        message: 'no meetups found',
-      });
+      Validation.verifyMeetupCount(res, 'meetups');
     }
 
     return res.status(200).send({
@@ -121,10 +102,7 @@ class Questioner {
     Questioner.getRequiredFields(meetups, filteredFields);
 
     if (meetups.length === 0) {
-      return res.status(200).send({
-        status: 200,
-        message: 'no upcoming meetups',
-      });
+      Validation.verifyMeetupCount(res, 'upcoming');
     }
 
     return res.status(200).send({
@@ -138,24 +116,15 @@ class Questioner {
   static createQuestion(req, res) {
     const check = Validation.validateEntry(req.body);
     if (!check) {
-      return res.status(400).send({
-        status: 400,
-        error: 'fill all required fields',
-      });
+      Validation.validQuestionfieldLength(res);
     }
-    const [validTitle, length] = Validation.isValidLength(req.body.title, 10);
+    const [validTitle, length] = Validation.isValidLength(req.body.title, 5);
     if (!validTitle) {
-      return res.status(400).send({
-        status: 400,
-        error: `Question title should have minimun length of ${length}`,
-      });
+      Validation.validLengthResponse(res, 'question title', length);
     }
-    const [validBody, bodyLength] = Validation.isValidLength(req.body.body, 15);
+    const [validBody, bodyLength] = Validation.isValidLength(req.body.body, 10);
     if (!validBody) {
-      return res.status(400).send({
-        status: 400,
-        error: `Question Body should have minimun length of ${bodyLength}`,
-      });
+      Validation.validLengthResponse(res, 'question body', bodyLength);
     }
     const question = QuestionerModel.createQuestion(req.body);
 
@@ -177,12 +146,8 @@ class Questioner {
     const meetup = QuestionerModel.getOneQuestion(req.params.id);
 
     if (!meetup) {
-      return res.status(404).send({
-        status: 404,
-        error: 'unable to find question with given meetup ID',
-      });
+      Validation.validID(res, ['question', req.params.id]);
     }
-
     return res.status(200).send({
       status: 200,
       data: [
@@ -195,15 +160,32 @@ class Questioner {
     });
   }
 
-  static patchQuestionvote(req, res) {
+  static patchQuestionUpvote(req, res) {
     const question = QuestionerModel.getOneQuestion(req.params.id);
     if (!question) {
-      return res.status(404).send({
-        status: 404,
-        error: 'unable to find question with ID',
-      });
+      Validation.validID(res, ['question', req.params.id]);
     }
-    const updateVote = QuestionerModel.updateVote(req.params.id, req.body);
+
+    const updateVote = QuestionerModel.updateUpVote(req.params.id, req.body);
+
+    return res.status(200).send({
+      status: 200,
+      data: [{
+        meetup: uuid.v4(),
+        title: updateVote.title,
+        body: updateVote.body,
+        votes: updateVote.votes,
+      }],
+    });
+  }
+
+  static patchQuestionDownvote(req, res) {
+    const question = QuestionerModel.getOneQuestion(req.params.id);
+    if (!question) {
+      Validation.validID(res, ['question', req.params.id]);
+    }
+
+    const updateVote = QuestionerModel.updateDownVote(req.params.id, req.body);
 
     return res.status(200).send({
       status: 200,
@@ -219,9 +201,13 @@ class Questioner {
   static createRSVP(req, res) {
     const meetup = QuestionerModel.getOneMeetup(req.params.id);
     if (!meetup) {
-      return res.status(404).send({
-        status: 404,
-        error: 'unable to find meetup with ID',
+      Validation.validID(res, ['meetup', req.params.id]);
+    }
+    const validResponse = Validation.validResponse(req.body.response);
+    if (!validResponse) {
+      return res.status(400).send({
+        status: 400,
+        error: `response value '${req.body.response}' is not valid  `,
       });
     }
     const rsvp = QuestionerModel.meetupRsvp(req.params.id, req.body);
