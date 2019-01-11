@@ -20,19 +20,20 @@ const test = [{
   location: 'Lagos Nigeria',
   images: [],
   topic: 'meetup topic 1',
-  happeningOn: new Date('2019-01-01'),
+  happeningOn: new Date('2019-12-01'),
   tags: ['cool', 'nice'],
 },
 {
   title: 'question title',
   body: 'question body note',
   votes: 1,
+  meetup: 1,
 }, {
   createdOn: new Date(),
   location: '  ',
   images: [],
   topic: '     ',
-  happeningOn: new Date('2019-01-01'),
+  happeningOn: new Date('2019-12-01'),
   tags: ['cool', 'nice'],
 }];
 
@@ -140,8 +141,12 @@ describe('POST /api/v1/questions', () => {
       .post('/api/v1/questions')
       .send(test[1])
       .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
         expect(res).to.be.status(201);
-        done();
+        return done();
       });
   });
 });
