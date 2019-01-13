@@ -51,7 +51,8 @@ class Questioner {
     if (!isValidDate) {
       return res.status(400).send({
         status: 400,
-        error: `happeningOn value, ${actualDate} should be a valid date format YYYY-MM-DD`,
+        error: `happeningOn value, ${actualDate} 
+                should be a valid date format YYYY-MM-DD`,
       });
     }
     const checkpastDate = Validation.pastDate(req.body.happeningOn);
