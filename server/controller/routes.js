@@ -1,10 +1,13 @@
+import bodyParser from 'body-parser';
+
 import express from 'express';
 
 import Questioner from './questionerController';
 
+
 const app = express();
 
-app.use(express.json());
+app.use(bodyParser.json());
 
 app.post('/api/v1/meetups', Questioner.createMeetup);
 
@@ -18,9 +21,9 @@ app.post('/api/v1/questions', Questioner.createQuestion);
 
 app.get('/api/v1/questions/:id', Questioner.getQuestionById);
 
-app.patch('/api/v1/questions/:id/upvote', Questioner.patchQuestionvote);
+app.patch('/api/v1/questions/:id/upvote', Questioner.patchQuestionUpvote);
 
-app.patch('/api/v1/questions/:id/downvote', Questioner.patchQuestionvote);
+app.patch('/api/v1/questions/:id/downvote', Questioner.patchQuestionDownvote);
 
 app.post('/api/v1/meetups/:id/rsvps', Questioner.createRSVP);
 
