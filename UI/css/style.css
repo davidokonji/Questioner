@@ -18,36 +18,23 @@ html{
     height: 100%;
 }
 .footer{
-    height: 150px;
-    display: flex;
-    flex-wrap:wrap;
+    position: relative;
+    bottom: 0;
+    height: 50px;
+    width: 100%;
+    float: none;
     font-family:Montserrat-Regular;    
-    flex-direction: column;
     box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
     background-color: #25274d;
-}
-.footerTop{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-wrap:wrap;
-    padding:20px;
-    padding-bottom: 60px;
-    list-style-type: none;
-}
-.footerTop a{
-    color: #ffffff;
-    padding-right:50px;
-}
-.footerTop a:hover{
-    color: #BA1200;
 }
 .footerBottom{
     display:flex;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
     flex-wrap:wrap;
-    color: #ffffff;    
+    color: #ffffff;
+    padding-top: 20px;
 }
 .footerBottom i{
     color: #BA1200;

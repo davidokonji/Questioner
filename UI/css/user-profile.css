@@ -87,8 +87,8 @@
     flex-direction: row;
     flex-wrap: wrap;
     height:auto;
-    width: 90%;
-    justify-content: space-between;
+    width: 100%;
+    justify-content:center;
 }
 .sidebar{
     display: flex;
@@ -99,8 +99,9 @@
     margin-left: 20px;
     padding-bottom: 50px;
     margin-top:60px;
-    max-width: 280px;
-    max-height: 900px;
+    max-width: 100%;
+    margin-right: 10px;
+    /* max-height: 900px; */
     margin-bottom: 50px;
     overflow-wrap: break-word;
     font-family:roboto-regular; 
@@ -152,7 +153,7 @@
     margin-top:70px;
     margin-bottom: 50px;
     padding-top:20px;
-    padding-left: 10px; 
+    /* padding-left: 10px;  */
     padding-bottom: 50px;
     padding-right: 10px;
     margin-right: 5px;
