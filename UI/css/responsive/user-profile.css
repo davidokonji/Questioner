@@ -89,6 +89,7 @@
        .container{
         display: flex;
         flex-direction: row;
+        justify-content: center;
         flex-wrap: wrap;
         height:auto;
         width: 90%;
@@ -672,7 +673,7 @@
       flex-direction: row;
       flex-wrap: wrap;
       height:auto;
-      width: 90%;
+      width: 100%;
   }
   .sidebar{
     display: flex;
@@ -962,8 +963,8 @@
       flex-direction: row;
       flex-wrap: wrap;
       height:auto;
-      width: 90%;
-      justify-content: space-between;
+      width: 100%;
+      justify-content: center;
   }
   .sidebar{
       display: flex;

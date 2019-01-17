@@ -1,29 +1,13 @@
 @media (max-width: 575.98px) {
 
   .footer{
-    height: 150px;
+    height: 50px;
     display: flex;
     flex-wrap:wrap;
     font-family:Montserrat-Regular;    
     flex-direction: column;
     box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
     background-color: #25274d;
-}
-.footerTop{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-wrap:wrap;
-    padding:18px;
-    padding-bottom: 60px;
-    list-style-type: none;
-}
-.footerTop a{
-    color: #ffffff;
-    padding-right:30px;
-}
-.footerTop a:hover{
-    color: #BA1200;
 }
 .footerBottom{
     display:flex;
@@ -124,7 +108,7 @@ display: block;
 }
 .dashboard-container{
   display: flex;
-  width: 95% !important;
+  width: 100% !important;
   height: auto;
   margin: 0 auto;
   flex-direction: column;

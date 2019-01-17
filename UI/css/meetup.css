@@ -91,6 +91,7 @@ display: block;
   display:flex;
   flex-direction: column;
   height: 100%;
+  margin-bottom: 50px;
   background-color: rgba(248, 248, 250, 0.5);
 }
 .subcontainer{

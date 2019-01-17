@@ -101,6 +101,7 @@ nav{
      flex-direction: row;
      flex-wrap: wrap;
      height: auto;
+     margin-bottom: 50px;
      justify-content: center;
   }
   
@@ -202,15 +203,15 @@ nav{
   flex-direction: row;
   }
   .adm_details_title{
-  width: 300px;
-  max-width: 300px;
+  width: 70%;
+  max-width: 70%;
   text-overflow: ellipsis;
   overflow: hidden; 
   white-space: nowrap;
   }
   .adm_date{
-  width: 100px;
-  max-width: 100px;
+  width: 20%;
+  max-width: 20%;
   }
   .adm_location{
   width: 100px;
@@ -225,6 +226,7 @@ nav{
     font-size: 16px;
     cursor: pointer;
   }
+
   /*
    modal 
    */
@@ -353,4 +355,10 @@ nav{
    display:flex;
    flex-direction:row;
    justify-content:space-between;
+ }
+ .subtext{
+    font-size: 14px;
+    font-weight: bold;
+    margin:15px;
+    color: #565a5a;
  }
