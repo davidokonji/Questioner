@@ -1,127 +1,4 @@
-@media screen  and (max-width: 979px) /* Tablet */ {
-  /* body {
-    background: gray;
-  }
-   */
-/*********************
-  NAVIGATION LANDING
-**********************/
-
-.nav_landing{
-display: flex;
-justify-content: space-between;
-flex-direction: row;
-flex-wrap: wrap;
-height: auto;
-}
-/* .nav_landing h3::first-letter{
-font-size: 24px;
-color: rgb(119, 23, 23);
-color: rgb(19, 9, 6);
-
-} */
-.nav_landing h3 a {
-font: size 18px;
-padding-left: 1.8em;
-padding-top:30px;
-padding-bottom:20px;
-font-family:Montserrat-Regular;
-/* color: rgb(19, 9, 6); */
-color: #ffffff;
-}
-.nav_landing p a{
-  /* color: rgb(14, 8, 6); */
-font-family:Montserrat-Regular;
-  color: #ffffff;
-  opacity: 0.75;
-
-}
-.nav_landing p a:hover{
-  color: #ffffff;
-  opacity: 1;
-}
-.nav_landing p{
-padding-right: 3em;
-padding-top:30px;
-padding-bottom:20px;
-font-family:Montserrat-Regular;
-color: #ffffff;
-
-}
-/**********************
-SIGN IN AND SIGN UP
-***********************/
-.body_landing{
-  background-color: #25274d;
-}
-.container-fluid{
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-/* background-color: #000022 #170312 #538083; */
-}
-.leftside{
-height: auto;
-}
-.rightside{
-display: flex;
-flex-direction: column;
-height: auto;
-justify-content: center;
-margin-right: 30px;
-}
-.signin{
-max-width: 400px;
-height: auto;
-display: flex;
-flex-direction: column;
-margin-top: 160px;
-margin-right: 100px;
-box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
-background-color: #464866;
-color: #fff;
-
-}
-.signin .title{
-padding-top:20px;
-padding-left: 15px;
-padding-bottom: 20px;
-text-transform: uppercase;
-color: #fff;
-}
-.signup{
-display: flex;
-flex-wrap: wrap;
-flex-direction: column;
-font-family: raleway-regular;
-width: auto;
-height: auto;
-margin:  0 auto;
-box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
-margin-top: 100px; 
-border-radius: 5px;
-padding-bottom: 50px;
-background-color: #464866;
-color: #fff;
-}
-.show{
-padding-top:20px;
-}
-.btn-full{
-width: 320px;
-height: 2.5em;
-background-color: rgb(21, 33, 80); /*blue velvet*/
-color: #fff;
-font-size: medium;
-font-family: raleway-regular;
-
-}
-.btn-full:hover{
-  background-color: #fff; 
-  border:2px solid rgb(21, 33, 80);
-  color: #111010;
-  cursor: pointer;
-}
+@media (min-width: 768px) /* Tablet */ {
 /************************
 Form elements
 ************************/
@@ -146,8 +23,6 @@ padding-left: 10px;
 width: 14em;
 height: 2.5em;
 text-align: left;
-/* border-radius: 5px; */
-/* border: 1px solid; */
 outline: none;
 font-size: 18px;
 border-right:0px solid black;
@@ -182,7 +57,7 @@ padding-bottom:0.9em;
 padding: 10px;
 }
 .btn-primary{
-background-color: rgb(21, 33, 80); /*blue velvet*/
+background-color: rgb(21, 33, 80); 
 color: #fff;
 }
 .btn-primary:hover{
@@ -219,22 +94,15 @@ margin: 0 auto;
    color: #ffffff;
 
 }
-/* #nav_img{
-    border-radius: 50%;
-} */
 .logo{
    flex-grow: 1;
    order: 2;
-   /* padding-bottom:0.9em; */
 }
 #logo{
   color: #ffffff;
    flex-grow: 1;
 }
-/* .logo::first-letter{
-   font-size: 3em;
-   color: rgb(119, 23, 23);
-} */
+
 .img_btn{
    flex-basis: 100px;
    margin-right: 10px;
@@ -328,7 +196,6 @@ align-items: center;
     width:300px; 
     border: 2px solid #25274d;
    font-size: 16px;
-   /* text-align: center; */
     border-radius: 15px;
 }
 .bottom_dash{
@@ -348,7 +215,6 @@ align-items: center;
   flex-direction: column;
 }
 .card_img{
-  /* max-width: 400px; */
   margin-bottom: 20px;
 }
 .card_body{
@@ -579,7 +445,6 @@ align-items: center;
   flex-direction: column;
   flex-wrap: wrap; 
   overflow-wrap: break-word;
-  /*   color: red; */
 }
  /**************************
     USER PROFILE
@@ -603,9 +468,7 @@ align-items: center;
     padding-bottom: 50px;
     padding-top:15px;
     max-width: 230px;
-    /* border:1px solid black; */
     overflow-wrap: break-word;  
-    /* box-shadow: 0px 0px 4px rgba(0,0,0,0.1); */
 }
 .profile_img{
     width: 200px;
@@ -653,7 +516,6 @@ align-items: center;
     order: 2;
     padding-top:20px;
     padding-left: 5px; 
-    /* border: 1px solid black; */
     margin-right: 5px;
     padding-bottom: 50px;
     padding-right: 3px;
@@ -666,7 +528,6 @@ align-items: center;
 .upBox{
     width: 150px;
     height: 100px;
-    /* flex-basis: 200px; */
     border-radius: 5px;
     font-family:roboto-Regular;
 }
@@ -689,19 +550,16 @@ align-items: center;
 
 }
 .schedule{
-    /* width: 100%; */
     box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
     height: 200px;
     margin-top: 30px;
     margin-right: 15px;
 }
 .schedule h4{
-    /* border:1px solid black; */
     box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
     padding: 10px 15px;
 }
 .topQues{
- /* width: 100%; */
  box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
  height: 200px;
  margin-top: 20px;
@@ -756,7 +614,6 @@ align-items: center;
      display: flex;
      flex-direction: column;
      flex-wrap: wrap;
-     /* border: 1px solid red; */
      border:1px solid black;
      font-family:raleway-regular;
      order:2;
@@ -785,7 +642,6 @@ align-items: center;
  .boxtop{
      display:flex;
      flex-direction:row;
-     /* align-content: flex-end; */
      padding-top:50px;
      padding-left:60px;
  }
@@ -822,7 +678,6 @@ align-items: center;
      border-radius: 5px;
  }
  .view_meetup p{
-     /* border: 1px solid black; */
      box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
      padding: 20px;
      font-size: 16px;
@@ -872,10 +727,8 @@ align-items: center;
  }
 }
 
-@media screen and (max-width: 500px) /* Mobile */ {
-  /* body {
-    background: green;
-  } */
+@media (min-width: 576px) /* Mobile */ {
+  
   /*********************
   NAVIGATION LANDING
 **********************/
@@ -895,7 +748,6 @@ padding-bottom:15px;
 color: #ffffff;
 }
 .nav_landing p a{
-/* font-size:16px; */
 font-family:Montserrat-Regular;
 font-size: 14px;
 opacity: 0.75;
@@ -905,7 +757,6 @@ color: #ffffff;
 .nav_landing p a:hover{
   color: #ffffff;
   opacity: 1;
-/* border-bottom: 2px solid #000000; */
 }
 .nav_landing p{
 padding-right: 10px;
@@ -927,7 +778,6 @@ SIGN IN AND SIGN UP
 display: flex;
 flex-direction: row;
 justify-content: space-between;
-/* background-color: #000022 #170312 #538083; */
 }
 .leftside{
 height: auto;
@@ -938,8 +788,7 @@ flex-direction: column;
 justify-content: center;
 height: auto;
 justify-content: center;
-/* border: 1px solid black; */
-/* margin-right: 30px; */
+
 
 }
 .signin{
@@ -983,7 +832,7 @@ padding-top:20px;
 .btn-full{
 width: 320px;
 height: 2.5em;
-background-color: rgb(21, 33, 80); /*blue velvet*/
+background-color: rgb(21, 33, 80);
 color: #fff;
 font-size: medium;
 font-family: raleway-regular;

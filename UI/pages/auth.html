@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Questioner</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/auth.css">
+    <link rel="stylesheet" href="../css/responsive/auth.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
+    crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body class="body_landing">
+    <nav class="nav_landing">
+        <h3> <a href="../../index.html">Questioner</a></h3>
+        <p><button class="nav_btn" onclick="location.href='../../index.html'">HOME</button> | <button class="nav_btn" onclick="location.href='./admin_signin.html'">ADMIN</button></p>
+    </nav>
+    <div class="container-fluid">
+        <div class="wrapper">
+            <div class="container">
+              
+              <div class="signup" id="signup" onclick="show_signup()">Sign Up</div>
+              <div class="login" id="login" onclick="show_login()">Sign In</div>
+               <div class="signup-form" id="signup-form">
+              <div class="double">
+                  <input type="text" placeholder="First Name" class="input form_sm">
+                  <input type="text" placeholder="Last Name" class="input form_sm">
+                </div>
+                 <div class="double">
+                  <input type="text" placeholder="Other Name"class="input form_sm">
+                  <input type="text" placeholder="Username" class="input form_sm">
+                </div>
+                <input type="password" placeholder="Password" class="input form_lg">
+                  <input type="email" placeholder="Email Address" class="input form_lg">
+                 <div class="double">
+                  <input type="text" placeholder="Phone Number" class="input form_num">
+                </div>
+                  <div class="btn"><button class="btn" type="submit" onclick="location.href='dashboard.html';">
+                      Create account
+                  </button></div>
+               </div>
+              <div class="login-form" id="login-form">
+                <input type="text" placeholder="Email or Username" class="input form_lg"  id="email">
+                <input type="password" placeholder="Password" class="input form_lg">
+                  <div class="btn">
+                   <button class="btn" type="submit" onclick="location.href='dashboard.html';">Sign in</button>
+                  </div>
+               </div>
+              
+            </div>
+          </div>
+    </div>
+</body>
+<script src="../js/auth.js"></script>
+</html>

@@ -1,7 +1,8 @@
 //modal 
-var modal = document.querySelector(".modal");
-var trigger = document.querySelector(".trigger");
-var closeButton = document.querySelector(".close-button");
+const modal = document.querySelector(".modal");
+const trigger = document.querySelector(".trigger");
+const closeButton = document.querySelector(".close-button");
+const submitBtn =document.querySelector("#quesBtn");
 
 function toggleModal() {
     modal.classList.toggle("show-modal");
@@ -13,4 +14,5 @@ function windowOnClick(event) {
 }
 trigger.addEventListener("click", toggleModal);
 closeButton.addEventListener("click", toggleModal);
+submitBtn.addEventListener("click", toggleModal);
 window.addEventListener("click", windowOnClick);

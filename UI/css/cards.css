@@ -1,0 +1,139 @@
+.cardslide{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 30px;
+  }
+  .card{
+  
+    max-width: 410px;
+    height: 350px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction:column;
+  }
+  .card_image {
+    max-width: 410px;
+    width:410px;
+    height:170px;
+  }
+  .card .card_image img{
+    width:410px;
+    height:170px;
+    object-fit: cover;
+    cursor: pointer;
+  }
+  .card_body {
+    display: flex;
+    flex-direction:row;
+    max-width: 410px;
+    height:180px;
+  }
+  .more_meetups{
+    margin: 0 auto;
+    margin-top:30px;
+    margin-bottom: 40px;
+    font-size: 25px;
+  }
+  
+  .body_side{
+    display: flex;
+    flex-direction:column;
+    width: 350px;
+  }
+  .meetupBtn{
+    cursor: pointer;
+  
+  }
+  .side_date{
+    height:180px;
+    width:60px;
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+  }
+  .month{
+    position:relative;
+    top:55px;
+    font-size: 24px;
+  }
+  .day{
+     position:relative;
+     top:65px;
+    font-size: 24px;
+  }
+  .card_title {
+    display: flex;
+    flex-direction:row;
+    align-items:center;
+    max-width: 350px;
+    height:50px;
+  }
+  .card_date {
+    display: flex;
+    flex-direction:row;
+    align-items:center;
+    max-width: 350px;
+    height:45px;
+  }
+  .card_location {
+    display: flex;
+    flex-direction:row;
+    align-items:center;
+    max-width: 350px;
+    height:50px;
+  }
+  .card_question {
+    display: flex;
+    flex-direction:row;
+    justify-content: space-between;
+    max-width: 410px;
+    width:410px;
+    height:35px;
+  }
+  .tags {
+    width: 200px;
+  }
+  .tag_pills{
+    background-color: black;
+    color: white;
+    font-size: 12px;
+    border-radius: 20px;
+    padding: 5px;
+    margin-right: 3px;
+  }
+  .tag_pills:nth-child(1){
+    background-color: indigo;
+    color: white;
+  }
+  .tag_pills:nth-child(2){
+    background-color: brown;
+    color: white;
+  }
+  .tag_pills:nth-child(3){
+    background-color: #25274d;
+    color: white;
+  }
+  .question {
+     position:relative;
+     top: 5px;
+    right: 80px;
+  }
+  .title {
+    position: relative;
+    left: 10px;
+    cursor: pointer;
+  }
+  .date {
+    position: relative;
+    left: 10px;
+  }
+  .location {
+    position: relative;
+    left: 10px;
+  }
+  .card:hover{
+      box-shadow: 0px 0px 1px rgba(0,0,0,0.5);
+      transform: scale(1.03);
+  }
