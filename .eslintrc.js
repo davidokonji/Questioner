@@ -7,6 +7,7 @@ module.exports = {
         "node": true
       },
       "rules": {
-        "prefer-destructuring": ["error", {"object": false}]
+        "prefer-destructuring": ["error", {"object": false}],
+        "arrow-body-style": 0
       }
 };

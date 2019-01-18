@@ -9,7 +9,8 @@ cache: npm
 branches:
   only:
   - develop
-
+services:
+  - postgresql
 env:
   global:
     - CC_TEST_REPORTER_ID= 0ff4080080b3bc4236e45e0b82489d259c1108d784b6bd6a10f0acba49c90bd2
@@ -17,5 +18,6 @@ before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
+  - psql -c 'create database questioner_test;' -U postgres
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
