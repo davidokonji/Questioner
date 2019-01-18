@@ -11,24 +11,7 @@ chai.use(chaihttp);
 const expect = chai.expect;
 chai.should();
 
-let token = '';
-
-beforeEach((done) => {
-  chai.request(app)
-    .post('/api/v1/auth/login')
-    .send(
-      {
-        email: 'davidokonji3@gmail.com',
-        password: 'password',
-      },
-    ).end((err, res) => {
-      if (err) {
-        return err;
-      }
-      token = res.body.data[0].token;
-      return done();
-    });
-});
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsImlhdCI6MTU0Nzc4NDUyNCwiZXhwIjoxNTQ3ODcwOTI0fQ.oFt3hz-pCbvmA9cOPcg0QtX77-T3Va2e97dee_lONwE';
 
 describe('POST /api/v1/auth/login', () => {
   it('should login a new user', (done) => {
