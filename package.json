@@ -4,7 +4,7 @@
   "description": "This application helps the meetup organizer prioritize questions to be answered. It allows users to create meetups, delete meetups and other functionalities",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build:server && node dist/index.js",
+    "start": "npm run migrations && npm run build:server && node dist/index.js",
     "start:dev": "nodemon --exec babel-node server/server.js",
     "build:server": "babel ./src/app -d dist",
     "build-babel": "babel -d ./build ./server -s",
