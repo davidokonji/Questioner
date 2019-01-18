@@ -15,7 +15,7 @@
     "compile": "babel --presets es2015,stage-0 -d lib/ src/app/",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "createTables": "set NODE_ENV=development&& babel-node src/app/model/createTables.js",
-    "migrations": "npm run droptestTable && npm run testMigration",
+    "migrations": "set NODE_ENV=test&& npm run droptestTable && npm run testMigration",
     "testMigration": "babel-node src/app/tests/createTestTables.js",
     "droptables": "babel-node src/app/model/droptables.js",
     "droptestTable": "babel-node src/app/tests/droptestTables.js"

@@ -10,7 +10,7 @@ branches:
   only:
   - develop
 services:
-  - postgresql
+- postgresql
 env:
   global:
     - CC_TEST_REPORTER_ID= 0ff4080080b3bc4236e45e0b82489d259c1108d784b6bd6a10f0acba49c90bd2
@@ -19,5 +19,6 @@ before_script:
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
   - psql -c 'create database questioner_test;' -U postgres
+  - npm run migrations 
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
