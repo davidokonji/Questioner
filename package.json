@@ -4,16 +4,21 @@
   "description": "This application helps the meetup organizer prioritize questions to be answered. It allows users to create meetups, delete meetups and other functionalities",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build:server && node dist/server.js",
+    "start": "npm run build:server && node dist/index.js",
     "start:dev": "nodemon --exec babel-node server/server.js",
-    "build:server": "babel ./server -d dist",
+    "build:server": "babel ./src/app -d dist",
     "build-babel": "babel -d ./build ./server -s",
-    "test": " mocha --require babel-core/register ./server/test/*.test.js --exit",
+    "test": " npm run migrations && nyc mocha --require babel-core/register ./src/app/tests/*.test.js --exit",
     "test-watch": "nodemon --exec 'npm test' ",
-    "dev-start": "babel-watch server/server.js",
+    "dev-start": "babel-watch index.js",
     "heroku-postbuild": "npm run build:server",
-    "compile": "babel --presets es2015,stage-0 -d lib/ server/",
-    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
+    "compile": "babel --presets es2015,stage-0 -d lib/ src/app/",
+    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
+    "createTables": "set NODE_ENV=development&& babel-node src/app/model/createTables.js",
+    "migrations": "npm run droptestTable && npm run testMigration",
+    "testMigration": "babel-node src/app/tests/createTestTables.js",
+    "droptables": "babel-node src/app/model/droptables.js",
+    "droptestTable": "babel-node src/app/tests/droptestTables.js"
   },
   "repository": {
     "type": "git",
@@ -44,8 +49,16 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
+    "bcrypt": "^3.0.3",
     "body-parser": "^1.18.3",
+    "config": "^3.0.1",
+    "dotenv": "^6.2.0",
     "express": "^4.16.4",
-    "uuid": "^3.3.2"
+    "jsonwebtoken": "^8.4.0",
+    "multer": "^1.4.1",
+    "pg": "^7.8.0",
+    "supertest": "^3.4.1",
+    "uuid": "^3.3.2",
+    "validator": "^10.11.0"
   }
 }
