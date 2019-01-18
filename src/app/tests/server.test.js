@@ -13,7 +13,7 @@ chai.should();
 
 let token = '';
 
-before((done) => {
+beforeEach((done) => {
   chai.request(app)
     .post('/api/v1/auth/login')
     .send(
@@ -430,11 +430,4 @@ describe('POST /api/v1/meetups/:id/tags', () => {
         return done();
       });
   });
-});
-after((done) => {
-  console.log(`
-  **************************************************************************
-  ********************************** DONE **********************************
-  ********************************** TEST **********************************`);
-  return done();
 });
