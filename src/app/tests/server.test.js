@@ -84,7 +84,7 @@ describe('POST /api/v1/auth/signup', () => {
         firstname: 'david',
         lastname: 'okonji',
         othername: 'nonso',
-        email: 'david0okonji@gmail.com',
+        email: 'davidokonji2017@gmail.com',
         password: 'pass',
         phonenumber: '08109418943',
         username: 'davidd',
