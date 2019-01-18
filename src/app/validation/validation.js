@@ -245,7 +245,7 @@ class Validate {
    * @return {object} error or pass object
    */
   static async createUser(req, res, next) {
-    const getRequired = Validation.checkValidEntry(req.body, ['firstname', 'lastname', 'email', 'phonenumber', 'username']);
+    const getRequired = Validation.checkValidEntry(req.body, ['firstname', 'lastname', 'othername', 'passowrd', 'email', 'phonenumber', 'username']);
     const errorValues = getRequired.map(error => error);
     if (typeof getRequired === 'object' && getRequired.length > 0) {
       return res.status(400).json({

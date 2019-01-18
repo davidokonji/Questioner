@@ -284,8 +284,8 @@ class Questioner {
         status: 201,
         data: [
           {
-            user: rows[0].createdBy,
-            meetup: rows[0].meetup,
+            user: rows[0].createdby,
+            meetup: rows[0].meetupid,
             title: rows[0].title,
             body: rows[0].body,
           },
@@ -482,7 +482,7 @@ class Questioner {
         status: 201,
         data: [
           {
-            question: req.question.id,
+            question: rows[0].questionid,
             title: req.question.title,
             body: req.question.body,
             comment: rows[0].comment,
@@ -547,7 +547,7 @@ class Questioner {
     } catch (error) {
       return res.status(400).json({
         status: 400,
-        message: error,
+        message: error.message,
       });
     }
   }
@@ -569,7 +569,7 @@ class Questioner {
     } catch (error) {
       return res.status(400).json({
         status: 400,
-        message: error,
+        message: error.message,
       });
     }
   }
