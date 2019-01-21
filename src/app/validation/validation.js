@@ -1,11 +1,6 @@
 import validator from 'validator';
-
 import Validation from './validationhelper';
-
-// import hash from '../middleware/hashPassword';
-
 import db from '../config/db';
-
 
 class Validate {
   /**
@@ -28,7 +23,6 @@ class Validate {
     if (!checkBody) {
       return Validation.validQuestionfieldLength(res);
     }
-
     const [isValidDate, actualDate] = Validation.validateDate(req.body.happeningOn);
     if (!isValidDate) {
       return res.status(400).send({
@@ -78,7 +72,6 @@ class Validate {
     }
     return next();
   }
-
   /**
    * get all meetup middleware
    * @param {object} req
@@ -102,7 +95,6 @@ class Validate {
     }
     return next();
   }
-
   /**
    * get upcoming meetup middleware
    * @param {object} req
@@ -160,7 +152,6 @@ class Validate {
     }
     return next();
   }
-
   /**
    * patch upvote middleware
    * @param {object} req
@@ -178,7 +169,6 @@ class Validate {
     }
     return next();
   }
-
   /**
    * patch downvote middleware
    * @param {object} req
@@ -204,7 +194,6 @@ class Validate {
 
     return next();
   }
-
   /**
    * create rsvp middleware
    * @param {object} req
@@ -245,7 +234,7 @@ class Validate {
    * @return {object} error or pass object
    */
   static async createUser(req, res, next) {
-    const getRequired = Validation.checkValidEntry(req.body, ['firstname', 'lastname', 'othername', 'passowrd', 'email', 'phonenumber', 'username']);
+    const getRequired = Validation.checkValidEntry(req.body, ['firstname', 'lastname', 'othername', 'password', 'email', 'phonenumber', 'username']);
     const errorValues = getRequired.map(error => error);
     if (typeof getRequired === 'object' && getRequired.length > 0) {
       return res.status(400).json({
@@ -290,7 +279,6 @@ class Validate {
         message: 'invalid data',
       });
     }
-
     const validphonenumber = validator.isMobilePhone(req.body.phonenumber);
     if (!validphonenumber) {
       return res.status(400).send({
@@ -298,7 +286,6 @@ class Validate {
         error: `Phone number ${req.body.phonenumber} is not valid`,
       });
     }
-
     return next();
   }
 
@@ -324,6 +311,21 @@ class Validate {
       return res.status(400).send({
         status: 400,
         error: `Email value,  ${req.body.email} is not a valid Email`,
+      });
+    }
+    try {
+      const text = 'SELECT * FROM users WHERE email = $1';
+      const { rows } = await db.query(text, [req.body.email]);
+      if (!rows[0]) {
+        return res.status(400).json({
+          status: 400,
+          message: 'user account does not exist',
+        });
+      }
+    } catch (error) {
+      return res.status(500).json({
+        status: 500,
+        message: 'invalid data',
       });
     }
 
@@ -380,9 +382,16 @@ class Validate {
   static deleteMeetup(req, res, next) {
     const id = parseInt(req.params.id, 10);
     const text = 'SELECT * FROM meetup WHERE id = $1';
-    const { rows, rowCount } = db.query(text, [id]);
-    if (rowCount === 0 && !rows[0].id) {
-      return Validation.validID(res, ['meetup', id]);
+    try {
+      const { rows, rowCount } = db.query(text, [id]);
+      if (rowCount === 0 && !rows[0]) {
+        return Validation.validID(res, ['meetup', id]);
+      }
+    } catch (error) {
+      return res.status(500).send({
+        status: 500,
+        message: 'meetup can not be deleted',
+      });
     }
     return next();
   }

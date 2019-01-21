@@ -23,7 +23,6 @@ class Questioner {
       return filtered.push(meetup);
     });
   }
-
   /**
    *  creating a new user
    * @param {object} req
@@ -74,7 +73,6 @@ class Questioner {
       });
     }
   }
-
   /**
    *  Login user
    * @param {object} req
@@ -122,7 +120,6 @@ class Questioner {
       });
     }
   }
-
 
   /**
    * create a meetup
@@ -511,14 +508,14 @@ class Questioner {
       const id = parseInt(req.params.id, 10);
       const { rows } = await db.query(text, [id]);
 
-      return res.status(202).json({
-        status: 202,
-        data: `meetup with title ${rows[0].topic} has been deleted`,
+      return res.status(200).json({
+        status: 200,
+        data: `meetup with title, ${rows[0].topic} has been deleted`,
       });
     } catch (error) {
       return res.status(404).json({
         status: 404,
-        message: 'meetup can not be deleted',
+        message: 'meetup does not exist',
       });
     }
   }
@@ -552,6 +549,12 @@ class Questioner {
     }
   }
 
+  /**
+   * post images to meetup
+   * @param {object} req
+   * @param {object} res
+   * @returns {object} post images response
+   */
   static async postImages(req, res) {
     const text = `UPDATE meetup SET images = (select array_agg(distinct e)
                    from unnest(images || $1) e) WHERE id = $2 returning *`;
