@@ -11,8 +11,21 @@ chai.use(chaihttp);
 const expect = chai.expect;
 chai.should();
 
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsImlhdCI6MTU0Nzc4NDUyNCwiZXhwIjoxNTQ3ODcwOTI0fQ.oFt3hz-pCbvmA9cOPcg0QtX77-T3Va2e97dee_lONwE';
-
+let token = '';
+before((done) => {
+  chai.request(app)
+    .post('/api/v1/auth/login')
+    .send({
+      email: 'davidokonji3@gmail.com',
+      password: 'password',
+    }).end((err, res) => {
+      if (err) {
+        return err;
+      }
+      token = res.body.data[0].token || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsImlhdCI6MTU0ODEwODMzOSwiZXhwIjoxNTQ4MjgxMTM5fQ.A9ecXU0Fsmi2JPJC7WfPBAH52NygDA4IBt8N-8XmtWE';
+      return done();
+    });
+});
 describe('POST /api/v1/auth/login', () => {
   it('should login a new user', (done) => {
     const user = {
@@ -50,11 +63,36 @@ describe('POST /api/v1/auth/login', () => {
           return done(err);
         }
         expect(res).to.have.status(400);
+        expect(res).to.be.a('object');
         return done();
       });
   });
 });
 describe('POST /api/v1/auth/signup', () => {
+  it('should create a new user', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .send({
+        firstname: 'david',
+        lastname: 'okonji',
+        othername: 'nonso',
+        email: 'davidokonji2017@gmail.com',
+        password: 'pass',
+        phonenumber: '08109418943',
+        username: 'davidd',
+        isadmin: true,
+      })
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.have.status(201);
+        expect(res).to.not.have.property('message');
+        expect(res).to.be.a('object');
+        return done();
+      });
+  });
   it('should return error if duplicate email entry', (done) => {
     chai.request(app)
       .post('/api/v1/auth/signup')
@@ -73,29 +111,30 @@ describe('POST /api/v1/auth/signup', () => {
           return done(err);
         }
         expect(res).to.have.status(400);
+        res.body.should.have.property('message');
         expect(res).to.be.a('object');
         return done();
       });
   });
-  it('should create a new user', (done) => {
+  it('should return error if username already exist', (done) => {
     chai.request(app)
       .post('/api/v1/auth/signup')
       .send({
         firstname: 'david',
         lastname: 'okonji',
         othername: 'nonso',
-        email: 'david0okonji@gmail.com',
+        email: 'davidokonji2018@gmail.com',
         password: 'pass',
         phonenumber: '08109418943',
-        username: 'davidd',
-        isadmin: true,
+        username: 'devlen',
       })
       .end((err, res) => {
         if (err) {
           expect(res).to.throw(err);
           return done(err);
         }
-        expect(res).to.have.status(201);
+        expect(res).to.have.status(400);
+        res.body.should.have.property('message');
         expect(res).to.be.a('object');
         return done();
       });
@@ -181,6 +220,7 @@ describe('POST /api/v1/meetups', () => {
         }
         expect(res).to.have.status(401);
         expect(res).to.be.a('object');
+        res.body.should.have.property('message');
         res.body.should.have.property('status').equal(401);
         return done();
       });
@@ -292,6 +332,7 @@ describe('POST /api/v1/questions', () => {
           return done(err);
         }
         expect(res).to.be.status(401);
+        expect(res).to.be.a('object');
         return done();
       });
   });
@@ -311,6 +352,7 @@ describe('POST /api/v1/comments/', () => {
           return done(err);
         }
         expect(res).to.be.status(201);
+        expect(res).to.be.a('object');
         return done();
       });
   });
@@ -325,6 +367,7 @@ describe('POST /api/v1/comments/', () => {
           return done(err);
         }
         expect(res).to.be.status(400);
+        expect(res).to.be.a('object');
         return done();
       });
   });
@@ -344,6 +387,7 @@ describe('POST /api/v1/meetups/:id/rsvps', () => {
           return done(err);
         }
         expect(res).to.be.status(201);
+        expect(res).to.be.a('object');
         return done();
       });
   });
@@ -360,6 +404,7 @@ describe('PATCH /api/v1/questions/:id/upvote', () => {
           return done(err);
         }
         expect(res).to.be.status(200);
+        expect(res).to.be.a('object');
         return done();
       });
   });
@@ -375,6 +420,7 @@ describe('PATCH /api/v1/questions/:id/upvote', () => {
           return done(err);
         }
         expect(res).to.be.status(401);
+        expect(res).to.be.a('object');
         return done();
       });
   });
@@ -391,6 +437,7 @@ describe('PATCH /api/v1/questions/:id/downvote', () => {
           return done(err);
         }
         expect(res).to.be.status(200);
+        expect(res).to.be.a('object');
         return done();
       });
   });
@@ -410,6 +457,7 @@ describe('POST /api/v1/meetups/:id/tags', () => {
           return done(err);
         }
         expect(res).to.be.status(200);
+        expect(res).to.be.a('object');
         return done();
       });
   });

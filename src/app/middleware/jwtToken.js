@@ -19,7 +19,7 @@ class jwtToken {
     },
     process.env.SECRET_KEY,
     {
-      expiresIn: '1d',
+      expiresIn: '2d',
     });
     return token;
   }

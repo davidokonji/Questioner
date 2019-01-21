@@ -41,7 +41,7 @@ app.post('/api/v1/meetups/:id/rsvps', [Validation.createRsvp, Auth], Questioner.
 
 app.post('/api/v1/auth/signup', [Validation.createUser], Questioner.createUser);
 
-app.post('/api/v1/auth/login', Questioner.loginUser);
+app.post('/api/v1/auth/login', [Validation.loginUser], Questioner.loginUser);
 
 app.delete('/api/v1/meetups/:id', [Validation.deleteMeetup, Auth, isadmin], Questioner.deleteMeetup);
 
@@ -68,6 +68,5 @@ app.use('/', (req, res) => {
     message: 'welcome to  Questioner, refer to api docs',
   });
 });
-
 
 export default app;

@@ -25,12 +25,20 @@ class Authenticate {
     try {
       const decodedToken = await jwt.verifyToken(token, process.env.SECRET_KEY);
 
+      const currentDate = new Date().getTime() / 1000;
+      if (decodedToken.exp < currentDate) {
+        return res.status(401).send({
+          status: 401,
+          error: 'token provided has expired',
+        });
+      }
+
       const querytext = 'SELECT * FROM users WHERE id =$1';
 
       const { rows } = await db.query(querytext, [decodedToken.userid]);
       if (!rows[0].id) {
-        return res.status(400).send({
-          status: 400,
+        return res.status(401).send({
+          status: 401,
           error: 'invalid token provided',
         });
       }
