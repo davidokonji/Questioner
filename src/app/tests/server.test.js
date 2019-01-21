@@ -116,6 +116,7 @@ describe('POST /api/v1/auth/signup', () => {
         return done();
       });
   });
+
   it('should return error if username already exist', (done) => {
     chai.request(app)
       .post('/api/v1/auth/signup')
