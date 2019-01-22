@@ -1,26 +1,15 @@
 import multer from 'multer';
+import Datauri from 'datauri';
+import path from 'path';
 
-const storage = multer.diskStorage({
-  destination(req, file, cb) {
-    cb(null, './uploads/');
-  },
-  filename(req, file, cb) {
-    const imagevalue = `${new Date().toISOString()} ${file.originalname}`;
-    cb(null, imagevalue);
-  },
-});
-const fileFilter = (req, file, cb) => {
-  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
-    cb(null, true);
-  } else {
-    cb(new Error('file type not supported'), false);
-  }
-};
+const storage = multer.memoryStorage();
+const multerUploads = multer({ storage }).single('images');
+const dUri = new Datauri();
+/**
+* @description This function converts the buffer to data url
+* @param {Object} req containing the field object
+* @returns {String} The data url from the string buffer
+*/
+const dataUri = req => dUri.format(path.extname(req.file.originalname).toString(), req.file.buffer);
 
-export default multer({
-  storage,
-  limits: {
-    fileSize: 1024 * 1024 * 5,
-  },
-  fileFilter,
-});
+export default { multerUploads, dataUri };
