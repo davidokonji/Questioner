@@ -1,8 +1,13 @@
+import cloudinary from 'cloudinary';
+
 import db from '../config/db';
 
 import jwt from '../middleware/jwtToken';
 
 import hash from '../middleware/hashPassword';
+
+import dataUri from '../middleware/uploadfile';
+
 
 class Questioner {
   /**
@@ -555,26 +560,42 @@ class Questioner {
    * @param {object} res
    * @returns {object} post images response
    */
-  static async postImages(req, res) {
-    const text = `UPDATE meetup SET images = (select array_agg(distinct e)
+  static async postImages(req, res, next) {
+    if (req.file) {
+      const file = dataUri.dataUri(req).content;
+      return cloudinary.v2.uploader.upload(file, {
+        folder: 'questioner',
+        use_filename: true,
+      })
+        .then(async (result) => {
+          const images = result.url;
+          const text = `UPDATE meetup SET images = (select array_agg(distinct e)
                    from unnest(images || $1) e) WHERE id = $2 returning *`;
-    const id = parseInt(req.params.id, 10);
-    const images = req.file.path;
-    const splited = images.split(',');
-    try {
-      const { rows } = await db.query(text, [splited, id]);
-      return res.status(200).json({
-        status: 200,
-        meetup: rows[0].id,
-        topic: rows[0].topic,
-        images: rows[0].images,
-      });
-    } catch (error) {
-      return res.status(400).json({
-        status: 400,
-        message: error.message,
-      });
+          const id = parseInt(req.params.id, 10);
+          const splited = images.split(',');
+          try {
+            const { rows } = await db.query(text, [splited, id]);
+            return res.status(200).json({
+              status: 200,
+              meetup: rows[0].id,
+              topic: rows[0].topic,
+              images: rows[0].images,
+            });
+          } catch (error) {
+            return res.status(400).json({
+              status: 400,
+              message: error.message,
+            });
+          }
+        })
+        .catch((err) => {
+          return res.status(400).json({
+            status: 400,
+            message: err,
+          });
+        });
     }
+    return next();
   }
 }
 

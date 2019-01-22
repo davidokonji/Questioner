@@ -11,7 +11,9 @@ import Questioner from './questionerController';
 
 import isadmin from '../middleware/isadmin';
 
-import upload from '../middleware/uploadfile';
+import multerUploads from '../middleware/uploadfile';
+
+import cloudinaryConfig from '../config/cloudinaryConfig';
 
 const app = express();
 
@@ -19,7 +21,7 @@ app.use(bodyParser.json());
 
 app.use('/uploads', express.static('uploads'));
 
-app.post('/api/v1/meetups', [upload.single('images'), Validation.createMeetup, Auth, isadmin], Questioner.createMeetup);
+app.post('/api/v1/meetups', [Validation.createMeetup, Auth, isadmin], Questioner.createMeetup);
 
 app.get('/api/v1/meetups/upcoming/', [Validation.GetUpcoming, Auth], Questioner.getUpcoming);
 
@@ -47,23 +49,16 @@ app.delete('/api/v1/meetups/:id', [Validation.deleteMeetup, Auth, isadmin], Ques
 
 app.put('/api/v1/meetups/:id/tags', [Auth, isadmin], Questioner.postTags);
 
-app.put('/api/v1/meetups/:id/images', [upload.single('images'), Auth, isadmin], Questioner.postImages);
+app.put('/api/v1/meetups/:id/images', [cloudinaryConfig, multerUploads.multerUploads, Auth, isadmin], Questioner.postImages);
 
 app.use('*', (req, res) => {
-  return res.status(404).send({
+  return res.status(404).json({
     status: 404,
     error: 'invalid route passed',
   });
 });
-app.use((err, req, res, next) => {
-  res.status(400).send({
-    status: 400,
-    message: 'invalid response sent',
-  });
-  return next();
-});
 app.use('/', (req, res) => {
-  res.send(200).json({
+  res.status(200).json({
     status: 200,
     message: 'welcome to  Questioner, refer to api docs',
   });
