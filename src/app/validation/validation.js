@@ -4,6 +4,128 @@ import db from '../config/db';
 
 class Validate {
   /**
+   * create user middleware
+   * @param {object} req
+   * @param {object} res
+   * @param {object} next
+   * @return {object} error or pass object
+   */
+  static async createUser(req, res, next) {
+    const getRequired = Validation.checkValidEntry(req.body, ['firstname', 'lastname', 'othername', 'password', 'email', 'phonenumber', 'username']);
+    const errorValues = getRequired.map(error => error);
+    if (typeof getRequired === 'object' && getRequired.length > 0) {
+      return res.status(400).json({
+        status: 400,
+        error: errorValues,
+      });
+    }
+    const validEmail = validator.isEmail(req.body.email);
+    if (!validEmail) {
+      return Validation.validatorResponse(res, ['Email', req.body.email, 'a valid Email']);
+    }
+    const sortSpecialchars = validator.isAlphanumeric(req.body.username);
+    if (!sortSpecialchars) {
+      return Validation.validatorResponse(res, ['Username', req.body.username, 'aplhanumeric']);
+    }
+    try {
+      const text = 'SELECT * FROM users WHERE email = $1';
+      const { rows } = await db.query(text, [req.body.email]);
+      if (rows[0]) {
+        return Validation.alreadyExist(res, req.body.email);
+      }
+      const text1 = 'SELECT * FROM users WHERE username = $1';
+      const response = await db.query(text1, [req.body.username]);
+      if (response.rows[0]) {
+        return Validation.alreadyExist(res, req.body.username);
+      }
+    } catch (error) {
+      return res.status(500).json({
+        status: 500,
+        message: 'invalid data',
+      });
+    }
+    const validFirstname = validator.isAlpha(req.body.firstname);
+    if (!validFirstname) {
+      return Validation.validatorResponse(res, ['First Name', req.body.firstname, 'valid']);
+    }
+    const validLastname = validator.isAlpha(req.body.lastname);
+    if (!validLastname) {
+      return Validation.validatorResponse(res, ['Last Name', req.body.lastname, 'valid']);
+    }
+    if (req.body.othername) {
+      const validOthername = validator.isAlpha(req.body.othername);
+      if (!validOthername) {
+        return Validation.validatorResponse(res, ['Other Name', req.body.othername, 'valid']);
+      }
+    }
+    const validPasswordLength = validator.isLength(req.body.password, {
+      min: 8,
+      max: 50,
+    });
+    if (!validPasswordLength) {
+      return res.status(400).send({
+        status: 400,
+        error: 'Password, should be more than 7 digits',
+      });
+    }
+    const validphonenumber = validator.isMobilePhone(req.body.phonenumber);
+    if (!validphonenumber) {
+      return Validation.validatorResponse(res, ['Phone Number', req.body.phonenumber, 'valid']);
+    }
+    return next();
+  }
+
+  /**
+   * login middleware
+   * @param {object} req
+   * @param {object} res
+   * @param {object} next
+   * @return {object} error or pass object
+   */
+
+  static async loginUser(req, res, next) {
+    const getRequired = Validation.checkValidEntry(req.body, ['email', 'password']);
+    const errorValues = getRequired.map(error => error);
+    if (typeof getRequired === 'object' && getRequired.length > 0) {
+      return res.status(400).send({
+        status: 400,
+        error: errorValues,
+      });
+    }
+    const validEmail = validator.isEmail(req.body.email);
+    if (!validEmail) {
+      return Validation.validatorResponse(res, ['Email', req.body.email, 'a valid Email']);
+    }
+    const validPasswordLength = validator.isLength(req.body.password, {
+      min: 8,
+      max: 50,
+    });
+    if (!validPasswordLength) {
+      return res.status(400).send({
+        status: 400,
+        error: 'Password, should be more than 7 digits',
+      });
+    }
+    try {
+      const text = 'SELECT * FROM users WHERE email = $1';
+      const { rows } = await db.query(text, [req.body.email]);
+      if (!rows[0]) {
+        return res.status(400).json({
+          status: 400,
+          message: 'user account does not exist',
+        });
+      }
+    } catch (error) {
+      return res.status(500).json({
+        status: 500,
+        message: 'invalid data',
+      });
+    }
+
+    return next();
+  }
+
+  /**
    * create meetup middleware
    * @param {object} req
    * @param {object} res
@@ -227,112 +349,6 @@ class Validate {
   }
 
   /**
-   * create user middleware
-   * @param {object} req
-   * @param {object} res
-   * @param {object} next
-   * @return {object} error or pass object
-   */
-  static async createUser(req, res, next) {
-    const getRequired = Validation.checkValidEntry(req.body, ['firstname', 'lastname', 'othername', 'password', 'email', 'phonenumber', 'username']);
-    const errorValues = getRequired.map(error => error);
-    if (typeof getRequired === 'object' && getRequired.length > 0) {
-      return res.status(400).json({
-        status: 400,
-        error: errorValues,
-      });
-    }
-    const validEmail = validator.isEmail(req.body.email);
-    if (!validEmail) {
-      return res.status(400).json({
-        status: 400,
-        error: `Email value,  ${req.body.email} is not a valid Email`,
-      });
-    }
-    const sortSpecialchars = validator.isAlphanumeric(req.body.username);
-    if (!sortSpecialchars) {
-      return res.status(400).json({
-        status: 400,
-        error: `Username value,  ${req.body.username} should be aplhanumeric`,
-      });
-    }
-    try {
-      const text = 'SELECT * FROM users WHERE email = $1';
-      const { rows } = await db.query(text, [req.body.email]);
-      if (rows[0]) {
-        return res.status(400).json({
-          status: 400,
-          message: 'user account already exist',
-        });
-      }
-      const text1 = 'SELECT * FROM users WHERE username = $1';
-      const response = await db.query(text1, [req.body.username]);
-      if (response.rows[0]) {
-        return res.status(400).json({
-          status: 400,
-          message: 'username already exist',
-        });
-      }
-    } catch (error) {
-      return res.status(500).json({
-        status: 500,
-        message: 'invalid data',
-      });
-    }
-    const validphonenumber = validator.isMobilePhone(req.body.phonenumber);
-    if (!validphonenumber) {
-      return res.status(400).send({
-        status: 400,
-        error: `Phone number ${req.body.phonenumber} is not valid`,
-      });
-    }
-    return next();
-  }
-
-  /**
-   * login middleware
-   * @param {object} req
-   * @param {object} res
-   * @param {object} next
-   * @return {object} error or pass object
-   */
-
-  static async loginUser(req, res, next) {
-    const getRequired = Validation.checkValidEntry(req.body, ['email', 'password']);
-    const errorValues = getRequired.map(error => error);
-    if (typeof getRequired === 'object' && getRequired.length > 0) {
-      return res.status(400).send({
-        status: 400,
-        error: errorValues,
-      });
-    }
-    const validEmail = validator.isEmail(req.body.email);
-    if (!validEmail) {
-      return res.status(400).send({
-        status: 400,
-        error: `Email value,  ${req.body.email} is not a valid Email`,
-      });
-    }
-    try {
-      const text = 'SELECT * FROM users WHERE email = $1';
-      const { rows } = await db.query(text, [req.body.email]);
-      if (!rows[0]) {
-        return res.status(400).json({
-          status: 400,
-          message: 'user account does not exist',
-        });
-      }
-    } catch (error) {
-      return res.status(500).json({
-        status: 500,
-        message: 'invalid data',
-      });
-    }
-
-    return next();
-  }
-
-  /**
    * creating comment middleware
    * @param {object} req
    * @param {object} res
@@ -341,19 +357,16 @@ class Validate {
    */
   static async postComments(req, res, next) {
     try {
-      // const { questionId } = req.body;
       const text = 'SELECT * FROM question WHERE id= $1';
 
       const { rows } = await db.query(text, [req.body.questionId]);
       if (rows.length < 1) {
-        return res.status(400).json({
-          status: 400,
+        return res.status(404).json({
+          status: 404,
           message: 'question ID does not exist',
         });
       }
       req.question = rows[0];
-
-      // next();
     } catch (error) {
       return res.status(500).json({
         status: 500,
