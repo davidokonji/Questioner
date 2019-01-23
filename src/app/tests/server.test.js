@@ -49,10 +49,80 @@ describe('POST /api/v1/auth/login', () => {
         return done();
       });
   });
-  it('should return 401 when invalid credentials passed', (done) => {
+  it('should return 400 when invalid credentials passed', (done) => {
     const user = {
       email: 'nonsookonji1243@gmail.com',
       password: 'password',
+    };
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .send(user)
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.have.status(400);
+        expect(res).to.be.a('object');
+        return done();
+      });
+  });
+  it('should return 400 invalid email sent', (done) => {
+    const user = {
+      email: 'nonsookonjigmail.com',
+      password: 'password',
+    };
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .send(user)
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.have.status(400);
+        expect(res).to.be.a('object');
+        return done();
+      });
+  });
+  it('should return 400 when email is not sent', (done) => {
+    const user = {
+      password: 'password',
+    };
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .send(user)
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.have.status(400);
+        expect(res).to.be.a('object');
+        return done();
+      });
+  });
+  it('should return 400 when password is not sent', (done) => {
+    const user = {
+      email: 'nonsookonji3@gmail.com',
+    };
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .send(user)
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.have.status(400);
+        expect(res).to.be.a('object');
+        return done();
+      });
+  });
+  it('should return 400 invalid password length', (done) => {
+    const user = {
+      email: 'nonsookonji@gmail.com',
+      password: 'pass',
     };
     chai.request(app)
       .post('/api/v1/auth/login')
@@ -76,8 +146,8 @@ describe('POST /api/v1/auth/signup', () => {
         firstname: 'david',
         lastname: 'okonji',
         othername: 'nonso',
-        email: 'davidokonji2017@gmail.com',
-        password: 'pass',
+        email: 'davidokonji2019@gmail.com',
+        password: 'password',
         phonenumber: '08109418943',
         username: 'davidd',
         isadmin: true,
@@ -140,6 +210,205 @@ describe('POST /api/v1/auth/signup', () => {
         return done();
       });
   });
+  it('should return error if username is invalid', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .send({
+        firstname: 'david',
+        lastname: 'okonji',
+        othername: 'nonso',
+        email: 'davidokonji2018@gmail.com',
+        password: 'password',
+        phonenumber: '08109418943',
+        username: 'devlen@$%',
+      })
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.have.status(400);
+        expect(res).to.be.a('object');
+        return done();
+      });
+  });
+
+  it('should return error if firstname not sent', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .send({
+        lastname: 'okonji',
+        othername: 'nonso',
+        email: 'davidokonji2018@gmail.com',
+        password: 'pass',
+        phonenumber: '08109418943',
+        username: 'devlen111',
+      })
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.have.status(400);
+        expect(res).to.be.a('object');
+        return done();
+      });
+  });
+
+  it('should return error if lastname not sent', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .send({
+        firstname: 'david',
+        othername: 'nonso',
+        email: 'davidokonji2018@gmail.com',
+        password: 'pass',
+        phonenumber: '08109418943',
+        username: 'devlen2222',
+      })
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.have.status(400);
+        expect(res).to.be.a('object');
+        return done();
+      });
+  });
+  it('should return error if othername not sent', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .send({
+        firstname: 'david',
+        lastname: 'okonji',
+        email: 'davidokonji2018@gmail.com',
+        password: 'password',
+        phonenumber: '08109418943',
+        username: 'devlen2222',
+      })
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.have.status(400);
+        expect(res).to.be.a('object');
+        return done();
+      });
+  });
+
+  it('should return error if username not sent', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .send({
+        firstname: 'david',
+        lastname: 'okonji',
+        othername: 'nonso',
+        email: 'davidokonji2018@gmail.com',
+        password: 'pass',
+        phonenumber: '08109418943',
+      })
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.have.status(400);
+        expect(res).to.be.a('object');
+        return done();
+      });
+  });
+
+  it('should return error if email not sent', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .send({
+        firstname: 'david',
+        lastname: 'okonji',
+        othername: 'nonso',
+        password: 'password',
+        phonenumber: '08109418943',
+        username: 'devlen123',
+      })
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.have.status(400);
+        expect(res).to.be.a('object');
+        return done();
+      });
+  });
+  it('should return error invalid email not sent', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .send({
+        firstname: 'david',
+        lastname: 'okonji',
+        othername: 'nonso',
+        email: 'davidokonjigmail.com',
+        password: 'password',
+        phonenumber: '08109418943',
+        username: 'devlen1234',
+      })
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.have.status(400);
+        expect(res).to.be.a('object');
+        return done();
+      });
+  });
+
+  it('should return error if invalid password length sent', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .send({
+        firstname: 'david',
+        lastname: 'okonji',
+        othername: 'nonso',
+        email: 'davidokonji2018@gmail.com',
+        password: 'pass',
+        phonenumber: '08109418943',
+        username: 'devlen',
+      })
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.have.status(400);
+        expect(res).to.be.a('object');
+        return done();
+      });
+  });
+
+  it('should return error if password not sent', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .send({
+        firstname: 'david',
+        lastname: 'okonji',
+        othername: 'nonso',
+        email: 'davidokonji2018@gmail.com',
+        password: 'pass',
+        phonenumber: '08109418943',
+        username: 'devlen',
+      })
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.have.status(400);
+        expect(res).to.be.a('object');
+        return done();
+      });
+  });
 });
 
 describe('POST /api/v1/meetups', () => {
@@ -167,12 +436,70 @@ describe('POST /api/v1/meetups', () => {
         return done();
       });
   });
-  it('should return 400 if required fields are not sent', (done) => {
+  it('should return 400 if location is not sent', (done) => {
     chai.request(app)
       .post('/api/v1/meetups')
       .send({
         topic: 'this is a correct meetup',
         happeningOn: '2019-03-12',
+      })
+      .set('x-access-token', token)
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.have.status(400);
+        expect(res).to.be.a('object');
+        res.body.should.have.property('status').equal(400);
+        return done();
+      });
+  });
+  it('should return 400 if topic is not sent', (done) => {
+    chai.request(app)
+      .post('/api/v1/meetups')
+      .send({
+        location: 'lagos nigeria',
+        happeningOn: '2019-03-12',
+      })
+      .set('x-access-token', token)
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.have.status(400);
+        expect(res).to.be.a('object');
+        res.body.should.have.property('status').equal(400);
+        return done();
+      });
+  });
+  it('should return 400 if topic is not a valid length', (done) => {
+    chai.request(app)
+      .post('/api/v1/meetups')
+      .send({
+        topic: 'this',
+        location: 'lagos nigeria',
+        happeningOn: '2019-03-12',
+      })
+      .set('x-access-token', token)
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.have.status(400);
+        expect(res).to.be.a('object');
+        res.body.should.have.property('status').equal(400);
+        return done();
+      });
+  });
+  it('should return 400 if happeningOn is not sent', (done) => {
+    chai.request(app)
+      .post('/api/v1/meetups')
+      .send({
+        topic: 'this is a correct meetup',
+        location: 'lagos nigeria',
       })
       .set('x-access-token', token)
       .end((err, res) => {
@@ -243,6 +570,23 @@ describe('GET /api/v1/meetups/:id', () => {
         return done();
       });
   });
+  it('should return 401 if invalid token sent', (done) => {
+    const toks = 'jffjfjjhsbjhuywueyuirgriufbe';
+    const id = '1';
+    chai.request(app)
+      .get(`/api/v1/meetups/${parseInt(id, 10)}`)
+      .set('x-access-token', toks)
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.have.status(401);
+        expect(res).to.be.a('object');
+        res.body.should.have.property('status').equal(401);
+        return done();
+      });
+  });
   it('should return 404 if ID is not found', (done) => {
     const id = 100;
     chai.request(app)
@@ -274,6 +618,21 @@ describe('GET /api/v1/meetups/', () => {
         return done();
       });
   });
+  it('should return 401 when invalid token passed', (done) => {
+    const toks = 'jffjfjjhsbjhuywueyuirgriufbe';
+    chai.request(app)
+      .get('/api/v1/meetups/')
+      .set('x-access-token', toks)
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.be.status(401);
+        expect(res).to.be.a('object');
+        return done();
+      });
+  });
 });
 
 describe('GET /api/v1/meetups/upcoming', () => {
@@ -296,6 +655,22 @@ describe('GET /api/v1/meetups/upcoming', () => {
         return done();
       });
   });
+  it('should return 401 if invalid token passed', (done) => {
+    const toks = 'jffjfjjhsbjhuywueyuirgriufbe';
+    chai.request(app)
+      .get('/api/v1/meetups/upcoming')
+      .set('x-access-token', toks)
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.be.status(401);
+        expect(res).to.be.a('object');
+        res.body.should.have.property('status').equal(401);
+        return done();
+      });
+  });
 });
 
 describe('POST /api/v1/questions', () => {
@@ -315,6 +690,80 @@ describe('POST /api/v1/questions', () => {
         expect(res).to.be.status(201);
         expect(res).to.be.a('object');
         res.body.should.have.property('status').equal(201);
+        return done();
+      });
+  });
+  it('should return 400 if title not provided', (done) => {
+    chai.request(app)
+      .post('/api/v1/questions')
+      .send({
+        body: 'this body cannot be empty',
+      })
+      .set('x-access-token', token)
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.be.status(400);
+        expect(res).to.be.a('object');
+        res.body.should.have.property('status').equal(400);
+        return done();
+      });
+  });
+  it('should return 400 if title not of valid length', (done) => {
+    chai.request(app)
+      .post('/api/v1/questions')
+      .send({
+        title: 'the',
+        body: 'this body cannot be empty',
+      })
+      .set('x-access-token', token)
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.be.status(400);
+        expect(res).to.be.a('object');
+        res.body.should.have.property('status').equal(400);
+        return done();
+      });
+  });
+  it('should return 400 if body not provided', (done) => {
+    chai.request(app)
+      .post('/api/v1/questions')
+      .send({
+        title: 'this is a valid question',
+      })
+      .set('x-access-token', token)
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.be.status(400);
+        expect(res).to.be.a('object');
+        res.body.should.have.property('status').equal(400);
+        return done();
+      });
+  });
+  it('should return 400 if body not of valid length', (done) => {
+    chai.request(app)
+      .post('/api/v1/questions')
+      .send({
+        title: 'this is a valid question',
+        body: 'this',
+      })
+      .set('x-access-token', token)
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.be.status(400);
+        expect(res).to.be.a('object');
+        res.body.should.have.property('status').equal(400);
         return done();
       });
   });
@@ -357,7 +806,25 @@ describe('POST /api/v1/comments/', () => {
         return done();
       });
   });
-  it('return 400 if comment to sent correctly', (done) => {
+  it('should return 404 if question ID does not exist', (done) => {
+    chai.request(app)
+      .post('/api/v1/comments/')
+      .set('x-access-token', token)
+      .send({
+        questionId: 10,
+        comment: 'this is a valid comment',
+      })
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.be.status(404);
+        expect(res).to.be.a('object');
+        return done();
+      });
+  });
+  it('should return 404 if comment not provided', (done) => {
     chai.request(app)
       .post('/api/v1/comments/')
       .set('x-access-token', token)
@@ -367,7 +834,7 @@ describe('POST /api/v1/comments/', () => {
           expect(res).to.throw(err);
           return done(err);
         }
-        expect(res).to.be.status(400);
+        expect(res).to.be.status(404);
         expect(res).to.be.a('object');
         return done();
       });

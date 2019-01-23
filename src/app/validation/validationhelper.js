@@ -261,6 +261,20 @@ class Validation {
     const prettydate = `${day} , ${monthNames[monthIndex]} ${year}`;
     return prettydate;
   }
+
+  static validatorResponse(res, data) {
+    return res.status(400).json({
+      status: 400,
+      error: `${data[0]} value,  ${data[1]} is not ${data[2]}`,
+    });
+  }
+
+  static alreadyExist(res, data) {
+    return res.status(400).json({
+      status: 400,
+      message: `Username, ${data} already exist`,
+    });
+  }
 }
 
 export default Validation;
