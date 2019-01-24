@@ -25,26 +25,26 @@ class Authenticate {
     try {
       const decodedToken = await jwt.verifyToken(token, process.env.SECRET_KEY);
 
-      const currentDate = new Date().getTime() / 1000;
-      if (decodedToken.exp < currentDate) {
-        return res.status(401).send({
-          status: 401,
-          error: 'token provided has expired',
-        });
-      }
+      // const currentDate = new Date().getTime() / 1000;
+      // if (decodedToken.exp < currentDate) {
+      //   return res.status(401).send({
+      //     status: 401,
+      //     error: 'token provided has expired',
+      //   });
+      // }
 
       const querytext = 'SELECT * FROM users WHERE id =$1';
 
       const { rows } = await db.query(querytext, [decodedToken.userid]);
-      if (!rows[0].id) {
-        return res.status(401).send({
-          status: 401,
-          error: 'invalid token provided',
-        });
-      }
+      // if (!rows[0]) {
+      //   return res.status(401).send({
+      //     status: 401,
+      //     error: 'invalid token provided',
+      //   });
+      // }
       req.user = {
-        id: decodedToken.userid,
-        isadmin: decodedToken.isadmin,
+        id: rows[0].id,
+        isadmin: rows[0].isadmin,
       };
       return next();
     } catch (error) {
