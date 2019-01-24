@@ -43,7 +43,7 @@ describe('POST /api/v1/auth/login', () => {
           expect(res).to.throw(err);
           return done(err);
         }
-        expect(res).to.have.status(201);
+        expect(res).to.have.status(200);
         expect(res).to.be.a('object');
         expect(res.body.data[0].user.email).to.be.equal(user.email);
         return done();
