@@ -17,9 +17,7 @@ const droptables = async () => {
               DROP TABLE IF EXISTS comments CASCADE;
               DROP TABLE IF EXISTS votes CASCADE;
             `;
-  const query = await pool.query(text).catch((error) => {
-    return error;
-  });
+  const query = await pool.query(text);
   return query;
 };
 

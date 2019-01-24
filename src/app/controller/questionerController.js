@@ -102,8 +102,8 @@ class Questioner {
         });
       }
       const token = await jwt.generateJwtToken(rows[0].id, rows[0].isadmin);
-      return res.status(201).json({
-        status: 201,
+      return res.status(200).json({
+        status: 200,
         data: [{
           token,
           user: {
