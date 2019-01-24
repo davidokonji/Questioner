@@ -74,7 +74,7 @@ class Questioner {
     } catch (error) {
       return res.status(400).json({
         status: 400,
-        meesage: 'invalid user credentials',
+        meesage: 'invalid user data parameters',
       });
     }
   }
@@ -96,8 +96,8 @@ class Questioner {
       const matchedPassword = hash.verifyPassword(req.body.password, rows[0].password);
 
       if (!matchedPassword) {
-        return res.status(400).json({
-          status: 400,
+        return res.status(404).json({
+          status: 404,
           message: 'invalid credential',
         });
       }
@@ -119,8 +119,8 @@ class Questioner {
         }],
       });
     } catch (error) {
-      return res.status(400).json({
-        status: 400,
+      return res.status(404).json({
+        status: 404,
         message: 'user not found',
       });
     }
@@ -189,8 +189,8 @@ class Questioner {
         }],
       });
     } catch (error) {
-      return res.status(400).json({
-        status: 400,
+      return res.status(404).json({
+        status: 404,
         message: 'unable to find meetup',
       });
     }
@@ -217,8 +217,8 @@ class Questioner {
         data: filteredFields,
       });
     } catch (error) {
-      return res.status(400).json({
-        status: 400,
+      return res.status(404).json({
+        status: 404,
         message: 'no meetups available',
       });
     }
@@ -256,8 +256,8 @@ class Questioner {
         ],
       });
     } catch (error) {
-      return res.status(400).json({
-        status: 400,
+      return res.status(404).json({
+        status: 404,
         message: 'no upcoming meetup found',
       });
     }
@@ -324,8 +324,8 @@ class Questioner {
         data: rows,
       });
     } catch (error) {
-      return res.status(400).json({
-        status: 400,
+      return res.status(404).json({
+        status: 404,
         meesage: 'unable to find question',
       });
     }
@@ -560,42 +560,39 @@ class Questioner {
    * @param {object} res
    * @returns {object} post images response
    */
-  static async postImages(req, res, next) {
-    if (req.file) {
-      const file = dataUri.dataUri(req).content;
-      return cloudinary.v2.uploader.upload(file, {
-        folder: 'questioner',
-        use_filename: true,
-      })
-        .then(async (result) => {
-          const images = result.url;
-          const text = `UPDATE meetup SET images = (select array_agg(distinct e)
-                   from unnest(images || $1) e) WHERE id = $2 returning *`;
-          const id = parseInt(req.params.id, 10);
-          const splited = images.split(',');
-          try {
-            const { rows } = await db.query(text, [splited, id]);
-            return res.status(200).json({
-              status: 200,
-              meetup: rows[0].id,
-              topic: rows[0].topic,
-              images: rows[0].images,
-            });
-          } catch (error) {
-            return res.status(400).json({
-              status: 400,
-              message: error.message,
-            });
-          }
-        })
-        .catch((err) => {
+  static async postImages(req, res) {
+    const file = dataUri.dataUri(req).content;
+    return cloudinary.v2.uploader.upload(file, {
+      folder: 'questioner',
+      use_filename: true,
+    })
+      .then(async (result) => {
+        const images = result.url;
+        const text = `UPDATE meetup SET images = (select array_agg(distinct e)
+                  from unnest(images || $1) e) WHERE id = $2 returning *`;
+        const id = parseInt(req.params.id, 10);
+        const splited = images.split(',');
+        try {
+          const { rows } = await db.query(text, [splited, id]);
+          return res.status(200).json({
+            status: 200,
+            meetup: rows[0].id,
+            topic: rows[0].topic,
+            images: rows[0].images,
+          });
+        } catch (error) {
           return res.status(400).json({
             status: 400,
-            message: err,
+            message: error.message,
           });
+        }
+      })
+      .catch((err) => {
+        return res.status(400).json({
+          status: 400,
+          message: err,
         });
-    }
-    return next();
+      });
   }
 }
 

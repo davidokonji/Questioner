@@ -11,7 +11,7 @@ const cloudinaryConfig = (req, res, next) => {
     api_secret: process.env.CLOUDINARY_API_SECRET,
   });
 
-  next();
+  return next();
 };
 
 export default cloudinaryConfig;
