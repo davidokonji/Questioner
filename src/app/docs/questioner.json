@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "This is a documentation of Questioner App. You can find out more about Questioner via the [Github](https://github.com/davidokonji/Questioner) repository.This application helps the meetup organizer prioritize questions to be answered, crowd source questions for Meet Ups",
+    "description": "This is a documentation of Questioner App. You can find out more about Questioner via the [`Github`](https://github.com/davidokonji/Questioner) repository.This application helps the meetup organizer prioritize questions to be answered, crowd source questions for Meet Ups. **Note:** **Endpoints with a lock require an Access token generated from API `/auth/login` Endpoint**",
     "version": "1.0.0",
     "title": "Questioner",
     "contact": {
@@ -66,10 +66,7 @@
             "description": "Created a new User"
           },
           "400": {
-            "description": "Invalid input | Incomplete Data"
-          },
-          "500": {
-            "description": "server error"
+            "description": "Invalid Data"
           }
         }
       }
@@ -101,16 +98,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesful Log In"
+            "description": "Logged In Succesful"
           },
           "400": {
             "description": "Invalid entries"
           },
           "404": {
-            "description": "User account not found"
-          },
-          "500": {
-            "description": "server error"
+            "$ref": "#/definitions/invalid_user"
           }
         }
       }
@@ -131,13 +125,6 @@
         ],
         "parameters": [
           {
-            "in": "header",
-            "name": "x-access-token",
-            "description": "JWT access token",
-            "required": true,
-            "type": "string"
-          },
-          {
             "in": "body",
             "name": "body",
             "description": "meetup object for creating a new meetup",
@@ -152,12 +139,17 @@
             "description": "successful created meetup"
           },
           "400": {
-            "description": "Invalid values"
+            "description": "Invalid data"
           },
           "401": {
-            "description": "Unauthorized User"
+            "$ref": "#/definitions/Unauthorized_user"
           }
-        }
+        },
+        "security": [
+          {
+            "access-token": []
+          }
+        ]
       },
       "get": {
         "tags": [
@@ -169,13 +161,9 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [
+        "security": [
           {
-            "in": "header",
-            "name": "x-access-token",
-            "description": "JWT access token",
-            "required": true,
-            "type": "string"
+            "access-token": []
           }
         ],
         "responses": {
@@ -183,13 +171,10 @@
             "description": "successful fetched all meetup"
           },
           "401": {
-            "description": "Unauthorized no access token"
+            "$ref": "#/definitions/Unauthorized_no_access_token"
           },
           "404": {
-            "description": "no meetup available"
-          },
-          "500": {
-            "description": "server error"
+            "description": "no available Meet Up"
           }
         }
       }
@@ -207,13 +192,6 @@
         ],
         "parameters": [
           {
-            "in": "header",
-            "name": "x-access-token",
-            "description": "JWT access token",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "id",
             "in": "path",
             "description": "ID of meetup to delete",
@@ -222,15 +200,20 @@
             "format": "int64"
           }
         ],
+        "security": [
+          {
+            "access-token": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "successful deleted meetup"
           },
           "401": {
-            "description": "Unauthorized User"
+            "$ref": "#/definitions/Unauthorized_user"
           },
           "404": {
-            "description": "meet up does not exist"
+            "$ref": "#/definitions/invalid_meetup_id"
           }
         }
       },
@@ -246,13 +229,6 @@
         ],
         "parameters": [
           {
-            "in": "header",
-            "name": "x-access-token",
-            "description": "JWT access token",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "id",
             "in": "path",
             "description": "ID of meetup to fetch",
@@ -261,18 +237,20 @@
             "format": "int64"
           }
         ],
+        "security": [
+          {
+            "access-token": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "successful fetched meetup by ID"
           },
           "401": {
-            "description": "Unauthorized no access token"
+            "$ref": "#/definitions/Unauthorized_no_access_token"
           },
           "404": {
-            "description": "meet up does not exist"
-          },
-          "500": {
-            "description": "server error"
+            "$ref": "#/definitions/invalid_meetup_id"
           }
         }
       }
@@ -288,13 +266,9 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [
+        "security": [
           {
-            "in": "header",
-            "name": "x-access-token",
-            "description": "JWT access token",
-            "required": true,
-            "type": "string"
+            "access-token": []
           }
         ],
         "responses": {
@@ -302,13 +276,10 @@
             "description": "successful fetched all upcoming meetup"
           },
           "401": {
-            "description": "Unauthorized no access token"
+            "$ref": "#/definitions/Unauthorized_no_access_token"
           },
           "404": {
             "description": "no upcoming meetup"
-          },
-          "500": {
-            "description": "server error"
           }
         }
       }
@@ -325,13 +296,6 @@
           "application/json"
         ],
         "parameters": [
-          {
-            "in": "header",
-            "name": "x-access-token",
-            "description": "JWT access token",
-            "required": true,
-            "type": "string"
-          },
           {
             "name": "id",
             "in": "path",
@@ -350,6 +314,11 @@
             }
           }
         ],
+        "security": [
+          {
+            "access-token": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "successful rsvp for meetup"
@@ -358,13 +327,10 @@
             "description": "unable to rsvp for meetup"
           },
           "401": {
-            "description": "Unauthorized no access token"
+            "$ref": "#/definitions/Unauthorized_no_access_token"
           },
           "404": {
-            "description": "meetup ID not found"
-          },
-          "500": {
-            "description": "server error"
+            "$ref": "#/definitions/invalid_meetup_id"
           }
         }
       }
@@ -385,13 +351,6 @@
         ],
         "parameters": [
           {
-            "in": "header",
-            "name": "x-access-token",
-            "description": "JWT access token",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "id",
             "in": "path",
             "description": "meetup ID",
@@ -409,6 +368,11 @@
             }
           }
         ],
+        "security": [
+          {
+            "access-token": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "successful set tags for meetup"
@@ -417,13 +381,10 @@
             "description": "error setting tags for meetup"
           },
           "401": {
-            "description": "Unauthorized User"
+            "$ref": "#/definitions/Unauthorized_user"
           },
           "404": {
-            "description": "meetup ID not found"
-          },
-          "500": {
-            "description": "server error"
+            "$ref": "#/definitions/invalid_meetup_id"
           }
         }
       }
@@ -444,13 +405,6 @@
         ],
         "parameters": [
           {
-            "in": "header",
-            "name": "x-access-token",
-            "description": "JWT access token",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "id",
             "in": "path",
             "description": "meetup ID",
@@ -466,6 +420,11 @@
             "type": "file"
           }
         ],
+        "security": [
+          {
+            "access-token": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "successful set images for meetup"
@@ -474,13 +433,10 @@
             "description": "error setting images for meetup"
           },
           "401": {
-            "description": "Unauthorized User"
+            "$ref": "#/definitions/Unauthorized_user"
           },
           "404": {
-            "description": "meetup ID not found"
-          },
-          "500": {
-            "description": "server error"
+            "$ref": "#/definitions/invalid_meetup_id"
           }
         }
       }
@@ -501,13 +457,6 @@
         ],
         "parameters": [
           {
-            "in": "header",
-            "name": "x-access-token",
-            "description": "JWT access token",
-            "required": true,
-            "type": "string"
-          },
-          {
             "in": "body",
             "name": "body",
             "description": "question object required to add a new question",
@@ -517,18 +466,20 @@
             }
           }
         ],
+        "security": [
+          {
+            "access-token": []
+          }
+        ],
         "responses": {
           "201": {
             "description": "Question created"
           },
           "400": {
-            "description": "Invalid input | Incomplete Data"
+            "description": "Invalid Data"
           },
           "401": {
-            "description": "Unauthorized no access token"
-          },
-          "500": {
-            "description": "server error"
+            "$ref": "#/definitions/Unauthorized_no_access_token"
           }
         }
       }
@@ -548,13 +499,6 @@
         ],
         "parameters": [
           {
-            "in": "header",
-            "name": "x-access-token",
-            "description": "JWT access token",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "id",
             "in": "path",
             "description": "Question ID",
@@ -562,21 +506,20 @@
             "type": "integer"
           }
         ],
+        "security": [
+          {
+            "access-token": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Question succesfully upvoted"
           },
-          "400": {
-            "description": "Invalid input | Incomplete Data"
-          },
           "401": {
-            "description": "Unauthorized no access token"
+            "$ref": "#/definitions/Unauthorized_no_access_token"
           },
           "404": {
-            "description": "Question ID not found"
-          },
-          "500": {
-            "description": "server error"
+            "$ref": "#/definitions/invalid_question_id"
           }
         }
       }
@@ -596,13 +539,6 @@
         ],
         "parameters": [
           {
-            "in": "header",
-            "name": "x-access-token",
-            "description": "JWT access token",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "id",
             "in": "path",
             "description": "Question ID",
@@ -610,21 +546,20 @@
             "type": "integer"
           }
         ],
+        "security": [
+          {
+            "access-token": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Question succesfully downvoted"
           },
-          "400": {
-            "description": "Invalid input | Incomplete Data"
-          },
           "401": {
-            "description": "Unauthorized no access token"
+            "$ref": "#/definitions/Unauthorized_no_access_token"
           },
           "404": {
-            "description": "Question ID not found"
-          },
-          "500": {
-            "description": "server error"
+            "$ref": "#/definitions/invalid_question_id"
           }
         }
       }
@@ -645,13 +580,6 @@
         ],
         "parameters": [
           {
-            "in": "header",
-            "name": "x-access-token",
-            "description": "JWT access token",
-            "required": true,
-            "type": "string"
-          },
-          {
             "in": "body",
             "name": "body",
             "description": "user object required to create a new user",
@@ -661,24 +589,33 @@
             }
           }
         ],
+        "security": [
+          {
+            "access-token": []
+          }
+        ],
         "responses": {
           "201": {
-            "description": "successful set comment for question"
+            "description": "commented successfully for question"
           },
           "400": {
-            "description": "error making comment on question"
+            "description": "error posting comment"
           },
           "401": {
-            "description": "Unauthorized no access token"
+            "$ref": "#/definitions/Unauthorized_no_access_token"
           },
           "404": {
-            "description": "question ID not found"
-          },
-          "500": {
-            "description": "server error"
+            "$ref": "#/definitions/invalid_question_id"
           }
         }
       }
+    }
+  },
+  "securityDefinitions": {
+    "access-token": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "x-access-token"
     }
   },
   "definitions": {
@@ -792,6 +729,76 @@
         "comments": {
           "type": "string",
           "example": "this is a comment"
+        }
+      }
+    },
+    "invalid_user": {
+      "type": "object",
+      "description": "user account does not exist",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "example": 404
+        },
+        "message": {
+          "type": "string",
+          "example": "invalid user credentials"
+        }
+      }
+    },
+    "invalid_meetup_id": {
+      "type": "object",
+      "description": "invalid meetup id",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "example": 404
+        },
+        "message": {
+          "type": "string",
+          "example": "meetup id does not exist"
+        }
+      }
+    },
+    "invalid_question_id": {
+      "type": "object",
+      "description": "invalid question id",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "example": 404
+        },
+        "message": {
+          "type": "string",
+          "example": "question id does not exist"
+        }
+      }
+    },
+    "Unauthorized_user": {
+      "type": "object",
+      "description": "Unauthorized User",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "example": 401
+        },
+        "message": {
+          "type": "string",
+          "example": "Unauthorized access"
+        }
+      }
+    },
+    "Unauthorized_no_access_token": {
+      "type": "object",
+      "description": "Unauthorized invalid access token",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "example": 401
+        },
+        "message": {
+          "type": "string",
+          "example": "Unauthorized access"
         }
       }
     }
