@@ -3,6 +3,8 @@ import bodyParser from 'body-parser';
 
 import express from 'express';
 
+import path from 'path';
+
 import Auth from '../middleware/authenticate';
 
 import Validation from '../validation/validation';
@@ -17,9 +19,9 @@ import cloudinaryConfig from '../config/cloudinaryConfig';
 
 const app = express();
 
-app.use(bodyParser.json());
+app.use('/docs', express.static(path.join(__dirname, '../docs')));
 
-app.use('/uploads', express.static('uploads'));
+app.use(bodyParser.json());
 
 app.post('/api/v1/meetups', [Validation.createMeetup, Auth, isadmin], Questioner.createMeetup);
 
