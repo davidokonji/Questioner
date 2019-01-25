@@ -13,7 +13,7 @@ class Questioner {
   /**
    * getRequiredfields method
    * @param {object} meetups
-   * @param {array} filtered
+   * @param {object} filtered
    * @returns {array} filtered fields
    */
   static getRequiredFields(meetups, filtered) {
@@ -518,8 +518,8 @@ class Questioner {
         data: `meetup with title, ${rows[0].topic} has been deleted`,
       });
     } catch (error) {
-      return res.status(404).json({
-        status: 404,
+      return res.status(400).json({
+        status: 400,
         message: 'meetup does not exist',
       });
     }
@@ -565,6 +565,7 @@ class Questioner {
     return cloudinary.v2.uploader.upload(file, {
       folder: 'questioner',
       use_filename: true,
+      resource_type: 'image',
     })
       .then(async (result) => {
         const images = result.url;

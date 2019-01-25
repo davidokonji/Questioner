@@ -96,16 +96,6 @@ class Validate {
     if (!validEmail) {
       return Validation.validatorResponse(res, ['Email', req.body.email, 'a valid Email']);
     }
-    const validPasswordLength = validator.isLength(req.body.password, {
-      min: 8,
-      max: 50,
-    });
-    if (!validPasswordLength) {
-      return res.status(400).send({
-        status: 400,
-        error: 'Password, should be more than 7 digits',
-      });
-    }
     try {
       const text = 'SELECT * FROM users WHERE email = $1';
       const { rows } = await db.query(text, [req.body.email]);
@@ -118,7 +108,7 @@ class Validate {
     } catch (error) {
       return res.status(500).json({
         status: 500,
-        message: 'invalid data',
+        message: 'invalid credentials',
       });
     }
 
@@ -392,14 +382,14 @@ class Validate {
     const id = parseInt(req.params.id, 10);
     const text = 'SELECT * FROM meetup WHERE id = $1';
     try {
-      const { rows, rowCount } = db.query(text, [id]);
-      if (rowCount === 0 && !rows[0]) {
+      const { rows } = db.query(text, [id]);
+      if (!rows[0]) {
         return Validation.validID(res, ['meetup', id]);
       }
     } catch (error) {
       return res.status(404).send({
         status: 404,
-        message: 'meetup can not be deleted',
+        message: error.message,
       });
     }
     return next();
