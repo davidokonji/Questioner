@@ -3,6 +3,8 @@ import bodyParser from 'body-parser';
 
 import express from 'express';
 
+import path from 'path';
+
 import cors from 'cors';
 
 import Auth from '../middleware/authenticate';
@@ -19,11 +21,14 @@ import cloudinaryConfig from '../config/cloudinaryConfig';
 
 const app = express();
 
+app.use('/docs', express.static(path.join(__dirname, '../docs')));
+
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/uploads', express.static('uploads'));
+
+app.use(bodyParser.json());
 
 app.post('/api/v1/meetups', [Validation.createMeetup, Auth, isadmin], Questioner.createMeetup);
 

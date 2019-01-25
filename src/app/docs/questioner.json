@@ -1,0 +1,803 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is a documentation of Questioner App. You can find out more about Questioner via the [Github](https://github.com/davidokonji/Questioner) repository.This application helps the meetup organizer prioritize questions to be answered, crowd source questions for Meet Ups",
+    "version": "1.0.0",
+    "title": "Questioner",
+    "contact": {
+      "email": "davidokonji3@gmail.com"
+    }
+  },
+  "host": "secret-river-12005.herokuapp.com",
+  "basePath": "/api/v1",
+  "tags": [
+    {
+      "name": "User",
+      "description": "user authentication endpoints"
+    },
+    {
+      "name": "Admin",
+      "description": "Admin user endpoints"
+    },
+    {
+      "name": "Meetup",
+      "description": "routes related to meet up"
+    },
+    {
+      "name": "Questions",
+      "description": "routes related to questions"
+    },
+    {
+      "name": "Comments",
+      "description": "routes related to comments on questions"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/auth/signup": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Sign up a new user",
+        "description": "Route for creating a new user",
+        "operationId": "addUser",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "user object required to create a new user",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created a new User"
+          },
+          "400": {
+            "description": "Invalid input | Incomplete Data"
+          },
+          "500": {
+            "description": "server error"
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Login a user",
+        "description": "Route for user login",
+        "operationId": "loginUser",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "user object required to login a user",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Login"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesful Log In"
+          },
+          "400": {
+            "description": "Invalid entries"
+          },
+          "404": {
+            "description": "User account not found"
+          },
+          "500": {
+            "description": "server error"
+          }
+        }
+      }
+    },
+    "/meetups": {
+      "post": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Admin user create meetup",
+        "description": "admin user route to create meetup",
+        "operationId": "createMeetup",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "x-access-token",
+            "description": "JWT access token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "meetup object for creating a new meetup",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/meetup"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful created meetup"
+          },
+          "400": {
+            "description": "Invalid values"
+          },
+          "401": {
+            "description": "Unauthorized User"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Meetup"
+        ],
+        "summary": "Get all Available Meet Up",
+        "description": "Get all Available Meet Up",
+        "operationId": "getAllMeetup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "x-access-token",
+            "description": "JWT access token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful fetched all meetup"
+          },
+          "401": {
+            "description": "Unauthorized no access token"
+          },
+          "404": {
+            "description": "no meetup available"
+          },
+          "500": {
+            "description": "server error"
+          }
+        }
+      }
+    },
+    "/meetups/:id": {
+      "delete": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "delete meetup by ID",
+        "description": "Admin can delete a meetup using the ID",
+        "operationId": "deleteMeetup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "x-access-token",
+            "description": "JWT access token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of meetup to delete",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful deleted meetup"
+          },
+          "401": {
+            "description": "Unauthorized User"
+          },
+          "404": {
+            "description": "meet up does not exist"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Meetup"
+        ],
+        "summary": "Get meetup by ID",
+        "description": "Get a meetup using the ID",
+        "operationId": "getMeetupbyId",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "x-access-token",
+            "description": "JWT access token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of meetup to fetch",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful fetched meetup by ID"
+          },
+          "401": {
+            "description": "Unauthorized no access token"
+          },
+          "404": {
+            "description": "meet up does not exist"
+          },
+          "500": {
+            "description": "server error"
+          }
+        }
+      }
+    },
+    "/meetups/upcoming": {
+      "get": {
+        "tags": [
+          "Meetup"
+        ],
+        "summary": "Get All Upcoming meetup",
+        "description": "Get all Upcoming meetups",
+        "operationId": "getUpcomingMeetup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "x-access-token",
+            "description": "JWT access token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful fetched all upcoming meetup"
+          },
+          "401": {
+            "description": "Unauthorized no access token"
+          },
+          "404": {
+            "description": "no upcoming meetup"
+          },
+          "500": {
+            "description": "server error"
+          }
+        }
+      }
+    },
+    "/meetups/:id/rsvps": {
+      "post": {
+        "tags": [
+          "Meetup"
+        ],
+        "summary": "RSVP for a Meet Up",
+        "description": "RSVP for a Meet Up",
+        "operationId": "rsvpMeetup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "x-access-token",
+            "description": "JWT access token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "meetup ID",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "RSVP object for meetup",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RSVP"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful rsvp for meetup"
+          },
+          "400": {
+            "description": "unable to rsvp for meetup"
+          },
+          "401": {
+            "description": "Unauthorized no access token"
+          },
+          "404": {
+            "description": "meetup ID not found"
+          },
+          "500": {
+            "description": "server error"
+          }
+        }
+      }
+    },
+    "/meetups/:id/tags": {
+      "put": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Admin can add tags to a meetup",
+        "description": "Add tags to a meet up endpoint",
+        "operationId": "meetupTags",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "x-access-token",
+            "description": "JWT access token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "meetup ID",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "comma separeted tags for meetup",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Tags"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful set tags for meetup"
+          },
+          "400": {
+            "description": "error setting tags for meetup"
+          },
+          "401": {
+            "description": "Unauthorized User"
+          },
+          "404": {
+            "description": "meetup ID not found"
+          },
+          "500": {
+            "description": "server error"
+          }
+        }
+      }
+    },
+    "/meetups/:id/images": {
+      "put": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Admin can add images to a meetup",
+        "description": "Add images to a meet up endpoint",
+        "operationId": "meetupImages",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "x-access-token",
+            "description": "JWT access token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "meetup ID",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "images",
+            "in": "formData",
+            "description": "images for meetup",
+            "required": true,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful set images for meetup"
+          },
+          "400": {
+            "description": "error setting images for meetup"
+          },
+          "401": {
+            "description": "Unauthorized User"
+          },
+          "404": {
+            "description": "meetup ID not found"
+          },
+          "500": {
+            "description": "server error"
+          }
+        }
+      }
+    },
+    "/questions": {
+      "post": {
+        "tags": [
+          "Questions"
+        ],
+        "summary": "Add a question",
+        "description": "Route for adding a new question",
+        "operationId": "addQuestion",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "x-access-token",
+            "description": "JWT access token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "question object required to add a new question",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Question"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Question created"
+          },
+          "400": {
+            "description": "Invalid input | Incomplete Data"
+          },
+          "401": {
+            "description": "Unauthorized no access token"
+          },
+          "500": {
+            "description": "server error"
+          }
+        }
+      }
+    },
+    "/questions/:id/upvote": {
+      "patch": {
+        "tags": [
+          "Questions"
+        ],
+        "summary": "Upvote a question",
+        "operationId": "upvoteQuestion",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "x-access-token",
+            "description": "JWT access token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Question ID",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Question succesfully upvoted"
+          },
+          "400": {
+            "description": "Invalid input | Incomplete Data"
+          },
+          "401": {
+            "description": "Unauthorized no access token"
+          },
+          "404": {
+            "description": "Question ID not found"
+          },
+          "500": {
+            "description": "server error"
+          }
+        }
+      }
+    },
+    "/questions/:id/downvote": {
+      "patch": {
+        "tags": [
+          "Questions"
+        ],
+        "summary": "Downvote a question",
+        "operationId": "downvoteQuestion",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "x-access-token",
+            "description": "JWT access token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Question ID",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Question succesfully downvoted"
+          },
+          "400": {
+            "description": "Invalid input | Incomplete Data"
+          },
+          "401": {
+            "description": "Unauthorized no access token"
+          },
+          "404": {
+            "description": "Question ID not found"
+          },
+          "500": {
+            "description": "server error"
+          }
+        }
+      }
+    },
+    "/comments": {
+      "post": {
+        "tags": [
+          "Comments"
+        ],
+        "summary": "user comments on question",
+        "description": "Add comment to a question",
+        "operationId": "meetupComments",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "x-access-token",
+            "description": "JWT access token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "user object required to create a new user",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Comments"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful set comment for question"
+          },
+          "400": {
+            "description": "error making comment on question"
+          },
+          "401": {
+            "description": "Unauthorized no access token"
+          },
+          "404": {
+            "description": "question ID not found"
+          },
+          "500": {
+            "description": "server error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "properties": {
+        "firstname": {
+          "type": "string",
+          "example": "john"
+        },
+        "lastname": {
+          "type": "string",
+          "example": "doe"
+        },
+        "othername": {
+          "type": "string",
+          "example": "doeline"
+        },
+        "email": {
+          "type": "string",
+          "example": "johndoe@email.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "john1234"
+        },
+        "phonenumber": {
+          "type": "string",
+          "example": "08012356789"
+        },
+        "username": {
+          "type": "string",
+          "example": "johndoe"
+        },
+        "isadmin": {
+          "type": "boolean",
+          "default": false,
+          "example": false
+        }
+      }
+    },
+    "Login": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "johndoe@email.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "johndoe"
+        }
+      }
+    },
+    "meetup": {
+      "type": "object",
+      "properties": {
+        "topic": {
+          "type": "string",
+          "example": "first meetup organized"
+        },
+        "location": {
+          "type": "string",
+          "example": "Lagos Nigeria"
+        },
+        "happeningOn": {
+          "type": "string",
+          "example": "2019-12-01",
+          "format": "date-time"
+        }
+      }
+    },
+    "Question": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "Meet up 01 by john doe"
+        },
+        "body": {
+          "type": "string",
+          "example": "This is the body for meet up 01 "
+        }
+      }
+    },
+    "RSVP": {
+      "type": "object",
+      "properties": {
+        "response": {
+          "type": "string",
+          "example": "yes"
+        }
+      }
+    },
+    "Tags": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "string",
+          "example": "code,world"
+        }
+      }
+    },
+    "Comments": {
+      "type": "object",
+      "properties": {
+        "questionId": {
+          "type": "integer",
+          "example": 1
+        },
+        "comments": {
+          "type": "string",
+          "example": "this is a comment"
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Question",
+    "url": "https://github.com/davidokonji/Questioner"
+  }
+}
