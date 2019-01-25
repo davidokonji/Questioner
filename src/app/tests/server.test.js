@@ -71,6 +71,24 @@ describe('POST /api/v1/auth/login', () => {
         return done();
       });
   });
+  it('should return 404 when correct email but wrong password passed', (done) => {
+    const user = {
+      email: 'davidokonji@gmail.com',
+      password: 'password12',
+    };
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .send(user)
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.have.status(404);
+        expect(res).to.be.a('object');
+        return done();
+      });
+  });
   it('should return 400 invalid email sent', (done) => {
     const user = {
       email: 'nonsookonjigmail.com',
@@ -1000,7 +1018,7 @@ describe('POST /api/v1/meetups/:id/rsvps', () => {
         return done();
       });
   });
-  it('should 400 for invalid meetup id for rsvp ', (done) => {
+  it('should 404 for invalid meetup id for rsvp ', (done) => {
     const id = '10';
     chai.request(app)
       .post(`/api/v1/meetups/${id}/rsvps`)
@@ -1013,7 +1031,7 @@ describe('POST /api/v1/meetups/:id/rsvps', () => {
           expect(res).to.throw(err);
           return done(err);
         }
-        expect(res).to.be.status(400);
+        expect(res).to.be.status(404);
         expect(res).to.be.a('object');
         return done();
       });
@@ -1190,22 +1208,22 @@ describe('Check for invalid route passed', () => {
       });
   });
   describe('DELETE /api/v1/meetups/:id', () => {
-    // it('should delete a meetup', (done) => {
-    //   // const id = parseInt(4, 10);
-    //   chai.request(app)
-    //     .del('/api/v1/meetups/1')
-    //     .set('x-access-token', token)
-    //     .end((err, res) => {
-    //       console.log(res.body);
-    //       if (err) {
-    //         expect(res).to.throw(err);
-    //         return done(err);
-    //       }
-    //       expect(res).to.be.status(200);
-    //       expect(res).to.be.a('object');
-    //       return done();
-    //     });
-    // });
+    it('should delete a meetup', (done) => {
+      // const id = parseInt(4, 10);
+      chai.request(app)
+        .del('/api/v1/meetups/1')
+        .set('x-access-token', token)
+        .end((err, res) => {
+          console.log(res.body);
+          if (err) {
+            expect(res).to.throw(err);
+            return done(err);
+          }
+          expect(res).to.be.status(200);
+          expect(res).to.be.a('object');
+          return done();
+        });
+    });
     it('should return 404 if meetup no found', (done) => {
       const id = parseInt(10, 10);
       chai.request(app)

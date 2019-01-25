@@ -39,8 +39,8 @@ class Validate {
         return Validation.alreadyExist(res, req.body.username);
       }
     } catch (error) {
-      return res.status(500).json({
-        status: 500,
+      return res.status(400).json({
+        status: 400,
         message: 'invalid data',
       });
     }
@@ -106,8 +106,8 @@ class Validate {
         });
       }
     } catch (error) {
-      return res.status(500).json({
-        status: 500,
+      return res.status(400).json({
+        status: 400,
         message: 'invalid credentials',
       });
     }
@@ -188,16 +188,16 @@ class Validate {
    * @return {object} error or pass object
    */
 
-  static GetAllMeetups(req, res, next) {
+  static async GetAllMeetups(req, res, next) {
     try {
       const text = 'SELECT * FROM meetup';
-      const { rowCount } = db.query(text);
+      const { rowCount } = await db.query(text);
       if (rowCount === 0) {
         return Validation.verifyMeetupCount(res, 'meetup');
       }
     } catch (error) {
-      return res.status(500).json({
-        status: 500,
+      return res.status(400).json({
+        status: 400,
         message: 'unable to get available meetups',
       });
     }
@@ -211,12 +211,12 @@ class Validate {
    * @return {object} error or pass object
    */
 
-  static GetUpcoming(req, res, next) {
+  static async GetUpcoming(req, res, next) {
     const text = {
       text: 'SELECT id,topic,location,happeningOn,tags FROM meetup WHERE happeningOn >= NOW()',
     };
     try {
-      const { rowCount } = db.query(text);
+      const { rowCount } = await db.query(text);
       if (rowCount === 0) {
         return Validation.verifyMeetupCount(res, 'upcoming meetup');
       }
@@ -246,10 +246,6 @@ class Validate {
         error: errorValues,
       });
     }
-    // const check = Validation.validateEntry(req.body);
-    // if (!check) {
-    //   return Validation.validQuestionfieldLength(res);
-    // }
     const [validTitle, length] = Validation.isValidLength(req.body.title, 5);
     if (!validTitle) {
       return Validation.validLengthResponse(res, 'question title', length);
@@ -268,12 +264,19 @@ class Validate {
    * @return {object} error or pass object
    */
 
-  static patchUpvote(req, res, next) {
+  static async patchUpvote(req, res, next) {
     const id = parseInt(req.params.id, 10);
     const text = 'SELECT * FROM question WHERE id = $1';
-    const { rowCount } = db.query(text, [id]);
-    if (rowCount === 0) {
-      return Validation.validID(res, ['question', id]);
+    try {
+      const { rowCount } = await db.query(text, [id]);
+      if (rowCount === 0) {
+        return Validation.validID(res, ['question', id]);
+      }
+    } catch (error) {
+      return res.status(400).json({
+        error: 400,
+        message: error.message,
+      });
     }
     return next();
   }
@@ -285,17 +288,17 @@ class Validate {
    * @return {object} error or pass object
    */
 
-  static patchDownvote(req, res, next) {
+  static async patchDownvote(req, res, next) {
     const id = parseInt(req.params.id, 10);
     const text = 'SELECT * FROM question WHERE id = $1';
     try {
-      const { rowCount } = db.query(text, [id]);
+      const { rowCount } = await db.query(text, [id]);
       if (rowCount === 0) {
         return Validation.validID(res, ['question', id]);
       }
     } catch (error) {
-      return res.status(500).json({
-        error: 500,
+      return res.status(400).json({
+        error: 400,
         message: error.message,
       });
     }
@@ -310,18 +313,25 @@ class Validate {
    * @return {object} error or pass object
    */
 
-  static createRsvp(req, res, next) {
+  static async createRsvp(req, res, next) {
     if (!req.body.response) {
       return res.status(400).send({
         status: 400,
         message: 'response is required',
       });
     }
-    const id = parseInt(req.params.id, 10);
-    const text = 'SELECT * FROM meetup WHERE id = $1';
-    const { rowCount } = db.query(text, [id]);
-    if (rowCount === 0) {
-      return Validation.validID(res, ['meetup', id]);
+    try {
+      const id = parseInt(req.params.id, 10);
+      const text = 'SELECT * FROM meetup WHERE id = $1';
+      const { rowCount } = await db.query(text, [id]);
+      if (rowCount === 0) {
+        return Validation.validID(res, ['meetup', id]);
+      }
+    } catch (error) {
+      return res.status(400).json({
+        status: 400,
+        message: error.message,
+      });
     }
 
     const validResponse = Validation.validResponse(req.body.response);
@@ -354,8 +364,8 @@ class Validate {
       }
       req.question = rows[0];
     } catch (error) {
-      return res.status(500).json({
-        status: 500,
+      return res.status(400).json({
+        status: 400,
         message: error.message,
       });
     }
@@ -378,12 +388,12 @@ class Validate {
    * @return  {object} error or pass object
    */
 
-  static deleteMeetup(req, res, next) {
+  static async deleteMeetup(req, res, next) {
     const id = parseInt(req.params.id, 10);
     const text = 'SELECT * FROM meetup WHERE id = $1';
     try {
-      const { rows } = db.query(text, [id]);
-      if (!rows[0]) {
+      const { rows, rowCount } = await db.query(text, [id]);
+      if (!rows[0] && rowCount === 0) {
         return Validation.validID(res, ['meetup', id]);
       }
     } catch (error) {

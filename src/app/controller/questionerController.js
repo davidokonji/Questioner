@@ -92,9 +92,7 @@ class Questioner {
     ];
     try {
       const { rows } = await db.query(text, values);
-
       const matchedPassword = hash.verifyPassword(req.body.password, rows[0].password);
-
       if (!matchedPassword) {
         return res.status(404).json({
           status: 404,
