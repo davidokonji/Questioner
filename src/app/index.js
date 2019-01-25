@@ -6,7 +6,7 @@ import app from './controller/routes';
 
 dotenv.config();
 
-const port = process.env.PORT || process.env.DEV_PORT;
+const port = process.env.PORT;
 
 app.listen(port);
 
