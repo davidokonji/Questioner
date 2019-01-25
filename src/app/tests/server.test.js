@@ -43,13 +43,13 @@ describe('POST /api/v1/auth/login', () => {
           expect(res).to.throw(err);
           return done(err);
         }
-        expect(res).to.have.status(201);
+        expect(res).to.have.status(200);
         expect(res).to.be.a('object');
         expect(res.body.data[0].user.email).to.be.equal(user.email);
         return done();
       });
   });
-  it('should return 400 when invalid credentials passed', (done) => {
+  it('should return 404 when invalid credentials passed', (done) => {
     const user = {
       email: 'nonsookonji1243@gmail.com',
       password: 'password',
@@ -62,7 +62,7 @@ describe('POST /api/v1/auth/login', () => {
           expect(res).to.throw(err);
           return done(err);
         }
-        expect(res).to.have.status(400);
+        expect(res).to.have.status(404);
         expect(res).to.be.a('object');
         return done();
       });
@@ -137,6 +137,24 @@ describe('POST /api/v1/auth/login', () => {
         return done();
       });
   });
+  it('should return 400 invalid email', (done) => {
+    const user = {
+      email: 'nonsookonjigmail.com',
+      password: 'password',
+    };
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .send(user)
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.have.status(400);
+        expect(res).to.be.a('object');
+        return done();
+      });
+  });
 });
 describe('POST /api/v1/auth/signup', () => {
   it('should create a new user', (done) => {
@@ -150,7 +168,6 @@ describe('POST /api/v1/auth/signup', () => {
         password: 'password',
         phonenumber: '08109418943',
         username: 'davidd',
-        isadmin: true,
       })
       .end((err, res) => {
         if (err) {
@@ -371,10 +388,10 @@ describe('POST /api/v1/auth/signup', () => {
         firstname: 'david',
         lastname: 'okonji',
         othername: 'nonso',
-        email: 'davidokonji2018@gmail.com',
+        email: 'davidokonji2022@gmail.com',
         password: 'pass',
         phonenumber: '08109418943',
-        username: 'devlen',
+        username: 'devlen2018',
       })
       .end((err, res) => {
         if (err) {
@@ -395,7 +412,6 @@ describe('POST /api/v1/auth/signup', () => {
         lastname: 'okonji',
         othername: 'nonso',
         email: 'davidokonji2018@gmail.com',
-        password: 'pass',
         phonenumber: '08109418943',
         username: 'devlen',
       })
@@ -412,7 +428,43 @@ describe('POST /api/v1/auth/signup', () => {
 });
 
 describe('POST /api/v1/meetups', () => {
-  it('should create a meetups', (done) => {
+  let userToken = '';
+  before((done) => {
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .send({
+        email: 'davidokonji2019@gmail.com',
+        password: 'password',
+      }).end((err, res) => {
+        if (err) {
+          return err;
+        }
+        userToken = res.body.data[0].token || '';
+        return done();
+      });
+  });
+  it('should return 401 if a non admin tries to create meetups', (done) => {
+    chai.request(app)
+      .post('/api/v1/meetups')
+      .send({
+        topic: 'this is a correct meetup',
+        location: 'lagos nigeria',
+        happeningOn: '2019-03-12',
+        tags: ['hhh'],
+      })
+      .set('x-access-token', userToken)
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.have.status(401);
+        expect(res).to.be.a('object');
+        res.body.should.have.property('status').equal(401);
+        return done();
+      });
+  });
+  it('should create meetups', (done) => {
     chai.request(app)
       .post('/api/v1/meetups')
       .send({
@@ -433,6 +485,69 @@ describe('POST /api/v1/meetups', () => {
         res.body.data[0].should.have.property('location');
         res.body.data[0].should.have.property('tags');
         res.body.should.have.property('status').equal(201);
+        return done();
+      });
+  });
+  it('should return 400 if meetup has a past date', (done) => {
+    chai.request(app)
+      .post('/api/v1/meetups')
+      .send({
+        topic: 'this is a correct meetup',
+        location: 'lagos nigeria',
+        happeningOn: '2018-03-12',
+        tags: ['hhh'],
+      })
+      .set('x-access-token', token)
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.have.status(400);
+        expect(res).to.be.a('object');
+        res.body.should.have.property('status').equal(400);
+        return done();
+      });
+  });
+  it('should return 401 when no token passed', (done) => {
+    chai.request(app)
+      .post('/api/v1/meetups')
+      .send({
+        topic: 'this is a correct meetup',
+        location: 'lagos nigeria',
+        happeningOn: '2019-03-12',
+        tags: ['hhh'],
+      })
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.have.status(401);
+        expect(res).to.be.a('object');
+        res.body.should.have.property('status').equal(401);
+        return done();
+      });
+  });
+  const expiredToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsImlhdCI6MTU0ODEwODMzOSwiZXhwIjoxNTQ4MjgxMTM5fQ.A9ecXU0Fsmi2JPJC7WfPBAH52NygDA4IBt8N-8XmtWE';
+  it('should return 401 when expired token passed', (done) => {
+    chai.request(app)
+      .post('/api/v1/meetups')
+      .send({
+        topic: 'this is a correct meetup',
+        location: 'lagos nigeria',
+        happeningOn: '2019-03-12',
+        tags: ['hhh'],
+      })
+      .set('x-access-token', expiredToken)
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.have.status(401);
+        expect(res).to.be.a('object');
+        res.body.should.have.property('status').equal(401);
         return done();
       });
   });
@@ -517,6 +632,8 @@ describe('POST /api/v1/meetups', () => {
     chai.request(app)
       .post('/api/v1/meetups')
       .send({
+        topic: 'this is a correct meetup',
+        location: 'lagos nigeria',
         happeningOn: '2019-03.12',
       })
       .set('x-access-token', token)
@@ -828,7 +945,6 @@ describe('POST /api/v1/comments/', () => {
     chai.request(app)
       .post('/api/v1/comments/')
       .set('x-access-token', token)
-      .send({})
       .end((err, res) => {
         if (err) {
           expect(res).to.throw(err);
@@ -842,7 +958,7 @@ describe('POST /api/v1/comments/', () => {
 });
 describe('POST /api/v1/meetups/:id/rsvps', () => {
   it('should rsvp for a meetup', (done) => {
-    const id = '1';
+    const id = '2';
     chai.request(app)
       .post(`/api/v1/meetups/${id}/rsvps`)
       .set('x-access-token', token)
@@ -855,6 +971,60 @@ describe('POST /api/v1/meetups/:id/rsvps', () => {
           return done(err);
         }
         expect(res).to.be.status(201);
+        expect(res).to.be.a('object');
+        return done();
+      });
+  });
+  it('should 400 for wrong rsvp response', (done) => {
+    const id = '1';
+    chai.request(app)
+      .post(`/api/v1/meetups/${id}/rsvps`)
+      .set('x-access-token', token)
+      .send({
+        response: 12,
+      })
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.be.status(400);
+        expect(res).to.be.a('object');
+        return done();
+      });
+  });
+  it('should 400 for wrong rsvp response length', (done) => {
+    const id = '1';
+    chai.request(app)
+      .post(`/api/v1/meetups/${id}/rsvps`)
+      .set('x-access-token', token)
+      .send({
+        response: 'this is a wrong response',
+      })
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.be.status(400);
+        expect(res).to.be.a('object');
+        return done();
+      });
+  });
+  it('should 400 for invalid meetup id for rsvp ', (done) => {
+    const id = '10';
+    chai.request(app)
+      .post(`/api/v1/meetups/${id}/rsvps`)
+      .set('x-access-token', token)
+      .send({
+        response: 'this is a wrong response',
+      })
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.be.status(400);
         expect(res).to.be.a('object');
         return done();
       });
@@ -928,5 +1098,80 @@ describe('POST /api/v1/meetups/:id/tags', () => {
         expect(res).to.be.a('object');
         return done();
       });
+  });
+});
+describe('Check for invalid route passed', () => {
+  it('should return 404 when invalid route passed', (done) => {
+    chai.request(app)
+      .patch('/api/')
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.be.status(404);
+        expect(res).to.be.a('object');
+        return done();
+      });
+  });
+  it('should return 200 when default route passed', (done) => {
+    chai.request(app)
+      .patch('/home')
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.be.status(200);
+        expect(res).to.be.a('object');
+        return done();
+      });
+  });
+  describe('DELETE /api/v1/meetups/:id', () => {
+    it('should return 404 if meetup no found', (done) => {
+      const id = parseInt(10, 10);
+      chai.request(app)
+        .del(`/api/v1/meetups/${id}`)
+        .set('x-access-token', token)
+        .end((err, res) => {
+          if (err) {
+            expect(res).to.throw(err);
+            return done(err);
+          }
+          expect(res).to.be.status(404);
+          expect(res).to.be.a('object');
+          return done();
+        });
+    });
+    it('should delete a meetup', (done) => {
+      const id = parseInt(1, 10);
+      chai.request(app)
+        .del(`/api/v1/meetups/${id}`)
+        .set('x-access-token', token)
+        .end((err, res) => {
+          if (err) {
+            expect(res).to.throw(err);
+            return done(err);
+          }
+          expect(res).to.be.status(200);
+          expect(res).to.be.a('object');
+          return done();
+        });
+    });
+    it('should return 404 if meetup does not exist', (done) => {
+      const id = parseInt(1, 10);
+      chai.request(app)
+        .del(`/api/v1/meetups/${id}`)
+        .set('x-access-token', token)
+        .end((err, res) => {
+          if (err) {
+            expect(res).to.throw(err);
+            return done(err);
+          }
+          expect(res).to.be.status(404);
+          expect(res).to.be.a('object');
+          return done();
+        });
+    });
   });
 });

@@ -5,6 +5,8 @@ import express from 'express';
 
 import path from 'path';
 
+import cors from 'cors';
+
 import Auth from '../middleware/authenticate';
 
 import Validation from '../validation/validation';
@@ -20,6 +22,11 @@ import cloudinaryConfig from '../config/cloudinaryConfig';
 const app = express();
 
 app.use('/docs', express.static(path.join(__dirname, '../docs')));
+
+app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 
 app.use(bodyParser.json());
 
@@ -53,16 +60,16 @@ app.put('/api/v1/meetups/:id/tags', [Auth, isadmin], Questioner.postTags);
 
 app.put('/api/v1/meetups/:id/images', [cloudinaryConfig, multerUploads.multerUploads, Auth, isadmin], Questioner.postImages);
 
+app.use('/home', (req, res) => {
+  return res.status(200).json({
+    status: 200,
+    message: 'welcome to  Questioner, refer to api docs',
+  });
+});
 app.use('*', (req, res) => {
   return res.status(404).json({
     status: 404,
     error: 'invalid route passed',
-  });
-});
-app.use('/', (req, res) => {
-  res.status(200).json({
-    status: 200,
-    message: 'welcome to  Questioner, refer to api docs',
   });
 });
 

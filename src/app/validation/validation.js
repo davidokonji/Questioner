@@ -110,8 +110,8 @@ class Validate {
       const text = 'SELECT * FROM users WHERE email = $1';
       const { rows } = await db.query(text, [req.body.email]);
       if (!rows[0]) {
-        return res.status(400).json({
-          status: 400,
+        return res.status(404).json({
+          status: 404,
           message: 'user account does not exist',
         });
       }
@@ -140,10 +140,6 @@ class Validate {
         status: 400,
         error: errorValues,
       });
-    }
-    const checkBody = Validation.validateEntry(req.body);
-    if (!checkBody) {
-      return Validation.validQuestionfieldLength(res);
     }
     const [isValidDate, actualDate] = Validation.validateDate(req.body.happeningOn);
     if (!isValidDate) {
@@ -260,10 +256,10 @@ class Validate {
         error: errorValues,
       });
     }
-    const check = Validation.validateEntry(req.body);
-    if (!check) {
-      return Validation.validQuestionfieldLength(res);
-    }
+    // const check = Validation.validateEntry(req.body);
+    // if (!check) {
+    //   return Validation.validQuestionfieldLength(res);
+    // }
     const [validTitle, length] = Validation.isValidLength(req.body.title, 5);
     if (!validTitle) {
       return Validation.validLengthResponse(res, 'question title', length);
@@ -401,8 +397,8 @@ class Validate {
         return Validation.validID(res, ['meetup', id]);
       }
     } catch (error) {
-      return res.status(500).send({
-        status: 500,
+      return res.status(404).send({
+        status: 404,
         message: 'meetup can not be deleted',
       });
     }
@@ -417,29 +413,29 @@ class Validate {
    * @return  {object} error or pass object
    */
 
-  static postTags(req, res, next) {
-    const id = parseInt(req.params.id, 10);
-    const text = 'SELECT * FROM meetup WHERE id = $1';
-    const { rows, rowCount } = db.query(text, [id]);
-    if (rowCount === 0 && !rows[0].id) {
-      return Validation.validID(res, ['meetup', id]);
-    }
-    const validateArray = Validation.validateArray(req.body.tags);
-    if (!validateArray) {
-      return res.status(400).send({
-        status: 400,
-        message: `tags, ${req.body.tags}  should be an array`,
-      });
-    }
-    const validateArrayValues = Validation.validArrayValues(req.body.tags);
-    if (!validateArrayValues) {
-      return res.status(400).send({
-        status: 400,
-        message: `tags, ${req.body.tags} should have no empty values`,
-      });
-    }
-    return next();
-  }
+  // static postTags(req, res, next) {
+  //   const id = parseInt(req.params.id, 10);
+  //   const text = 'SELECT * FROM meetup WHERE id = $1';
+  //   const { rows, rowCount } = db.query(text, [id]);
+  //   if (rowCount === 0 && !rows[0].id) {
+  //     return Validation.validID(res, ['meetup', id]);
+  //   }
+  //   const validateArray = Validation.validateArray(req.body.tags);
+  //   if (!validateArray) {
+  //     return res.status(400).send({
+  //       status: 400,
+  //       message: `tags, ${req.body.tags}  should be an array`,
+  //     });
+  //   }
+  //   const validateArrayValues = Validation.validArrayValues(req.body.tags);
+  //   if (!validateArrayValues) {
+  //     return res.status(400).send({
+  //       status: 400,
+  //       message: `tags, ${req.body.tags} should have no empty values`,
+  //     });
+  //   }
+  //   return next();
+  // }
 }
 
 export default Validate;
