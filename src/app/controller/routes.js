@@ -21,12 +21,11 @@ import cloudinaryConfig from '../config/cloudinaryConfig';
 
 const app = express();
 
-app.use('/docs', express.static(path.join(__dirname, '../docs')));
-
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use('/docs', express.static(path.join(__dirname, '../docs')));
 
 app.use(bodyParser.json());
 
