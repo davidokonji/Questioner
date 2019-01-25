@@ -11,12 +11,12 @@
     "test": " npm run migrations && nyc mocha --require babel-core/register --timeout 20000 ./src/app/tests/*.test.js --exit",
     "test-watch": "nodemon --exec 'npm test' ",
     "dev-start": "babel-watch ./src/app/index.js",
-    "heroku-postbuild": "npm run build:server && npm run migrations",
+    "heroku-postbuild": "npm run build:server && npm run migrateTables",
     "compile": "babel --presets es2015,stage-0 -d lib/ src/app/",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "createTables": "set NODE_ENV=development&& babel-node src/app/model/createTables.js",
-    "migrations": "set NODE_ENV=test&& npm run droptestTable && npm run testMigration",
-    "testMigration": "babel-node src/app/tests/createTestTables.js",
+    "migrations": "set NODE_ENV=test&& npm run droptestTable && npm run migrateTables",
+    "migrateTables": "babel-node src/app/tests/createTestTables.js",
     "droptables": "babel-node src/app/model/droptables.js",
     "droptestTable": "babel-node src/app/tests/droptestTables.js"
   },
@@ -60,7 +60,7 @@
     "jsonwebtoken": "^8.4.0",
     "multer": "^1.4.1",
     "pg": "^7.8.0",
-    "supertest": "^3.4.1",
+    "supertest": "^3.4.2",
     "uuid": "^3.3.2",
     "validator": "^10.11.0"
   }
