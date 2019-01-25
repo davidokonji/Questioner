@@ -336,7 +336,7 @@
       }
     },
     "/meetups/:id/tags": {
-      "put": {
+      "post": {
         "tags": [
           "Admin"
         ],
@@ -390,7 +390,7 @@
       }
     },
     "/meetups/:id/images": {
-      "put": {
+      "post": {
         "tags": [
           "Admin"
         ],
