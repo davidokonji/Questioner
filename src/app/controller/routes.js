@@ -69,7 +69,7 @@ app.use('/home', (req, res) => {
     message: 'welcome to  Questioner, refer to api docs',
   });
 });
-app.use('*', (req, res) => {
+app.get('*', (req, res) => {
   return res.status(404).json({
     status: 404,
     error: 'invalid route passed',
