@@ -26,6 +26,9 @@
   },
   "author": "Okonji Chukwunonso",
   "license": "ISC",
+  "engines": {
+    "node": "8.11.3"
+  },
   "bugs": {
     "url": "https://github.com/davidokonji/Questioner/issues"
   },

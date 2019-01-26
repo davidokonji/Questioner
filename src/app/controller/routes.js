@@ -27,6 +27,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/api/v1/docs', express.static(path.join(__dirname, '../docs')));
 
+if (process.env.NODE_ENV === 'production') {
+  app.use('/api/v1/docs', express.static(path.join(__dirname, '../docs')));
+}
+
 app.use(bodyParser.json());
 
 app.post('/api/v1/meetups', [cors(), Validation.createMeetup, Auth, isadmin], Questioner.createMeetup);
@@ -65,7 +69,7 @@ app.use('/home', (req, res) => {
     message: 'welcome to  Questioner, refer to api docs',
   });
 });
-app.use('*', (req, res) => {
+app.get('*', (req, res) => {
   return res.status(404).json({
     status: 404,
     error: 'invalid route passed',
