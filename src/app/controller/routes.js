@@ -3,9 +3,11 @@ import bodyParser from 'body-parser';
 
 import express from 'express';
 
-import path from 'path';
-
 import cors from 'cors';
+
+import swaggerUi from 'swagger-ui-express';
+
+import swagerDocument from '../docs/questioner';
 
 import Auth from '../middleware/authenticate';
 
@@ -25,15 +27,11 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/api/v1/docs', express.static(path.join(__dirname, '../docs')));
-
-if (process.env.NODE_ENV === 'production') {
-  app.use('/api/v1/docs', express.static(path.join(__dirname, '../docs')));
-}
+app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(swagerDocument));
 
 app.use(bodyParser.json());
 
-app.post('/api/v1/meetups', [cors(), Validation.createMeetup, Auth, isadmin], Questioner.createMeetup);
+app.post('/api/v1/meetups', [cors(), cloudinaryConfig, multerUploads.multerUploads, Validation.createMeetup, Auth, isadmin], Questioner.createMeetup);
 
 app.get('/api/v1/meetups/upcoming/', [cors(), Validation.GetUpcoming, Auth], Questioner.getUpcoming);
 
@@ -45,11 +43,11 @@ app.post('/api/v1/questions', [cors(), Validation.CreateQuestion, Auth], Questio
 
 app.post('/api/v1/comments', [cors(), Validation.postComments, Auth], Questioner.postComments);
 
-app.patch('/api/v1/questions/:id/upvote', [cors(), Auth], Questioner.patchQuestionUpvote);
+app.patch('/api/v1/questions/:id/upvote', [cors(), Validation.patchDownvote, Auth], Questioner.patchQuestionUpvote);
 
 app.patch('/api/v1/questions/:id/downvote', [cors(), Validation.patchDownvote, Auth], Questioner.patchQuestionDownvote);
 
-app.get('/api/v1/questions/:id', cors(), Questioner.getQuestionById);
+// app.get('/api/v1/questions/:id', cors(), Questioner.getQuestionById);
 
 app.post('/api/v1/meetups/:id/rsvps', [cors(), Validation.createRsvp, Auth], Questioner.createRSVP);
 
@@ -63,13 +61,13 @@ app.post('/api/v1/meetups/:id/tags', [cors(), Auth, isadmin], Questioner.postTag
 
 app.post('/api/v1/meetups/:id/images', [cors(), cloudinaryConfig, multerUploads.multerUploads, Auth, isadmin], Questioner.postImages);
 
-app.use('/home', (req, res) => {
+app.get('/', (req, res) => {
   return res.status(200).json({
     status: 200,
     message: 'welcome to  Questioner, refer to api docs',
   });
 });
-app.get('*', (req, res) => {
+app.use('*', (req, res) => {
   return res.status(404).json({
     status: 404,
     error: 'invalid route passed',

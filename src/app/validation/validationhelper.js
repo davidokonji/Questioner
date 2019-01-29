@@ -245,7 +245,7 @@ class Validation {
   static alreadyExist(res, data) {
     return res.status(400).json({
       status: 400,
-      message: `Username, ${data} already exist`,
+      message: `User, ${data} already exist`,
     });
   }
 }

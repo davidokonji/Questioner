@@ -8,6 +8,7 @@ import hash from '../middleware/hashPassword';
 
 import dataUri from '../middleware/uploadfile';
 
+import Helper from '../helpers/controllerHelper';
 
 class Questioner {
   /**
@@ -24,6 +25,7 @@ class Questioner {
         location: meet.location,
         happeningOn: meet.happeningOn,
         tags: meet.tags,
+        images: meet.images,
       };
       return filtered.push(meetup);
     });
@@ -52,31 +54,24 @@ class Questioner {
       req.body.username,
       req.body.isadmin || false,
     ];
-    try {
-      const { rows } = await db.query(text, values);
-      const token = await jwt.generateJwtToken(rows[0].id, rows[0].isadmin);
-      return res.status(201).json({
-        status: 201,
-        token,
-        data: [{
-          user: {
-            id: rows[0].id,
-            firstname: rows[0].firstname,
-            lastname: rows[0].lastname,
-            othername: rows[0].othername,
-            email: rows[0].email,
-            phonenumber: rows[0].phonenumber,
-            username: rows[0].username,
-            registered: rows[0].registered,
-          },
-        }],
-      });
-    } catch (error) {
-      return res.status(400).json({
-        status: 400,
-        meesage: 'invalid user data parameters',
-      });
-    }
+    const { rows } = await db.query(text, values);
+    const token = await jwt.generateJwtToken(rows[0].id, rows[0].isadmin);
+    return res.status(201).json({
+      status: 201,
+      token,
+      data: [{
+        user: {
+          id: rows[0].id,
+          firstname: rows[0].firstname,
+          lastname: rows[0].lastname,
+          othername: rows[0].othername,
+          email: rows[0].email,
+          phonenumber: rows[0].phonenumber,
+          username: rows[0].username,
+          registered: rows[0].registered,
+        },
+      }],
+    });
   }
   /**
    *  Login user
@@ -90,38 +85,32 @@ class Questioner {
     const values = [
       req.body.email,
     ];
-    try {
-      const { rows } = await db.query(text, values);
-      const matchedPassword = hash.verifyPassword(req.body.password, rows[0].password);
-      if (!matchedPassword) {
-        return res.status(404).json({
-          status: 404,
-          message: 'invalid credential',
-        });
-      }
-      const token = await jwt.generateJwtToken(rows[0].id, rows[0].isadmin);
-      return res.status(200).json({
-        status: 200,
-        data: [{
-          token,
-          user: {
-            id: rows[0].id,
-            firstname: rows[0].firstname,
-            lastname: rows[0].lastname,
-            othername: rows[0].othername,
-            email: rows[0].email,
-            phonenumber: rows[0].phonenumber,
-            username: rows[0].username,
-            registered: rows[0].registered,
-          },
-        }],
-      });
-    } catch (error) {
+    const { rows } = await db.query(text, values);
+    const matchedPassword = hash.verifyPassword(req.body.password, rows[0].password);
+    if (!matchedPassword) {
       return res.status(404).json({
         status: 404,
-        message: 'user not found',
+        message: 'invalid credential',
       });
     }
+    const token = await jwt.generateJwtToken(rows[0].id, rows[0].isadmin);
+    return res.status(200).json({
+      status: 200,
+      data: [{
+        token,
+        user: {
+          id: rows[0].id,
+          firstname: rows[0].firstname,
+          lastname: rows[0].lastname,
+          othername: rows[0].othername,
+          email: rows[0].email,
+          phonenumber: rows[0].phonenumber,
+          username: rows[0].username,
+          registered: rows[0].registered,
+          isadmin: rows[0].isadmin,
+        },
+      }],
+    });
   }
 
   /**
@@ -131,31 +120,30 @@ class Questioner {
    * @returns {object} meetup object
    */
   static async createMeetup(req, res) {
-    const text = `INSERT INTO meetup(topic,location,happeningon)
-                   VALUES ($1,$2,$3) RETURNING *`;
+    if (req.file) {
+      return Helper(req, res);
+    }
+    const tag = req.body.tags;
+    const splited = tag.split(',');
+    const text = `INSERT INTO meetup(topic,location,happeningon,tags)
+                  VALUES ($1,$2,$3,$4) RETURNING *`;
     const values = [
       req.body.topic,
       req.body.location,
       new Date(req.body.happeningOn),
+      splited,
     ];
-    try {
-      const { rows } = await db.query(text, values);
+    const { rows } = await db.query(text, values);
 
-      return res.status(201).json({
-        status: 201,
-        data: [{
-          topic: rows[0].topic,
-          location: rows[0].location,
-          happeningOn: rows[0].happeningOn,
-          tags: rows[0].tags,
-        }],
-      });
-    } catch (error) {
-      return res.status(400).json({
-        status: 400,
-        message: 'error in creating meetup',
-      });
-    }
+    return res.status(201).json({
+      status: 201,
+      data: [{
+        topic: rows[0].topic,
+        location: rows[0].location,
+        happeningOn: rows[0].happeningOn,
+        tags: rows[0].tags,
+      }],
+    });
   }
   /**
    * get a meetup by ID
@@ -166,32 +154,20 @@ class Questioner {
 
   static async getMeetupById(req, res) {
     const text = 'SELECT * FROM meetup WHERE id = $1';
-    try {
-      const id = parseInt(req.params.id, 10);
-      const { rows } = await db.query(text, [id]);
+    const id = parseInt(req.params.id, 10);
+    const { rows } = await db.query(text, [id]);
 
-      if (!rows[0]) {
-        return res.status(404).json({
-          status: 404,
-          error: 'unable to find meetup with given ID',
-        });
-      }
-      return res.status(200).json({
-        status: 200,
-        data: [{
-          id: rows[0].id,
-          topic: rows[0].topic,
-          location: rows[0].location,
-          happeningOn: rows[0].happeningOn,
-          tags: rows[0].tags,
-        }],
-      });
-    } catch (error) {
-      return res.status(404).json({
-        status: 404,
-        message: 'unable to find meetup',
-      });
-    }
+    return res.status(200).json({
+      status: 200,
+      data: [{
+        id: rows[0].id,
+        topic: rows[0].topic,
+        location: rows[0].location,
+        happeningOn: rows[0].happeningOn,
+        tags: rows[0].tags,
+        images: rows[0].images || null,
+      }],
+    });
   }
 
   /**
@@ -202,24 +178,17 @@ class Questioner {
    */
   static async getMeetups(req, res) {
     const text = {
-      text: 'SELECT id, topic, location, happeningOn, tags FROM meetup',
+      text: 'SELECT id, topic, location, happeningOn, images,tags FROM meetup',
     };
-    try {
-      const { rows } = await db.query(text);
-      const filteredFields = [];
+    const { rows } = await db.query(text);
+    const filteredFields = [];
 
-      Questioner.getRequiredFields(rows, filteredFields);
+    Questioner.getRequiredFields(rows, filteredFields);
 
-      return res.status(200).json({
-        status: 200,
-        data: filteredFields,
-      });
-    } catch (error) {
-      return res.status(404).json({
-        status: 404,
-        message: 'no meetups available',
-      });
-    }
+    return res.status(200).json({
+      status: 200,
+      data: filteredFields,
+    });
   }
 
   /**
@@ -230,35 +199,19 @@ class Questioner {
    */
   static async getUpcoming(req, res) {
     const text = {
-      text: `SELECT id,topic,location,happeningOn,tags 
+      text: `SELECT id,topic,location,happeningOn,images,tags
               FROM meetup WHERE happeningOn >= NOW()`,
     };
+    const { rows } = await db.query(text);
+    const filteredFields = [];
+    await Questioner.getRequiredFields(rows, filteredFields);
 
-    try {
-      const { rows, rowCount } = await db.query(text);
-      const filteredFields = [];
-      if (rowCount === 0) {
-        return res.status(404).json({
-          status: 404,
-          data: [{
-            message: 'no upcoming meetup found',
-          }],
-        });
-      }
-      await Questioner.getRequiredFields(rows, filteredFields);
-
-      return res.status(200).json({
-        status: 200,
-        data: [
-          filteredFields,
-        ],
-      });
-    } catch (error) {
-      return res.status(404).json({
-        status: 404,
-        message: 'no upcoming meetup found',
-      });
-    }
+    return res.status(200).json({
+      status: 200,
+      data: [
+        filteredFields,
+      ],
+    });
   }
 
   /**
@@ -277,26 +230,18 @@ class Questioner {
       req.body.title,
       req.body.body,
     ];
-
-    try {
-      const { rows } = await db.query(text, values);
-      return res.status(201).json({
-        status: 201,
-        data: [
-          {
-            user: rows[0].createdby,
-            meetup: rows[0].meetupid,
-            title: rows[0].title,
-            body: rows[0].body,
-          },
-        ],
-      });
-    } catch (error) {
-      return res.status(400).json({
-        status: 400,
-        message: 'unable to create question',
-      });
-    }
+    const { rows } = await db.query(text, values);
+    return res.status(201).json({
+      status: 201,
+      data: [
+        {
+          user: rows[0].createdby,
+          meetup: rows[0].meetupid,
+          title: rows[0].title,
+          body: rows[0].body,
+        },
+      ],
+    });
   }
 
   /**
@@ -305,29 +250,22 @@ class Questioner {
    * @param {object} res
    * @returns {object} single queston object
    */
-  static async getQuestionById(req, res) {
-    const text = 'SELECT * FROM question WHERE id= $1 RETURNING *';
-    const id = parseInt(req.params.id, 10);
-    try {
-      const { rows } = await db.query(text, [id]);
-
-      if (!rows[0]) {
-        return res.status(404).json({
-          status: 404,
-          error: `unable to find question with given ID ${req.params.id}`,
-        });
-      }
-      return res.status(200).json({
-        status: 200,
-        data: rows,
-      });
-    } catch (error) {
-      return res.status(404).json({
-        status: 404,
-        meesage: 'unable to find question',
-      });
-    }
-  }
+  // static async getQuestionById(req, res) {
+  //   const text = 'SELECT * FROM question WHERE id= $1 RETURNING *';
+  //   const id = parseInt(req.params.id, 10);
+  //   try {
+  //     const { rows } = await db.query(text, [id]);
+  //     return res.status(200).json({
+  //       status: 200,
+  //       data: rows,
+  //     });
+  //   } catch (error) {
+  //     return res.status(404).json({
+  //       status: 404,
+  //       meesage: 'unable to find question',
+  //     });
+  //   }
+  // }
 
   /**
    *  increasing upvote by 1
@@ -339,30 +277,22 @@ class Questioner {
   static async patchQuestionUpvote(req, res) {
     const text = 'SELECT * FROM question WHERE id = $1';
     const values = [parseInt(req.params.id, 10)];
+    const { rows } = await db.query(text, values);
+    const question = rows[0];
 
-    try {
-      const { rows } = await db.query(text, values);
-      const question = rows[0];
+    // Check vote count
+    const votes = 'UPDATE question SET vote = $1 WHERE id = $2 returning *';
+    const vote = await db.query(votes, [question.vote += 1, req.params.id]);
 
-      // Check vote count
-      const votes = 'UPDATE question SET vote = $1 WHERE id = $2 returning *';
-      const vote = await db.query(votes, [question.vote += 1, req.params.id]);
-
-      return res.status(200).json({
-        status: 200,
-        data: [{
-          meetup: vote.rows[0].meetupid,
-          title: rows[0].title,
-          body: rows[0].body,
-          votes: vote.rows[0].vote,
-        }],
-      });
-    } catch (error) {
-      return res.status(400).json({
-        status: 400,
-        message: 'can not upvote this question',
-      });
-    }
+    return res.status(200).json({
+      status: 200,
+      data: [{
+        meetup: vote.rows[0].meetupid,
+        title: rows[0].title,
+        body: rows[0].body,
+        votes: vote.rows[0].vote,
+      }],
+    });
   }
 
   /**
@@ -376,45 +306,31 @@ class Questioner {
     const text = 'SELECT * FROM question WHERE id = $1';
     const values = [parseInt(req.params.id, 10)];
 
-    try {
-      const { rows } = await db.query(text, values);
-      let questions = rows[0];
-      if (questions.vote !== 0) {
-        const votes = 'UPDATE question SET vote = $1 WHERE id = $2 returning *';
-        try {
-          questions = await db.query(votes, [questions.vote -= 1, req.params.id]);
-        } catch (error) {
-          return res.status(400).json({
-            status: 400,
-            message: error.meesage,
-          });
-        }
-      } else {
-        return res.status(200).json({
-          status: 200,
-          data: [{
-            meetup: questions.meetupid,
-            title: questions.title,
-            body: questions.body,
-            votes: questions.vote,
-          }],
-        });
-      }
+    const { rows } = await db.query(text, values);
+    let questions = rows[0];
+    if (questions.vote !== 0) {
+      const votes = 'UPDATE question SET vote = $1 WHERE id = $2 returning *';
+      questions = await db.query(votes, [questions.vote -= 1, req.params.id]);
+    } else {
       return res.status(200).json({
         status: 200,
         data: [{
-          meetup: questions.rows[0].meetupid,
-          title: questions.rows[0].title,
-          body: questions.rows[0].body,
-          votes: questions.rows[0].vote,
+          meetup: questions.meetupid,
+          title: questions.title,
+          body: questions.body,
+          votes: questions.vote,
         }],
       });
-    } catch (error) {
-      return res.status(200).json({
-        status: 200,
-        message: 'unable to downvote question',
-      });
     }
+    return res.status(200).json({
+      status: 200,
+      data: [{
+        meetup: questions.rows[0].meetupid,
+        title: questions.rows[0].title,
+        body: questions.rows[0].body,
+        votes: questions.rows[0].vote,
+      }],
+    });
   }
 
   /**
@@ -427,37 +343,23 @@ class Questioner {
   static async createRSVP(req, res) {
     const id = parseInt(req.params.id, 10);
     const query = 'SELECT * FROM meetup WHERE id = $1';
-    try {
-      const { rows } = await db.query(query, [id]);
-      if (rows[0].length !== 0) {
-        const text = `INSERT INTO rsvp(meetupid, userid, response)
-        VALUES ($1,$2,$3) RETURNING *`;
-        const values = [
-          id,
-          req.user.id,
-          req.body.response,
-        ];
-        try {
-          const response = await db.query(text, values);
-          return res.status(201).json({
-            status: 201,
-            data: [{
-              meetup: response.rows[0].meetupid,
-              topic: rows[0].topic,
-              status: response.rows[0].response,
-            }],
-          });
-        } catch (error) {
-          return res.status(400).json({
-            status: 400,
-            message: 'unable to rsvp for meetup',
-          });
-        }
-      }
-    } catch (error) {
-      return error.meesage;
-    }
-    return true;
+    const { rows } = await db.query(query, [id]);
+    const text = `INSERT INTO rsvp(meetupid, userid, response)
+    VALUES ($1,$2,$3) RETURNING *`;
+    const values = [
+      id,
+      req.user.id,
+      req.body.response,
+    ];
+    const response = await db.query(text, values);
+    return res.status(201).json({
+      status: 201,
+      data: [{
+        meetup: response.rows[0].meetupid,
+        topic: rows[0].topic,
+        status: response.rows[0].response,
+      }],
+    });
   }
 
   /**
@@ -475,26 +377,19 @@ class Questioner {
       req.body.comment,
       req.user.id,
     ];
-    try {
-      const { rows } = await db.query(text, values);
+    const { rows } = await db.query(text, values);
 
-      return res.status(201).json({
-        status: 201,
-        data: [
-          {
-            question: rows[0].questionid,
-            title: req.question.title,
-            body: req.question.body,
-            comment: rows[0].comment,
-          },
-        ],
-      });
-    } catch (error) {
-      return res.status(400).json({
-        status: 400,
-        message: 'can not post comment',
-      });
-    }
+    return res.status(201).json({
+      status: 201,
+      data: [
+        {
+          question: rows[0].questionid,
+          title: req.question.title,
+          body: req.question.body,
+          comment: rows[0].comment,
+        },
+      ],
+    });
   }
 
   /**
@@ -506,21 +401,13 @@ class Questioner {
 
   static async deleteMeetup(req, res) {
     const text = 'DELETE FROM meetup WHERE id = $1 RETURNING *';
+    const id = parseInt(req.params.id, 10);
+    const { rows } = await db.query(text, [id]);
 
-    try {
-      const id = parseInt(req.params.id, 10);
-      const { rows } = await db.query(text, [id]);
-
-      return res.status(200).json({
-        status: 200,
-        data: `meetup with title, ${rows[0].topic} has been deleted`,
-      });
-    } catch (error) {
-      return res.status(400).json({
-        status: 400,
-        message: 'meetup does not exist',
-      });
-    }
+    return res.status(200).json({
+      status: 200,
+      data: `meetup with title, ${rows[0].topic} has been deleted`,
+    });
   }
 
   /**
@@ -571,25 +458,18 @@ class Questioner {
                   from unnest(images || $1) e) WHERE id = $2 returning *`;
         const id = parseInt(req.params.id, 10);
         const splited = images.split(',');
-        try {
-          const { rows } = await db.query(text, [splited, id]);
-          return res.status(200).json({
-            status: 200,
-            meetup: rows[0].id,
-            topic: rows[0].topic,
-            images: rows[0].images,
-          });
-        } catch (error) {
-          return res.status(400).json({
-            status: 400,
-            message: error.message,
-          });
-        }
+        const { rows } = await db.query(text, [splited, id]);
+        return res.status(200).json({
+          status: 200,
+          meetup: rows[0].id,
+          topic: rows[0].topic,
+          images: rows[0].images,
+        });
       })
       .catch((err) => {
         return res.status(400).json({
           status: 400,
-          message: err,
+          message: err.message,
         });
       });
   }

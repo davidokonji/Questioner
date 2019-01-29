@@ -107,7 +107,7 @@ const createTables = async () => {
             VALUES (1, 1, 'this is a question from migration', 'question test test', 4);
             
             INSERT INTO question (createdby, meetupid, title, body, vote)
-            VALUES (1, 2, 'this is a question from migration', 'question test test', 5);
+            VALUES (1, 2, 'this is a question from migration', 'question test test', 0);
 
             INSERT INTO comments (questionid, comment, userid)
             VALUES (1, 'this is a comment from migration', 2);
