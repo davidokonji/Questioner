@@ -23,7 +23,8 @@ class Validate {
     if (!validEmail) {
       return Validation.validatorResponse(res, ['Email', req.body.email, 'a valid Email']);
     }
-    const sortSpecialchars = validator.isAlphanumeric(req.body.username);
+    const trimmedUsername = req.body.username.replace(/\s/g, '');
+    const sortSpecialchars = validator.isAlphanumeric(trimmedUsername);
     if (!sortSpecialchars) {
       return Validation.validatorResponse(res, ['Username', req.body.username, 'aplhanumeric']);
     }
@@ -76,13 +77,12 @@ class Validate {
   }
 
   /**
-   * login middleware
+   * login user middleware
    * @param {object} req
    * @param {object} res
    * @param {object} next
    * @return {object} error or pass object
    */
-
   static async loginUser(req, res, next) {
     const getRequired = Validation.checkValidEntry(req.body, ['email', 'password']);
     const errorValues = getRequired.map(error => error);
@@ -153,6 +153,15 @@ class Validate {
     const [validlocation, locationLength] = Validation.isValidLength(req.body.location, 5);
     if (!validlocation) {
       return Validation.validLengthResponse(res, 'location', locationLength);
+    }
+    if (req.body.tags) {
+      const checkTagType = validator.isAlpha(req.body.tags);
+      if (!checkTagType) {
+        return res.status(400).send({
+          status: 400,
+          error: `Tag value, ${req.body.tags} should be a valid string`,
+        });
+      }
     }
     return next();
   }
@@ -267,18 +276,11 @@ class Validate {
   static async patchUpvote(req, res, next) {
     const id = parseInt(req.params.id, 10);
     const text = 'SELECT * FROM question WHERE id = $1';
-    try {
-      const { rowCount } = await db.query(text, [id]);
-      if (rowCount === 0) {
-        return Validation.validID(res, ['question', id]);
-      }
-    } catch (error) {
-      return res.status(400).json({
-        error: 400,
-        message: error.message,
-      });
+    const { rowCount } = await db.query(text, [id]);
+    if (rowCount !== 0) {
+      return next();
     }
-    return next();
+    return Validation.validID(res, ['question', id]);
   }
   /**
    * patch downvote middleware
@@ -291,19 +293,11 @@ class Validate {
   static async patchDownvote(req, res, next) {
     const id = parseInt(req.params.id, 10);
     const text = 'SELECT * FROM question WHERE id = $1';
-    try {
-      const { rowCount } = await db.query(text, [id]);
-      if (rowCount === 0) {
-        return Validation.validID(res, ['question', id]);
-      }
-    } catch (error) {
-      return res.status(400).json({
-        error: 400,
-        message: error.message,
-      });
+    const { rowCount } = await db.query(text, [id]);
+    if (rowCount !== 0) {
+      return next();
     }
-
-    return next();
+    return Validation.validID(res, ['question', id]);
   }
   /**
    * create rsvp middleware
@@ -320,20 +314,12 @@ class Validate {
         message: 'response is required',
       });
     }
-    try {
-      const id = parseInt(req.params.id, 10);
-      const text = 'SELECT * FROM meetup WHERE id = $1';
-      const { rowCount } = await db.query(text, [id]);
-      if (rowCount === 0) {
-        return Validation.validID(res, ['meetup', id]);
-      }
-    } catch (error) {
-      return res.status(400).json({
-        status: 400,
-        message: error.message,
-      });
+    const id = parseInt(req.params.id, 10);
+    const text = 'SELECT * FROM meetup WHERE id = $1';
+    const { rowCount } = await db.query(text, [id]);
+    if (rowCount === 0) {
+      return Validation.validID(res, ['meetup', id]);
     }
-
     const validResponse = Validation.validResponse(req.body.response);
     if (!validResponse) {
       return res.status(400).send({
@@ -352,29 +338,30 @@ class Validate {
    * @return  {object} error or pass object
    */
   static async postComments(req, res, next) {
-    try {
-      const text = 'SELECT * FROM question WHERE id= $1';
-
-      const { rows } = await db.query(text, [req.body.questionId]);
-      if (rows.length < 1) {
-        return res.status(404).json({
-          status: 404,
-          message: 'question ID does not exist',
-        });
-      }
-      req.question = rows[0];
-    } catch (error) {
-      return res.status(400).json({
-        status: 400,
-        message: error.message,
-      });
-    }
-    const getRequired = Validation.checkValidEntry(req.body, ['comment']);
+    const getRequired = Validation.checkValidEntry(req.body, ['comment', 'questionId']);
     const errorValues = getRequired.map(error => error);
     if (typeof getRequired === 'object' && getRequired.length > 0) {
       return res.status(400).send({
         status: 400,
         error: errorValues,
+      });
+    }
+    const text = 'SELECT * FROM question WHERE id= $1';
+
+    const { rows } = await db.query(text, [req.body.questionId]);
+    if (rows.length < 1) {
+      return res.status(404).json({
+        status: 404,
+        message: 'question ID does not exist',
+      });
+    }
+    req.question = rows[0];
+    const trimmedComment = req.body.comment.replace(/\s/g, '');
+    const validcomment = validator.isAlphanumeric(trimmedComment);
+    if (!validcomment) {
+      return res.status(400).json({
+        status: 400,
+        message: `comment value, ${req.body.comment} should be a valid string`,
       });
     }
     return next();
@@ -391,51 +378,12 @@ class Validate {
   static async deleteMeetup(req, res, next) {
     const id = parseInt(req.params.id, 10);
     const text = 'SELECT * FROM meetup WHERE id = $1';
-    try {
-      const { rows, rowCount } = await db.query(text, [id]);
-      if (!rows[0] && rowCount === 0) {
-        return Validation.validID(res, ['meetup', id]);
-      }
-    } catch (error) {
-      return res.status(404).send({
-        status: 404,
-        message: error.message,
-      });
+    const { rows, rowCount } = await db.query(text, [id]);
+    if (!rows[0] && rowCount === 0) {
+      return Validation.validID(res, ['meetup', id]);
     }
     return next();
   }
-
-  /**
-   * post tags middleware
-   * @param {object} req
-   * @param {object} res
-   * @param {object} next
-   * @return  {object} error or pass object
-   */
-
-  // static postTags(req, res, next) {
-  //   const id = parseInt(req.params.id, 10);
-  //   const text = 'SELECT * FROM meetup WHERE id = $1';
-  //   const { rows, rowCount } = db.query(text, [id]);
-  //   if (rowCount === 0 && !rows[0].id) {
-  //     return Validation.validID(res, ['meetup', id]);
-  //   }
-  //   const validateArray = Validation.validateArray(req.body.tags);
-  //   if (!validateArray) {
-  //     return res.status(400).send({
-  //       status: 400,
-  //       message: `tags, ${req.body.tags}  should be an array`,
-  //     });
-  //   }
-  //   const validateArrayValues = Validation.validArrayValues(req.body.tags);
-  //   if (!validateArrayValues) {
-  //     return res.status(400).send({
-  //       status: 400,
-  //       message: `tags, ${req.body.tags} should have no empty values`,
-  //     });
-  //   }
-  //   return next();
-  // }
 }
 
 export default Validate;
