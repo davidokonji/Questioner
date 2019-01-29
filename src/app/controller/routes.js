@@ -7,8 +7,6 @@ import cors from 'cors';
 
 import swaggerUi from 'swagger-ui-express';
 
-import swagerDocument from '../docs/questioner';
-
 import Auth from '../middleware/authenticate';
 
 import Validation from '../validation/validation';
@@ -20,6 +18,8 @@ import isadmin from '../middleware/isadmin';
 import multerUploads from '../middleware/uploadfile';
 
 import cloudinaryConfig from '../config/cloudinaryConfig';
+
+const swagerDocument = require('../docs/questioner.json');
 
 const app = express();
 
