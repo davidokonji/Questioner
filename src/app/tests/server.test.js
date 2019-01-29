@@ -73,7 +73,7 @@ describe('POST /api/v1/auth/login', () => {
   });
   it('should return 404 when correct email but wrong password passed', (done) => {
     const user = {
-      email: 'davidokonji@gmail.com',
+      email: 'davidokonji3@gmail.com',
       password: 'password12',
     };
     chai.request(app)
@@ -253,7 +253,28 @@ describe('POST /api/v1/auth/signup', () => {
         return done();
       });
   });
-
+  it('should return error if username is invalid', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .send({
+        firstname: 'david',
+        lastname: 'okonji',
+        othername: 'nonso',
+        email: 'davidokonji2018@gmail.com',
+        password: 'password',
+        phonenumber: '08109418943',
+        username: 'devlen okonji',
+      })
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.have.status(400);
+        expect(res).to.be.a('object');
+        return done();
+      });
+  });
   it('should return error if firstname not sent', (done) => {
     chai.request(app)
       .post('/api/v1/auth/signup')
@@ -454,7 +475,7 @@ describe('POST /api/v1/meetups', () => {
         topic: 'this is a correct meetup',
         location: 'lagos nigeria',
         happeningOn: '2019-03-12',
-        tags: ['hhh'],
+        tags: 'hhh',
       })
       .set('x-access-token', userToken)
       .end((err, res) => {
@@ -475,7 +496,7 @@ describe('POST /api/v1/meetups', () => {
         topic: 'this is a correct meetup',
         location: 'lagos nigeria',
         happeningOn: '2019-03-12',
-        tags: ['hhh'],
+        tags: 'hhh',
       })
       .set('x-access-token', token)
       .end((err, res) => {
@@ -492,6 +513,53 @@ describe('POST /api/v1/meetups', () => {
         return done();
       });
   });
+  it('should create meetups with images', (done) => {
+    const images = path.join(__dirname, './test.jpg');
+    chai.request(app)
+      .post('/api/v1/meetups')
+      .set('x-access-token', token)
+      .set('Content-Type', 'multipart/form-data')
+      .field('topic', 'this is a correct meetup')
+      .field('location', 'lagos nigeria')
+      .field('happeningOn', '2019-03-12')
+      .field('tags', 'hhh')
+      .attach('images', images)
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.have.status(201);
+        expect(res).to.be.a('object');
+        res.body.data[0].should.have.property('topic');
+        res.body.data[0].should.have.property('location');
+        res.body.data[0].should.have.property('tags');
+        res.body.should.have.property('status').equal(201);
+        return done();
+      });
+  });
+  it('should 400 if invalid images sent', (done) => {
+    const images = path.join(__dirname, './test.mp4');
+    chai.request(app)
+      .post('/api/v1/meetups')
+      .set('x-access-token', token)
+      .set('Content-Type', 'multipart/form-data')
+      .field('topic', 'this is a correct meetup')
+      .field('location', 'lagos nigeria')
+      .field('happeningOn', '2019-03-12')
+      .field('tags', 'hhh')
+      .attach('images', images)
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.have.status(400);
+        expect(res).to.be.a('object');
+        res.body.should.have.property('status').equal(400);
+        return done();
+      });
+  });
   it('should return 400 if meetup has a past date', (done) => {
     chai.request(app)
       .post('/api/v1/meetups')
@@ -499,7 +567,7 @@ describe('POST /api/v1/meetups', () => {
         topic: 'this is a correct meetup',
         location: 'lagos nigeria',
         happeningOn: '2018-03-12',
-        tags: ['hhh'],
+        tags: 'hhh',
       })
       .set('x-access-token', token)
       .end((err, res) => {
@@ -520,7 +588,7 @@ describe('POST /api/v1/meetups', () => {
         topic: 'this is a correct meetup',
         location: 'lagos nigeria',
         happeningOn: '2019-03-12',
-        tags: ['hhh'],
+        tags: 'hhh',
       })
       .end((err, res) => {
         if (err) {
@@ -533,6 +601,26 @@ describe('POST /api/v1/meetups', () => {
         return done();
       });
   });
+  it('should return 400 when wrong tag format sent', (done) => {
+    chai.request(app)
+      .post('/api/v1/meetups')
+      .send({
+        topic: 'this is a correct meetup',
+        location: 'lagos nigeria',
+        happeningOn: '2019-03-12',
+        tags: "['hhh']",
+      })
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.have.status(400);
+        expect(res).to.be.a('object');
+        res.body.should.have.property('status').equal(400);
+        return done();
+      });
+  });
   const expiredToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsImlhdCI6MTU0ODEwODMzOSwiZXhwIjoxNTQ4MjgxMTM5fQ.A9ecXU0Fsmi2JPJC7WfPBAH52NygDA4IBt8N-8XmtWE';
   it('should return 401 when expired token passed', (done) => {
     chai.request(app)
@@ -541,7 +629,7 @@ describe('POST /api/v1/meetups', () => {
         topic: 'this is a correct meetup',
         location: 'lagos nigeria',
         happeningOn: '2019-03-12',
-        tags: ['hhh'],
+        tags: 'hhh',
       })
       .set('x-access-token', expiredToken)
       .end((err, res) => {
@@ -945,6 +1033,41 @@ describe('POST /api/v1/comments/', () => {
         return done();
       });
   });
+  it('should return 400 if question ID not provided', (done) => {
+    chai.request(app)
+      .post('/api/v1/comments/')
+      .set('x-access-token', token)
+      .send({
+        comment: 'this is a valid comment',
+      })
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.be.status(400);
+        expect(res).to.be.a('object');
+        return done();
+      });
+  });
+  it('should return 400 if invalid comment passed', (done) => {
+    chai.request(app)
+      .post('/api/v1/comments/')
+      .set('x-access-token', token)
+      .send({
+        questionId: 1,
+        comment: '1$',
+      })
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.be.status(400);
+        expect(res).to.be.a('object');
+        return done();
+      });
+  });
   it('should return 400 if comment not provided', (done) => {
     chai.request(app)
       .post('/api/v1/comments/')
@@ -1018,6 +1141,22 @@ describe('POST /api/v1/meetups/:id/rsvps', () => {
         return done();
       });
   });
+  it('should 400 for wrong rsvp not provided', (done) => {
+    const id = '1';
+    chai.request(app)
+      .post(`/api/v1/meetups/${id}/rsvps`)
+      .set('x-access-token', token)
+      .send({})
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.be.status(400);
+        expect(res).to.be.a('object');
+        return done();
+      });
+  });
   it('should 404 for invalid meetup id for rsvp ', (done) => {
     const id = '10';
     chai.request(app)
@@ -1039,7 +1178,7 @@ describe('POST /api/v1/meetups/:id/rsvps', () => {
 });
 describe('PATCH /api/v1/questions/:id/upvote', () => {
   it('should update the current upvote of question', (done) => {
-    const id = parseInt(1, 10);
+    const id = parseInt(2, 10);
     chai.request(app)
       .patch(`/api/v1/questions/${id}/upvote`)
       .set('x-access-token', token)
@@ -1049,6 +1188,21 @@ describe('PATCH /api/v1/questions/:id/upvote', () => {
           return done(err);
         }
         expect(res).to.be.status(200);
+        expect(res).to.be.a('object');
+        return done();
+      });
+  });
+  it('should return 404 if invalid question ID passed', (done) => {
+    const id = parseInt(10, 10);
+    chai.request(app)
+      .patch(`/api/v1/questions/${id}/upvote`)
+      .set('x-access-token', token)
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.be.status(404);
         expect(res).to.be.a('object');
         return done();
       });
@@ -1071,8 +1225,38 @@ describe('PATCH /api/v1/questions/:id/upvote', () => {
   });
 });
 describe('PATCH /api/v1/questions/:id/downvote', () => {
-  it('should update the current upvote of question', (done) => {
-    const id = parseInt(1, 10);
+  it('should downvote the current vote of question', (done) => {
+    const id = parseInt(2, 10);
+    chai.request(app)
+      .patch(`/api/v1/questions/${id}/downvote`)
+      .set('x-access-token', token)
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.be.status(200);
+        expect(res).to.be.a('object');
+        return done();
+      });
+  });
+  it('should return 404 if invalid question ID passed', (done) => {
+    const id = parseInt(10, 10);
+    chai.request(app)
+      .patch(`/api/v1/questions/${id}/downvote`)
+      .set('x-access-token', token)
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.be.status(404);
+        expect(res).to.be.a('object');
+        return done();
+      });
+  });
+  it('should not downvite if vote equals 0', (done) => {
+    const id = parseInt(4, 10);
     chai.request(app)
       .patch(`/api/v1/questions/${id}/downvote`)
       .set('x-access-token', token)
@@ -1145,7 +1329,7 @@ describe('POST /api/v1/meetups/:id/tags', () => {
   });
 });
 describe('POST /api/v1/meetups/:id/images', () => {
-  const images = path.join(__dirname, './test.jpg');
+  let images = path.join(__dirname, './test.jpg');
   it('should post image to a meetup', (done) => {
     const id = parseInt(1, 10);
     chai.request(app)
@@ -1179,11 +1363,28 @@ describe('POST /api/v1/meetups/:id/images', () => {
         return done();
       });
   });
+  it('should return 400 for invalid images type sent', (done) => {
+    images = path.join(__dirname, './test.mp4');
+    const id = parseInt(1, 10);
+    request(app)
+      .post(`/api/v1/meetups/${id}/images`)
+      .set('x-access-token', token)
+      .attach('images', images)
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.be.status(400);
+        expect(res).to.be.a('object');
+        return done();
+      });
+  });
 });
 describe('Check for invalid route passed', () => {
   it('should return 404 when invalid route passed', (done) => {
     chai.request(app)
-      .patch('/api/')
+      .get('/api/')
       .end((err, res) => {
         if (err) {
           expect(res).to.throw(err);
@@ -1196,7 +1397,7 @@ describe('Check for invalid route passed', () => {
   });
   it('should return 200 when default route passed', (done) => {
     chai.request(app)
-      .patch('/home')
+      .get('/')
       .end((err, res) => {
         if (err) {
           expect(res).to.throw(err);
@@ -1207,52 +1408,50 @@ describe('Check for invalid route passed', () => {
         return done();
       });
   });
-  describe('DELETE /api/v1/meetups/:id', () => {
-    it('should delete a meetup', (done) => {
-      // const id = parseInt(4, 10);
-      chai.request(app)
-        .del('/api/v1/meetups/1')
-        .set('x-access-token', token)
-        .end((err, res) => {
-          console.log(res.body);
-          if (err) {
-            expect(res).to.throw(err);
-            return done(err);
-          }
-          expect(res).to.be.status(200);
-          expect(res).to.be.a('object');
-          return done();
-        });
-    });
-    it('should return 404 if meetup no found', (done) => {
-      const id = parseInt(10, 10);
-      chai.request(app)
-        .del(`/api/v1/meetups/${id}`)
-        .set('x-access-token', token)
-        .end((err, res) => {
-          if (err) {
-            expect(res).to.throw(err);
-            return done(err);
-          }
-          expect(res).to.be.status(404);
-          expect(res).to.be.a('object');
-          return done();
-        });
-    });
-    it('should return 404 if meetup does not exist', (done) => {
-      const id = parseInt(1, 10);
-      chai.request(app)
-        .del(`/api/v1/meetups/${id}`)
-        .set('x-access-token', token)
-        .end((err, res) => {
-          if (err) {
-            expect(res).to.throw(err);
-            return done(err);
-          }
-          expect(res).to.be.status(404);
-          expect(res).to.be.a('object');
-          return done();
-        });
-    });
+});
+describe('DELETE /api/v1/meetups/:id', () => {
+  it('should delete a meetup', (done) => {
+    chai.request(app)
+      .del('/api/v1/meetups/1')
+      .set('x-access-token', token)
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.be.status(200);
+        expect(res).to.be.a('object');
+        return done();
+      });
+  });
+  it('should return 404 if meetup no found', (done) => {
+    const id = parseInt(10, 10);
+    chai.request(app)
+      .del(`/api/v1/meetups/${id}`)
+      .set('x-access-token', token)
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.be.status(404);
+        expect(res).to.be.a('object');
+        return done();
+      });
+  });
+  it('should return 404 if meetup does not exist', (done) => {
+    const id = parseInt(1, 10);
+    chai.request(app)
+      .del(`/api/v1/meetups/${id}`)
+      .set('x-access-token', token)
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.be.status(404);
+        expect(res).to.be.a('object');
+        return done();
+      });
   });
 });
