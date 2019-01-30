@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/admin_signin.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
-    crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="../css/responsive/auth.css"> -->
 </head>
 
@@ -21,23 +21,26 @@
         <p><a href="./auth.html"><i class="fas fa-user fa-2x nav_btn"></i></a></p>
     </nav>
     <div class="container-fluid">
+        <div class="showalert"></div>
         <div class="rightside">
-            <div class="signin">
-                <p class="title">Sign In </p>
-                <div class="form-element">
+            <form method="post" name="admin_signin">
+                <div class="signin">
+                    <p class="title">Sign In </p>
+                    <div class="form-element">
                         <label for="" class="form-label">Username or Email</label>
-                        <input type="text" name="name" class="form-control-md" id="name" required>
-                </div>
-                <div class="form-element">
+                        <input type="text" name="email" class="form-control-md" id="name" required>
+                    </div>
+                    <div class="form-element">
                         <label for="" class="form-label">Password</label>
                         <input type="password" name="password" class="form-control-md" id="password" required>
+                    </div>
+                    <div class="btn-center">
+                        <input type="submit" value="SIGN IN" class="btn btn-primary" />
+                    </div>
                 </div>
-               <div class="btn-center">
-                   <button class="btn btn-primary" onclick="location.href='admin.html';" >SIGN IN</button>
-               </div>
-            </div>
+            </form>
         </div>
     </div>
 </body>
-
+<script src="../js/admin.js"></script>
 </html>

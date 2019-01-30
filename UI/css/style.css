@@ -18,7 +18,7 @@ html{
     height: 100%;
 }
 .footer{
-    position: relative;
+    position: absolute;
     bottom: 0;
     height: 50px;
     width: 100%;

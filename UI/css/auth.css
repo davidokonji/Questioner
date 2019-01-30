@@ -45,8 +45,7 @@ body{
   transform: scale(1.1);
 }
 .container{
-  width: 530px;
-  margin: 50px auto;
+  width: 500px;
   background: #e9eaea;
  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 
@@ -58,17 +57,24 @@ body{
   color:#03030e;
   float: left;
   font-size: 16px;
-  height: 60px;
-  line-height: 60px;
+  height: 50px;
+  line-height: 50px;
   text-align: center;
   cursor: pointer;
+  font-family:Montserrat-Regular;
   text-transform: uppercase;
 }
+.wrapper{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 100px auto;
 
+}
 .signup-form,
 .login-form{
   background: #fff;
-  padding: 40px;
+  padding: 20px;
   clear: both;
   width: 100%;
   display:flex;
@@ -76,7 +82,7 @@ body{
   box-sizing: border-box;
 }
 .form_num{
-  width: 60%;
+  width: 100%;
   padding: 15px;
   box-sizing: border-box;
   border: 2px solid #e9eaea;
@@ -125,7 +131,21 @@ body{
   font-weight: bold;
   letter-spacing: 1px;
   cursor: pointer;
-  margin-bottom: 30px;
+  box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.1);
+}
+.btn:hover{
+  width: 100%;
+  background: #25274d;
+  height: 60px;
+  text-align: center;
+  line-height: 60px;
+  text-transform: uppercase;
+  color: #fff;
+  font-weight: bold;
+  letter-spacing: 1px;
+  cursor: pointer;
+  box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.2);
+
 }
 
 span a{
@@ -136,5 +156,48 @@ span a{
 .double{
   display:flex;
   flex-direction:row;
-  justify-content:space-between;
+  justify-content:center;
+}
+.showalert{
+  width: 200px;
+  position: fixed;
+  right: 20px;
+  top: 20px;
+}
+.alert {
+  padding: 20px;
+  background-color: #d9534f;
+  border-color: #d43f3a;
+  color: white;
+  opacity: 1;
+  transition: opacity 0.6s;
+  margin-bottom: 15px;
+  width: 250px;
+  font-family:raleway-regular;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 15px;
+  position: fixed;
+  right: 20px;
+  top: 80px;
+}
+
+.alert.success {background-color: #5cb85c;}
+.alert.info {background-color: #2196F3;}
+.alert.warning {background-color: #ff9800; border-color: #eea236;}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
 }
