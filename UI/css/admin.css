@@ -282,17 +282,17 @@ nav{
  }
  
  .container{
-   width: 530px;
+   width: 100%;
    margin: 50px auto;
  }
- .signup-form{
+ .meetup-form{
    background: #fff;
-   padding: 40px;
+   padding: 5px;
    clear: both;
+   margin: 0 auto;
    width: 100%;
    display:flex;
    flex-direction:column;
-   box-sizing: border-box;
  }
  .form_num{
    width: 50%;
@@ -333,7 +333,7 @@ nav{
    transform: all 0.5s ease;
  }
  
- .bttm{
+ .btn_post{
    width: 100%;
    background: #25274d;
    height: 60px;
@@ -360,5 +360,6 @@ nav{
     font-size: 14px;
     font-weight: bold;
     margin:15px;
+    margin-top: 0;
     color: #565a5a;
  }
