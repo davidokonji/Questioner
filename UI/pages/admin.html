@@ -1,124 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Questioner - Admin</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/admin.css">
-    <link rel="stylesheet" href="../css/responsive/admin.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
-        crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
-<body>
-    <header>
-        <nav class="admin_nav">
-            <li class="admin_logo">
-                <a href="admin.html" id="admin_logo">
-                    Questioner
-                </a>
-            </li>
-            <div class="dropdown img_btn">
-                <button class="dropbtn ">
-                    <span id="nav_img">Admin</span>
-                    <i class="fa fa-caret-down fa-lg" id="img_icon"></i>
-                </button>
-                <div class="dropdown-content">
-                    <a href="../../index.html" class="icon signout">Sign Out
-                    </a>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="admin-container">
-        <div class="admin_body">
-            <div class="createBtn">
-                <button class="trigger btn btn-primary">create meetup </button>
-            </div>
-            <div class="admin_top">
-                <div class="admin_box">
-                    <div class="boxtop">
-                        <i class="fas fa-network-wired fa-2x"></i>
-                        <p class="boxcount">100</p>
-                    </div>
-                    <p class="note_down">organized meetups</p>
-                </div>
-                <div class="admin_box">
-                    <div class="boxtop">
-                        <i class="fas fa-users fa-2x"></i>
-                        <p class="boxcount">100</p>
-                    </div>
-                    <p class="note_down">regitered users</p>
-                </div>
-            </div>
-            <div class="admin_bottom">
-                <div class="view_meetup">
-                    <div class="adm_title">Available Meet-Ups</div>
-                    <a href="./admin_meetup.html" class="adm_link">
-                        <div class="adm_tab">
-                            <div class="adm_tab_img">
-                                <img class="tab_img" src="../resources/img/profile-placeholder.png" width="50px" height="50px"
-                                    alt="">
-                            </div>
-                            <div class="adm_details">
-                                <div class="adm_details_title">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                    Integer nec
-                                    odio</div>
-                                <div class="adm_date">date</div>
-                                <button class="del_btn">X</button>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="./admin_meetup.html" class="adm_link">
-                        <div class="adm_tab">
-                            <div class="adm_tab_img">
-                                <img class="tab_img" src="../resources/img/profile-placeholder.png" width="50px" height="50px"
-                                    alt="">
-                            </div>
-                            <div class="adm_details">
-                                <div class="adm_details_title">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                    Integer nec
-                                    odio</div>
-                                <div class="adm_date">date</div>
-                                <button class="del_btn">X</button>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <div class="modal">
-        <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <div class="wrapper">
-                <div class="container">
-                    <div class="meetup-form" id="meetup-form" name="meetup-form">
-                        <form method="post" enctype="multipart/form-data" >
-                            <input type="text" placeholder="Topic" name="topic" class="input form_lg" required>
-                            <input type="text" placeholder="Location" name="location" class="input form_lg" required>
-                            <div class="double">
-                                <input type="date" name="happeningon" class="input form_num" required>
-                            </div>
-                            <input type="file" name="images" class="input form_lg">
-                            <input type="text" placeholder="Tags" name="tags" class="input form_lg">
-                            <p class="subtext">each tags should be spaced with a comma</p>
-                            <input type="submit" class="btn_post" value="POST" />
-                        </form>
-                    </div>
-                </div>
-            </div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Questioner - Admin</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+  <link rel="stylesheet" href="../css/responsive/admin.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/dmuy/duDialog/duDialog.css"> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <header>
+    <nav class="admin_nav">
+      <li class="admin_logo">
+        <a href="admin.html" id="admin_logo">
+          Questioner
+        </a>
+      </li>
+      <div class="dropdown img_btn">
+        <button class="dropbtn ">
+          <span id="nav_img">Admin</span>
+          <i class="fa fa-caret-down fa-lg" id="img_icon"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="../../index.html" class="icon signout">Sign Out
+          </a>
         </div>
-        </div>
-            <footer class="footer">
-                <div class="footerBottom">
-                    <p>created with <i class="fa fa-heart fa-sm"></i> by Okonji Chukwunonso</p>
-                </div>
-            </footer>
-            <script src="../js/modal.js"></script>
+      </div>
+    </nav>
+  </header>
+  <div class="admin_container">
+    <div class="sidebar">
+      <button class="btn btn-primary createbtn trigger"> CREATE MEETUP</button>
+    </div>
+    <div class="body">
+      <div class="bottom">
+        <table class="meetups">
+          <tbody class="meetup-body">
+              <th>Meetup(s) Available</th>
+              <th>Operation</th>
+              <!-- <tr>
+                <td class="topic">
+                  <p class="title">
+                    meetup topic
+                  </p>
+                  <div class="title_section">
+                    <p class="date">
+                     <span><img src="../resources/svg/calendar.svg" alt="" width="20px"
+                      height="20px"> Jan, 2019
+                    </span>
+                    </p>
+                    <p class="location">
+                       <span>
+                          <img src="../resources/svg/location.svg" alt="" width="20px"
+                          height="20px">
+                          Lagos, Nigeria
+                       </span> 
+                    </p>
+                  </div>
+                </td>
+                <td class="operation">
+                  <button class="btn operationBtn delete" >Delete</button>
+                  <button class="btn operationBtn view">View</button>
+                </td>
+              </tr> -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="modal">
+      <div class="modal-content">
+          <span class="close-button">&times;</span>
+          <div class="wrapper">
+              <div class="container">
+                  <div class="meetup-form" id="meetup-form" >
+                      <form method="post"  name="meetup-form" enctype="multipart/form-data">
+                          <input type="text" placeholder="Topic" name="topic" class="input form_lg" required>
+                          <input type="text" placeholder="Location" name="location" class="input form_lg" required>
+                          <div class="double">
+                              <input type="date" name="happeningon" class="input form_num" required>
+                          </div>
+                          <input type="file" name="images" accept="image/png,image/jpeg" class="input form_lg">
+                          <input type="text" placeholder="Tags" name="tags" class="input form_lg">
+                          <p class="subtext">each tags should be spaced with a comma</p>
+                          <input type="submit" class="btn_post" id="Btn" value="POST" />
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+      </div>
+  <footer class="footer">
+    <div class="footerBottom">
+      <p>created with <i class="fa fa-heart fa-sm"></i> by Okonji Chukwunonso</p>
+    </div>
+  </footer>
+  <script src="../js/admin_meetup.js"></script>
+  <script src="../js/modal.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/dmuy/duDialog/duDialog.js"></script>
 </body>
 
 </html>

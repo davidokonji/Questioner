@@ -15,8 +15,8 @@
   background-color: #ffffff;
 }
 .nav_landing h3 a {
-  font-size: 22px;
-  padding-left: 1.8em;
+  font-size: 20px;
+  padding-left: 1em;
   font-family:Montserrat-Regular;
   padding-top:1em;
   padding-bottom:1em;
@@ -30,14 +30,37 @@
   color: #25274d;
 
 }
+.footer{
+  height: 50px;
+  display: flex;
+  flex-wrap:wrap;
+  font-family:Montserrat-Regular;    
+  flex-direction: column;
+  box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
+  background-color: #25274d;
+}
+
+.footerBottom{
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap:wrap;
+  font-size: 14px;
+  color: #ffffff;    
+}
+.footerBottom i{
+  color: #BA1200;
+}
+
 body{
   user-select: none;
 }
 .nav_btn{
-  width:80px;
-  padding:10px 20px;
+  width:60px;
+  padding:8px 10px;
   background-color: #25274d;
   color: white;
+  font-size:12px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   outline: none;
   border-radius: 20px;
@@ -47,8 +70,8 @@ body{
   transform: scale(1.1);
 }
 .container{
-  width: 350px;
-  margin: 70px auto;
+  width: 300px;
+  margin: 30px auto;
   background: #e9eaea;
  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 
@@ -59,9 +82,9 @@ body{
   background: #fff;
   color:#03030e;
   float: left;
-  font-size: 14px;
-  height: 40px;
-  line-height: 40px;
+  font-size: 12px;
+  height: 30px;
+  line-height: 30px;
   text-align: center;
   cursor: pointer;
   text-transform: uppercase;
@@ -70,7 +93,7 @@ body{
 .signup-form,
 .login-form{
   background: #fff;
-  padding: 40px;
+  padding: 20px;
   clear: both;
   width: 100%;
   display:flex;
@@ -82,9 +105,9 @@ body{
   padding: 10px;
   box-sizing: border-box;
   border: 2px solid #e9eaea;
-  margin:8px;
+  /* margin:8px; */
   margin-left: 10px;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   color: #3e3e40;
   font-size: 14px;
   outline: none;
@@ -95,7 +118,7 @@ body{
   padding: 10px;
   box-sizing: border-box;
   margin:8px;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   border: 2px solid #e9eaea;
   color: #3e3e40;
   font-size: 14px;
@@ -106,7 +129,7 @@ body{
   width: 96%;
   padding: 10px;
   box-sizing: border-box;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   margin-left: 10px;
   margin:8px;
   border: 2px solid #e9eaea;
@@ -119,15 +142,29 @@ body{
 .btn{
   width: 100%;
   background: #25274d;
-  height: 60px;
+  height: 40px;
   text-align: center;
-  line-height: 60px;
+  line-height: 40px;
   text-transform: uppercase;
   color: #fff;
   font-weight: bold;
   letter-spacing: 1px;
   cursor: pointer;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
+}
+.btn:hover{
+  width: 100%;
+  background: #25274d;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  text-transform: uppercase;
+  color: #fff;
+  font-weight: bold;
+  letter-spacing: 1px;
+  cursor: pointer;
+  box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.2);
+
 }
 
 span a{
@@ -138,8 +175,52 @@ span a{
 .double{
   display:flex;
   flex-direction:row;
+  flex-wrap: wrap;
   justify-content:space-between;
 }
+}
+.showalert{
+  width: 200px;
+  position: fixed;
+  right: 20px;
+  top: 10px;
+}
+.alert {
+  padding: 10px;
+  background-color: #d9534f;
+  border-color: #d43f3a;
+  color: white;
+  opacity: 1;
+  transition: opacity 0.6s;
+  width: 200px;
+  font-size: 12px;
+  font-family:raleway-regular;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 5px;
+  position: fixed;
+  right: 15px;
+  top: 60px;
+}
+
+.alert.success {background-color: #5cb85c;}
+.alert.info {background-color: #2196F3;}
+.alert.warning {background-color: #ff9800; border-color: #eea236;}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
 }
 
 @media  (min-width: 768px) and (max-width: 991.98px){
