@@ -135,8 +135,7 @@ class Validate {
     if (!isValidDate) {
       return res.status(400).send({
         status: 400,
-        error: `happeningOn value, ${actualDate} 
-                should be a valid date format YYYY-MM-DD`,
+        error: `happeningOn value, ${actualDate} should be a valid date format YYYY-MM-DD`,
       });
     }
     const checkpastDate = Validation.pastDate(req.body.happeningOn);
@@ -153,15 +152,6 @@ class Validate {
     const [validlocation, locationLength] = Validation.isValidLength(req.body.location, 5);
     if (!validlocation) {
       return Validation.validLengthResponse(res, 'location', locationLength);
-    }
-    if (req.body.tags) {
-      const checkTagType = validator.isAlpha(req.body.tags);
-      if (!checkTagType) {
-        return res.status(400).send({
-          status: 400,
-          error: `Tag value, ${req.body.tags} should be a valid string`,
-        });
-      }
     }
     return next();
   }

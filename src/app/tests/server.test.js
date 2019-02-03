@@ -601,26 +601,6 @@ describe('POST /api/v1/meetups', () => {
         return done();
       });
   });
-  it('should return 400 when wrong tag format sent', (done) => {
-    chai.request(app)
-      .post('/api/v1/meetups')
-      .send({
-        topic: 'this is a correct meetup',
-        location: 'lagos nigeria',
-        happeningOn: '2019-03-12',
-        tags: "['hhh']",
-      })
-      .end((err, res) => {
-        if (err) {
-          expect(res).to.throw(err);
-          return done(err);
-        }
-        expect(res).to.have.status(400);
-        expect(res).to.be.a('object');
-        res.body.should.have.property('status').equal(400);
-        return done();
-      });
-  });
   const expiredToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlzYWRtaW4iOnRydWUsImlhdCI6MTU0ODEwODMzOSwiZXhwIjoxNTQ4MjgxMTM5fQ.A9ecXU0Fsmi2JPJC7WfPBAH52NygDA4IBt8N-8XmtWE';
   it('should return 401 when expired token passed', (done) => {
     chai.request(app)

@@ -1,5 +1,7 @@
 import cloudinary from 'cloudinary';
 
+import moment from 'moment';
+
 import db from '../config/db';
 
 import jwt from '../middleware/jwtToken';
@@ -19,11 +21,12 @@ class Questioner {
    */
   static getRequiredFields(meetups, filtered) {
     meetups.map((meet) => {
+      const formated = moment(meet.happeningon).format('dddd, MMMM Do YYYY');
       const meetup = {
         id: meet.id,
         title: meet.topic,
         location: meet.location,
-        happeningOn: meet.happeningOn,
+        happeningOn: formated,
         tags: meet.tags,
         images: meet.images,
       };
@@ -134,13 +137,13 @@ class Questioner {
       splited,
     ];
     const { rows } = await db.query(text, values);
-
+    const formated = moment(rows[0].happeningon).format('dddd, MMMM Do YYYY');
     return res.status(201).json({
       status: 201,
       data: [{
         topic: rows[0].topic,
         location: rows[0].location,
-        happeningOn: rows[0].happeningOn,
+        happeningOn: formated,
         tags: rows[0].tags,
       }],
     });
@@ -156,14 +159,14 @@ class Questioner {
     const text = 'SELECT * FROM meetup WHERE id = $1';
     const id = parseInt(req.params.id, 10);
     const { rows } = await db.query(text, [id]);
-
+    const formated = moment(rows[0].happeningon).format('dddd, MMMM Do YYYY');
     return res.status(200).json({
       status: 200,
       data: [{
         id: rows[0].id,
         topic: rows[0].topic,
         location: rows[0].location,
-        happeningOn: rows[0].happeningOn,
+        happeningOn: formated,
         tags: rows[0].tags,
         images: rows[0].images || null,
       }],

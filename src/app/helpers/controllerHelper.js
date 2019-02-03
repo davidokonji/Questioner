@@ -1,5 +1,7 @@
 import cloudinary from 'cloudinary';
 
+import moment from 'moment';
+
 import dataUri from '../middleware/uploadfile';
 
 import db from '../config/db';
@@ -26,13 +28,14 @@ class Helper {
         splitedImages,
       ];
       const { rows } = await db.query(text, values);
+      const formated = moment(rows[0].happeningon).format('dddd, MMMM Do YYYY');
 
       return res.status(201).json({
         status: 201,
         data: [{
           topic: rows[0].topic,
           location: rows[0].location,
-          happeningOn: rows[0].happeningOn,
+          happeningOn: formated,
           tags: rows[0].tags,
           images: rows[0].images,
         }],
