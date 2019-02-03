@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 class Validation {
   /**
    * validate date method
@@ -6,28 +8,9 @@ class Validation {
    */
 
   static validateDate(date) {
-    let valid = true;
-    const regex = new RegExp('([0-9]{4}[-](0[1-9]|1[0-2])[-]([0-2]{1}[0-9]{1}|3[0-1]{1})|([0-2]{1}[0-9]{1}|3[0-1]{1})[-](0[1-9]|1[0-2])[-][0-9]{4})');
-    const validDate = regex.test(date);
-    if (!validDate) {
-      valid = false;
-    }
+    const valid = moment(date, ['MM/DD/YYYY', 'DD/MM/YYYY', 'YYYY-MM-DD', 'DD-MM-YYYY'], true).isValid();
     return [valid, date];
   }
-
-  /**
-   * validate email method
-   * @param {string} email
-   * @returns {boolean} true or false
-   */
-
-  // static isValidEmail(email) {
-  //   const valid = /\S+@\S+\.\S+/.test(email);
-  //   if (valid) {
-  //     return true;
-  //   }
-  //   return false;
-  // }
 
   /**
    *  past date method

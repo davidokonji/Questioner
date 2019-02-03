@@ -19,7 +19,7 @@ import multerUploads from '../middleware/uploadfile';
 
 import cloudinaryConfig from '../config/cloudinaryConfig';
 
-const swagerDocument = require('../docs/questioner.json');
+import * as swagerDocument from '../docs/questioner.json';
 
 const app = express();
 
