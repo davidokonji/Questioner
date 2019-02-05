@@ -32,11 +32,10 @@
 ***********************/
 
 .nav_btn{
-  width:50px;
-  padding:5px 10px;
+  width:40px !important;
+  padding:10px 10px;
   border-radius: 5px;
   font-family: raleway-regular;
-  font-size: 14px;
   align-items: center;
   cursor: pointer;
   margin-left: 15px;

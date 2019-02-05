@@ -2,9 +2,9 @@ const url = 'https://secret-river-12005.herokuapp.com/api/v1';
 const newHeaders = new Headers();
 newHeaders.append('Content-type','application/json');
 newHeaders.append('Accept','application/json');
-const form = document.forms['admin_signin'];
+const signinform = document.forms['admin_signin'];
 const showalert = document.getElementsByClassName('showalert')[0];
-form.addEventListener('submit', (event) => Admin.loginAdmin(event,form));
+signinform.addEventListener('submit', (event) => Admin.loginAdmin(event,signinform));
 
 class Admin {
   static loginAdmin(event, form) {
@@ -47,7 +47,7 @@ class Admin {
               showalert.style.display = 'block';
             }
             const message = `<div class="alert">
-            <b> Unauthorized Credentials </b>
+            <b> Unauthorized User </b>
             </div>`
             showalert.innerHTML += message;
             setTimeout(()=> {
@@ -56,14 +56,20 @@ class Admin {
             },2000)
            }
         } else{
-          console.log(data);
-          alert('Invalid User Credentials');
+          if (showalert.style.display = "none"){
+            showalert.style.opacity= '1';
+            showalert.style.display = 'block';
+          }
+          const message = `<div class="alert">
+          <b> Invalid User Credentials </b>
+          </div>`
+          showalert.innerHTML += message;
+          setTimeout(()=> {
+            showalert.style.opacity= '0';
+            showalert.style.display = 'none';
+          },2000)
         }
 		})
 		.catch(error => console.log(error))
-  }
-
-  static createMeetup (event, form) {
-
   }
 }
