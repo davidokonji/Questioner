@@ -4,6 +4,9 @@
  *{
      box-sizing: border-box;
  }
+ title{
+   text-transform: capitalize;
+ }
  nav{
   display: flex;
   width: 100%;
@@ -94,6 +97,7 @@
    height: auto;
    margin: 0 auto;
    flex-direction: column;
+   background-color: rgba(248, 248, 250, 0.5);
    flex-wrap: wrap;
 }
  .bottom_dash{
@@ -105,9 +109,9 @@
  .cardslide{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: left;
     flex-wrap: wrap;
-    margin: 30px;
+    /* margin: 30px; */
     }
     .card{
       max-width: 410px;
@@ -115,7 +119,10 @@
       border-radius: 15px;
       display: flex;
       flex-direction:column;
-      margin-bottom: 30px;
+      /* margin-bottom: 30px; */
+      box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.2);
+      font-family:Montserrat-Regular;
+      /* margin: 20px; */
     }
     .card_image {
       max-width: 410px;
@@ -148,7 +155,7 @@
     }
     .meetupBtn{
       cursor: pointer;
-    
+      margin-bottom: 50px;
     }
     .side_date{
       height:180px;
@@ -156,6 +163,9 @@
       display: flex;
       flex-direction:column;
       align-items: center;
+      background-color: #e5e2e2;
+      border-bottom-left-radius: 15px;
+      margin-right: 10px;
     }
     .month{
       position:relative;
@@ -174,12 +184,18 @@
       max-width: 350px;
       height:50px;
     }
+    .card_title a {
+      cursor: pointer;
+      color: #25274d;
+      text-transform: uppercase;
+    }
     .card_date {
       display: flex;
       flex-direction:row;
       align-items:center;
       max-width: 350px;
       height:45px;
+      font-size: 14px;
     }
     .card_location {
       display: flex;
@@ -187,17 +203,19 @@
       align-items:center;
       max-width: 350px;
       height:50px;
+      font-size: 14px;
     }
     .card_question {
       display: flex;
       flex-direction:row;
-      justify-content: space-between;
+      /* justify-content: space-between; */
       max-width: 410px;
       width:410px;
       height:35px;
+      font-size: 14px;
     }
     .tags {
-      width: 200px;
+      width: 250px;
     }
     .tag_pills{
       background-color: black;
@@ -206,23 +224,13 @@
       border-radius: 20px;
       padding: 5px;
       margin-right: 3px;
-    }
-    .tag_pills:nth-child(1){
-      background-color: indigo;
-      color: white;
-    }
-    .tag_pills:nth-child(2){
-      background-color: brown;
-      color: white;
-    }
-    .tag_pills:nth-child(3){
-      background-color: #25274d;
-      color: white;
+      background: #5a5959;
+
     }
     .question {
        position:relative;
-       top: 5px;
-      right: 80px;
+      font-size: 12px;
+      color: darkgray;
     }
     .title {
       position: relative;
@@ -232,10 +240,14 @@
     .date {
       position: relative;
       left: 10px;
+      color: #25274d;
+      text-transform: capitalize;
     }
     .location {
       position: relative;
       left: 10px;
+      color: #25274d;
+      text-transform: capitalize;
     }
     .card:hover{
         box-shadow: 0px 0px 1px rgba(0,0,0,0.5);
