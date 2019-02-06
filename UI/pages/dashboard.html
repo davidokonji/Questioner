@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>User(username) Dashboard </title>
+    <title> </title>
     <link rel="shortcut icon" href="../resources/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/dashboard.css">
@@ -20,7 +20,7 @@
         <nav>
             <li class="navlink">
                 <a href="" id="navlink">
-                    <b>DashBoard</b>
+                    <b>Dashboard</b>
                 </a>
             </li>
             <li class="logo">
@@ -30,7 +30,7 @@
             </li>
             <div class="dropdown img_btn">
                 <button class="dropbtn ">
-                    <span id="nav_img">NM</span>
+                    <span id="nav_img"></span>
                     <i class="fa fa-caret-down fa-lg" id="img_icon"></i>
                 </button>
                 <div class="dropdown-content">
@@ -82,7 +82,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="card">
+
+               <!--  <div class="card">
                     <div class="card_image">
                         <img src="../resources/img/event.jpg" alt="meetup image">
                     </div>
@@ -385,11 +386,49 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="more_meetups">
-                <button class="meetupBtn btn btn-primary" onclick="location.href='UI/pages/meetup.html';"> Next <i
-                        class="fas fa-chevron-right"></i></button>
-            </div>
+                <div class="card">
+                        <div class="card_image">
+                            <img src="../resources/img/event.jpg" alt="meetup image">
+                        </div>
+                        <div class="card_body">
+    
+                            <div class='side_date'>
+                                <span class="month">Jan</span>
+                                <span class="day">10</span>
+                            </div>
+                            <div class="body_side">
+                                <div class="card_title">
+                                    <span class="title"><a href="./meetup.html">Title of meetup </a></span>
+                                </div>
+                                <div class="card_date">
+                                    <span class="date_logo"><img src="../resources/svg/calendar.svg" alt="" width="20px"
+                                            height="20px"></span>
+                                    <span class="date">date of meetup</span>
+                                </div>
+                                <div class="card_location">
+                                    <span class="location_logo"><img src="../resources/svg/location.svg" alt="" width="20px"
+                                            height="20px"></span>
+                                    <span class='location'> location of meetup</span>
+                                </div>
+                                <div class="card_question">
+                                    <div class="tags">
+                                        <span class="tag_pills">
+                                            technology
+                                        </span>
+                                        <span class="tag_pills">
+                                            science
+                                        </span>
+                                    </div>
+                                    <span class="question">20 questions</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>-->
+        </div>
+        <div class="more_meetups"> 
+            <button class="meetupBtn btn btn-primary" onclick="location.href='UI/pages/meetup.html';"> Next <i
+                    class="fas fa-chevron-right"></i></button>
         </div>
     </div>
     </div>
@@ -403,6 +442,6 @@
         </div>
     </footer>
 </body>
-<script src="../js/main.js"></script>
-
+<script src="https://unpkg.com/moment"></script>
+<script src="../js/dashboard.js"></script>
 </html>

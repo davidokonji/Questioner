@@ -13,8 +13,7 @@ newHeaders.append('Accept','application/json');
 signup.addEventListener('click', show_signup);
 login.addEventListener('click', show_login);
 btn.addEventListener("click", function(){
-  // input[0].value = "";
-  for (let i = 0; i < slides.length; i++){
+  for (let i = 0; i < this.length; i++){
     input[i].value = "";
   }
 });
@@ -53,6 +52,7 @@ class Authentication {
           	window.localStorage.removeItem('token');
            }
           localStorage.setItem('token',data.data[0].token);
+          localStorage.setItem('username',data.data[0].user.username);
           if (showalert.style.display = "none"){
             showalert.style.opacity= '1';
             showalert.style.display = 'block';

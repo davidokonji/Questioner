@@ -62,6 +62,7 @@ class Meetup {
     })
     .then((response) => response.json())
     .then(data => {
+      window.location.reload(true);
       Meetup.getallMeetup();
     })
     .catch((error) => console.log(error))

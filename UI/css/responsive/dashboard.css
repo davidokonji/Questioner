@@ -1,11 +1,13 @@
 @media (max-width: 575.98px) {
-
   .footer{
+    position: fixed;
+    bottom: 0;
     height: 50px;
-    display: flex;
-    flex-wrap:wrap;
-    font-family:Montserrat-Regular;    
-    flex-direction: column;
+    width: 100% !important;
+    float: none;
+    clear: both;
+    margin-top: 50px;
+    font-family:Montserrat-Regular; 
     box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
     background-color: #25274d;
 }
@@ -13,13 +15,16 @@
     display:flex;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
     flex-wrap:wrap;
+    color: #ffffff;
+    padding-top: 20px;
     font-size: 14px;
-    color: #ffffff;    
 }
 .footerBottom i{
     color: #BA1200;
 }
+
 /********************* 
     USER DASHBOARD
  *********************/
@@ -27,10 +32,10 @@
     box-sizing: border-box;
 }
 nav{
- display: flex;
- width: 100%;
- flex-wrap: wrap;
- align-items: center;
+  display: flex;
+  width: 100% !important;
+  flex-wrap: wrap;
+  align-items: center;
   background-color: #25274d;
   font-family:Montserrat-Regular;
   color: #ffffff;
@@ -40,15 +45,19 @@ nav{
 order: 1;
 }
 #navlink b{
- margin-left: 10px;
- padding-right: 10px;
+ margin-left: 5px;
+ padding-right: 8px;
 border-right: 1px solid #000000;
 color: #ffffff;
+font-size: 15px;
+
 
 }
 #nav_img{
    color: #fff;
    padding-bottom: 20px;
+   font-size: 15px;
+   font-weight: bold;
 }
 .logo{
 order: 2;
@@ -56,11 +65,11 @@ padding-top:0.9em;
 }
 #logo{
 color: #ffffff;
-font-size: 22px;
+font-size: 19px;
 }
 .img_btn{
 flex-basis: 100px;
-margin-right: 10px;
+margin-right: 5px;
 order: 4;    
 }
 
@@ -86,7 +95,7 @@ display: none;
 position: absolute;
 background-color: #f9f9f9;
 min-width: 160px;
-right: 8px;
+right: 0px;
 box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 z-index: 1;
 }
@@ -124,21 +133,24 @@ display: block;
 .cardslide{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: wrap;
-    margin: 20px;
+    margin: 0 auto;
     }
     .card{
-      max-width: 350px;
-      width: 350px;
+      max-width: 300px;
+      width: 300px;
       height: 350px;
       border-radius: 15px;
       display: flex;
       flex-direction:column;
+      position:relative;      
+      margin: 0 auto;
+      margin-bottom: 5%;
     }
     .card_image {
-      max-width: 350px;
-      width:350px;
+      max-width: 300px;
+      width:300px;
       height:170px;
     }
     .card .card_image img{
@@ -150,7 +162,7 @@ display: block;
     .card_body {
       display: flex;
       flex-direction:row;
-      max-width: 410px;
+      max-width: 300px;
       height:180px;
     }
     .more_meetups{
@@ -163,17 +175,16 @@ display: block;
     .body_side{
       display: flex;
       flex-direction:column;
-      width: 330px;
+      width: 250px;
     }
     .meetupBtn{
       cursor: pointer;
-    
     }
     .side_date{
       height:180px;
       width:60px;
       margin-right: 10px;
-      margin-left: 10px;
+      margin-left: 0px;
       display: flex;
       flex-direction:column;
       align-items: center;
@@ -181,12 +192,12 @@ display: block;
     .month{
       position:relative;
       top:55px;
-      font-size: 24px;
+      font-size: 18px;
     }
     .day{
        position:relative;
        top:65px;
-      font-size: 24px;
+      font-size: 18px;
     }
     .card_title {
       display: flex;
@@ -212,7 +223,7 @@ display: block;
     .card_question {
       display: flex;
       flex-direction:row;
-      justify-content: space-between;
+      /* justify-content: space-between; */
       max-width: 410px;
       width:410px;
       height:35px;
@@ -227,23 +238,12 @@ display: block;
       border-radius: 20px;
       padding: 5px;
       margin-right: 3px;
-    }
-    .tag_pills:nth-child(1){
-      background-color: indigo;
-      color: white;
-    }
-    .tag_pills:nth-child(2){
-      background-color: brown;
-      color: white;
-    }
-    .tag_pills:nth-child(3){
-      background-color: #25274d;
-      color: white;
+      background: #5a5959;
     }
     .question {
-       position:relative;
-       top: 5px;
-      right: 120px;
+       position: absolute;
+       bottom: 15px !important;
+       right: 10px;
     }
     .title {
       position: relative;
@@ -449,7 +449,7 @@ align-items: center;
 .cardslide{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: left;
     flex-wrap: wrap;
     margin: 25px;
     margin:0 auto;
@@ -461,6 +461,8 @@ align-items: center;
       border-radius: 15px;
       display: flex;
       flex-direction:column;
+      position: relative;
+      margin: 5px;
     }
     .card_image {
       max-width: 350px;
@@ -505,12 +507,12 @@ align-items: center;
     .month{
       position:relative;
       top:55px;
-      font-size: 24px;
+      font-size: 18px;
     }
     .day{
        position:relative;
        top:65px;
-      font-size: 24px;
+       font-size: 18px;
     }
     .card_title {
       display: flex;
@@ -536,11 +538,16 @@ align-items: center;
     .card_question {
       display: flex;
       flex-direction:row;
-      justify-content: space-between;
+      /* justify-content: space-between; */
       max-width: 350px;
       width:350px;
       height:35px;
     }
+    .question {
+      position: absolute;
+      bottom: 15px !important;
+      right: 10px;
+     }
     .tags {
       width: 200px;
     }
@@ -551,8 +558,10 @@ align-items: center;
       border-radius: 20px;
       padding: 5px;
       margin-right: 3px;
+      background: #5a5959;
+
     }
-    .tag_pills:nth-child(1){
+    /* .tag_pills:nth-child(1){
       background-color: indigo;
       color: white;
     }
@@ -563,7 +572,7 @@ align-items: center;
     .tag_pills:nth-child(3){
       background-color: #25274d;
       color: white;
-    }
+    } */
     .title {
       position: relative;
       left: 10px;
@@ -765,17 +774,18 @@ align-items: center;
 .cardslide{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: left;
     flex-wrap: wrap;
     margin: 30px;
     }
     .card{
-    
       max-width: 410px;
       height: 350px;
       border-radius: 15px;
       display: flex;
+      position: relative;
       flex-direction:column;
+      margin: 20px;
     }
     .card_image {
       max-width: 410px;
@@ -851,13 +861,13 @@ align-items: center;
     .card_question {
       display: flex;
       flex-direction:row;
-      justify-content: space-between;
+      /* justify-content: space-between; */
       max-width: 410px;
       width:410px;
       height:35px;
     }
     .tags {
-      width: 200px;
+      width: 250px;
     }
     .tag_pills{
       background-color: black;
@@ -866,8 +876,9 @@ align-items: center;
       border-radius: 20px;
       padding: 5px;
       margin-right: 3px;
+      background: #5a5959;
     }
-    .tag_pills:nth-child(1){
+    /* .tag_pills:nth-child(1){
       background-color: indigo;
       color: white;
     }
@@ -878,11 +889,11 @@ align-items: center;
     .tag_pills:nth-child(3){
       background-color: #25274d;
       color: white;
-    }
+    } */
     .question {
-       position:relative;
-       top: 5px;
-      right: 80px;
+       position:absolute;
+       bottom: 15px;
+      right: 10px;
     }
     .title {
       position: relative;
@@ -904,17 +915,20 @@ align-items: center;
  }
 
 @media (min-width: 1200px) { 
-  /********************* 
+ /********************* 
     USER DASHBOARD
  *********************/
  *{
-    box-sizing: border-box;
+  box-sizing: border-box;
+}
+title{
+text-transform: capitalize;
 }
 nav{
- display: flex;
- width: 100%;
- flex-wrap: wrap;
- align-items: center;
+display: flex;
+width: 100%;
+flex-wrap: wrap;
+align-items: center;
 background-color: #25274d;
 font-family:Montserrat-Regular;
 color: #ffffff;
@@ -926,15 +940,15 @@ order: 1;
 flex-grow: 1;
 }
 #navlink b{
- margin-left: 50px;
- padding-right: 10px;
+margin-left: 50px;
+padding-right: 10px;
 border-right: 1px solid #000000;
 color: #ffffff;
 
 }
 #nav_img{
-   color: #fff;
-   padding-bottom: 20px;
+ color: #fff;
+ padding-bottom: 20px;
 }
 .logo{
 flex-grow: 1;
@@ -995,230 +1009,167 @@ background-color: #ddd;
 display: block;
 }
 .dashboard-container{
-  display: flex;
-  width: 95% !important;
-  height: auto;
-  margin: 0 auto;
-  flex-direction: column;
-  flex-wrap: wrap;
-}
-.top-dash{
 display: flex;
-display: -webkit-flex;
+width: 100% !important;
+height: auto;
+margin: 0 auto;
+flex-direction: column;
+background-color: rgba(248, 248, 250, 0.5);
 flex-wrap: wrap;
-flex-direction: row;
-justify-content: space-between;
-margin: 15px;
-align-items: center;
-}
-.box{
-  flex-basis: 250px;
-  justify-content: space-between;
-  font-family:Montserrat-Regular;
-}
-.box-1{
-  order: 1;
-  font-size:18px;
-  color:#25274d;
-}
-.box-2{
-    order: 2;
-    display: flex;
-    flex-direction: row;
-}
-.box-3{
-  flex-basis: 150px;
-  margin-right:20px;
-    order: 3;
-   border: 1px solid rgb(37, 39, 77,0.5);
-   border-radius: 5px;
-   color: rgb(21, 33, 80,1);
-}
-
-.box-3 .filterBtn i{
-    color: #ffffff;
-}
-#dash_search{
-    outline: none;
-    padding: 20px 10px;
-    font-size: 16px;         
-    width: 400px;
-    border: 2px solid #25274d;
-    border-radius:10px 0px 0px 10px;
-}
-.box-2 .searchBtn {
-   width: 100px;
-   padding: 10px;
-   color: black;
-   font-size: 17px;
-   border: 2px solid #25274d;
-   border-left: none;
-   cursor: pointer;
-   position: relative;
-   right: 10px;
-   border-radius:0px 10px 10px 0px;
-}
-.box-3 .filterBtn{
-   width: 150px;
-   height: 2.5em;
-   border-radius: 5px;
-   font-size: 14px;
-   font-family: raleway-regular;
-    width:150px;
-   cursor: pointer;
-   background: #25274d;
-   color: #ffffff;
-   outline: none;
-}
-
-.filterBtn :hover{
-    border: 1px solid #25274d;
-}
-.meetupBtn{
-    width: 100px;
 }
 .bottom_dash{
-  display: flex;
- flex-direction: column;
- flex-wrap: wrap;
+display: flex;
+flex-direction: column;
+flex-wrap: wrap;
+margin-top: 50px;
 }
 .cardslide{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    margin: 30px;
-    }
-    .card{
-    
-      max-width: 410px;
-      height: 350px;
-      border-radius: 15px;
-      display: flex;
-      flex-direction:column;
-    }
-    .card_image {
-      max-width: 410px;
-      width:410px;
-      height:170px;
-    }
-    .card .card_image img{
-      width:410px;
-      height:170px;
-      object-fit: cover;
-      cursor: pointer;
-    }
-    .card_body {
-      display: flex;
-      flex-direction:row;
-      max-width: 410px;
-      height:180px;
-    }
-    .more_meetups{
-      margin: 0 auto;
-      margin-top:30px;
-      margin-bottom: 40px;
-      font-size: 25px;
-    }
-    
-    .body_side{
-      display: flex;
-      flex-direction:column;
-      width: 350px;
-    }
-    .meetupBtn{
-      cursor: pointer;
-    
-    }
-    .side_date{
-      height:180px;
-      width:60px;
-      display: flex;
-      flex-direction:column;
-      align-items: center;
-    }
-    .month{
-      position:relative;
-      top:55px;
-      font-size: 24px;
-    }
-    .day{
-       position:relative;
-       top:65px;
-      font-size: 24px;
-    }
-    .card_title {
-      display: flex;
-      flex-direction:row;
-      align-items:center;
-      max-width: 350px;
-      height:50px;
-    }
-    .card_date {
-      display: flex;
-      flex-direction:row;
-      align-items:center;
-      max-width: 350px;
-      height:45px;
-    }
-    .card_location {
-      display: flex;
-      flex-direction:row;
-      align-items:center;
-      max-width: 350px;
-      height:50px;
-    }
-    .card_question {
-      display: flex;
-      flex-direction:row;
-      justify-content: space-between;
-      max-width: 410px;
-      width:410px;
-      height:35px;
-    }
-    .tags {
-      width: 200px;
-    }
-    .tag_pills{
-      background-color: black;
-      color: white;
-      font-size: 12px;
-      border-radius: 20px;
-      padding: 5px;
-      margin-right: 3px;
-    }
-    .tag_pills:nth-child(1){
-      background-color: indigo;
-      color: white;
-    }
-    .tag_pills:nth-child(2){
-      background-color: brown;
-      color: white;
-    }
-    .tag_pills:nth-child(3){
-      background-color: #25274d;
-      color: white;
-    }
-    .question {
-       position:relative;
-       top: 5px;
-      right: 80px;
-    }
-    .title {
-      position: relative;
-      left: 10px;
-      cursor: pointer;
-    }
-    .date {
-      position: relative;
-      left: 10px;
-    }
-    .location {
-      position: relative;
-      left: 10px;
-    }
-    .card:hover{
-        box-shadow: 0px 0px 1px rgba(0,0,0,0.5);
-        transform: scale(1.03);
-    }
+ display: flex;
+ flex-direction: row;
+ justify-content: left;
+ flex-wrap: wrap;
+ margin: 30px;
+ }
+ .card{
+   max-width: 410px;
+   height: 350px;
+   border-radius: 15px;
+   display: flex;
+   flex-direction:column;
+   position: relative;
+   margin-bottom: 30px;
+   box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.2);
+   font-family:Montserrat-Regular;
+   margin: 20px;
+ }
+ .card_image {
+   max-width: 410px;
+   width:410px;
+   height:170px;
+ }
+ .card .card_image img{
+   width:100%;
+   height:100%;
+   object-fit: cover;
+   cursor: pointer;
+ }
+ .card_body {
+   display: flex;
+   flex-direction:row;
+   max-width: 410px;
+   height:180px;
+ }
+ .more_meetups{
+   margin: 0 auto;
+   margin-top:30px;
+   margin-bottom: 40px;
+   font-size: 25px;
+ }
+ 
+ .body_side{
+   display: flex;
+   flex-direction:column;
+   width: 350px;
+ }
+ .meetupBtn{
+   cursor: pointer;
+   margin-bottom: 50px;
+ }
+ .side_date{
+   height:180px;
+   width:60px;
+   display: flex;
+   flex-direction:column;
+   align-items: center;
+   background-color: #e5e2e2;
+   border-bottom-left-radius: 15px;
+   margin-right: 8px;
+ }
+ .month{
+   position:relative;
+   top:55px;
+   font-size: 24px;
+ }
+ .day{
+    position:relative;
+    top:65px;
+   font-size: 24px;
+ }
+ .card_title {
+   display: flex;
+   flex-direction:row;
+   align-items:center;
+   max-width: 350px;
+   height:50px;
+ }
+ .card_title a {
+   cursor: pointer;
+   color: #25274d;
+   text-transform: uppercase;
+ }
+ .card_date {
+   display: flex;
+   flex-direction:row;
+   align-items:center;
+   max-width: 350px;
+   height:45px;
+   font-size: 14px;
+ }
+ .card_location {
+   display: flex;
+   flex-direction:row;
+   align-items:center;
+   max-width: 350px;
+   height:50px;
+   font-size: 14px;
+ }
+ .card_question {
+   display: flex;
+   flex-direction:row;
+   /* justify-content: space-between; */
+   max-width: 410px;
+   width:410px;
+   height:35px;
+   font-size: 14px;
+ }
+ .tags {
+   width: 250px;
+ }
+ .tag_pills{
+   background-color: black;
+   color: white;
+   font-size: 12px;
+   border-radius: 20px;
+   padding: 5px;
+   margin-right: 3px;
+  background: #5a5959;
+ }
+ .question {
+    position: absolute;
+    bottom: 15px;
+    right: 10px;
+   font-size: 12px;
+   color: darkgray;
+ }
+ .title {
+   position: relative;
+   left: 10px;
+   cursor: pointer;
+ }
+ .date {
+   position: relative;
+   left: 10px;
+   color: #25274d;
+   text-transform: capitalize;
+ }
+ .location {
+   position: relative;
+   left: 10px;
+   color: #25274d;
+   text-transform: capitalize;
+ }
+ .card:hover{
+     box-shadow: 0px 0px 1px rgba(0,0,0,0.5);
+     transform: scale(1.03);
+ }
  }

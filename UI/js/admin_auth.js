@@ -19,6 +19,7 @@ class Admin {
     })
     .then(response => response.json())
 		.then(data => {
+      signinform.reset();
         if (data.status === 200){
           if(window.localStorage.getItem('token') !==''){
           	window.localStorage.removeItem('token');
@@ -40,7 +41,7 @@ class Admin {
           },2000);
           setTimeout(()=>{
             window.location.href = "../pages/admin.html";
-          },1000);
+          },100);
            } else{
             if (showalert.style.display = "none"){
               showalert.style.opacity= '1';
