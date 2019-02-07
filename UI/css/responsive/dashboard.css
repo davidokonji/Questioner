@@ -117,7 +117,7 @@ display: block;
 }
 .dashboard-container{
   display: flex;
-  width: 100% !important;
+  width: 100%;
   height: auto;
   margin: 0 auto;
   flex-direction: column;
@@ -128,140 +128,151 @@ display: block;
  flex-direction: column;
  flex-wrap: wrap;
  margin-top: 40px;
+ width: 100%;
  justify-content: center;
 }
 .cardslide{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin: 0 auto;
-    }
-    .card{
-      max-width: 300px;
-      width: 300px;
-      height: 350px;
-      border-radius: 15px;
-      display: flex;
-      flex-direction:column;
-      position:relative;      
-      margin: 0 auto;
-      margin-bottom: 5%;
-    }
-    .card_image {
-      max-width: 300px;
-      width:300px;
-      height:170px;
-    }
-    .card .card_image img{
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      cursor: pointer;
-    }
-    .card_body {
-      display: flex;
-      flex-direction:row;
-      max-width: 300px;
-      height:180px;
-    }
-    .more_meetups{
-      margin: 0 auto;
-      margin-top:30px;
-      margin-bottom: 40px;
-      font-size: 25px;
-    }
-    
-    .body_side{
-      display: flex;
-      flex-direction:column;
-      width: 250px;
-    }
-    .meetupBtn{
-      cursor: pointer;
-    }
-    .side_date{
-      height:180px;
-      width:60px;
-      margin-right: 10px;
-      margin-left: 0px;
-      display: flex;
-      flex-direction:column;
-      align-items: center;
-    }
-    .month{
-      position:relative;
-      top:55px;
-      font-size: 18px;
-    }
-    .day{
-       position:relative;
-       top:65px;
-      font-size: 18px;
-    }
-    .card_title {
-      display: flex;
-      flex-direction:row;
-      align-items:center;
-      max-width: 350px;
-      height:50px;
-    }
-    .card_date {
-      display: flex;
-      flex-direction:row;
-      align-items:center;
-      max-width: 350px;
-      height:45px;
-    }
-    .card_location {
-      display: flex;
-      flex-direction:row;
-      align-items:center;
-      max-width: 350px;
-      height:50px;
-    }
-    .card_question {
-      display: flex;
-      flex-direction:row;
-      /* justify-content: space-between; */
-      max-width: 410px;
-      width:410px;
-      height:35px;
-    }
-    .tags {
-      width: 200px;
-    }
-    .tag_pills{
-      background-color: black;
-      color: white;
-      font-size: 12px;
-      border-radius: 20px;
-      padding: 5px;
-      margin-right: 3px;
-      background: #5a5959;
-    }
-    .question {
-       position: absolute;
-       bottom: 15px !important;
-       right: 10px;
-    }
-    .title {
-      position: relative;
-      left: 10px;
-      cursor: pointer;
-    }
-    .date {
-      position: relative;
-      left: 10px;
-    }
-    .location {
-      position: relative;
-      left: 10px;
-    }
-    .card:hover{
-        box-shadow: 0px 0px 1px rgba(0,0,0,0.5);
-        transform: scale(1.03);
-    } 
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex-wrap: wrap;
+  margin: 0 auto;
+}
+.card{
+  max-width: 300px;
+  width: 300px;
+  height: 350px;
+  border-radius: 15px;
+  display: flex;
+  flex-direction:column;
+  position:relative;
+  margin: 0 auto;
+  margin-bottom: 5%;
+  overflow-wrap: break-word;
+}
+.card_image {
+  max-width: 100%;
+  width:100%;
+  height:170px;
+}
+.card .card_image img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+}
+.card_body {
+  display: flex;
+  flex-direction:row;
+  max-width: 100%;
+  width: 100%;
+  height:180px;
+}
+.more_meetups{
+  margin: 0 auto;
+  margin-top:30px;
+  margin-bottom: 40px;
+  font-size: 25px;
+}
+.body_side{
+  display: flex;
+  flex-direction:column;
+  width: 80%;
+}
+.meetupBtn{
+  cursor: pointer;
+}
+.side_date{
+  height:180px;
+  width:20%;
+  margin-right: 10px;
+  display: flex;
+  flex-direction:column;
+  align-items: center;
+}
+.month{
+  position:relative;
+  top:55px;
+  font-size: 18px;
+}
+.day{
+    position:relative;
+    top:65px;
+    font-size: 16px;
+}
+.card_title {
+  display: flex;
+  flex-direction:row;
+  align-items:center;
+  max-width: 100%;
+  height:50px;
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+.card_date {
+  display: flex;
+  flex-direction:row;
+  align-items:center;
+  max-width: 100%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  height:45px;
+}
+.card_location {
+  display: flex;
+  flex-direction:row;
+  width: 100%;
+  overflow-wrap: break-word;
+  height:50px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+.card_question {
+  height:35px;
+  display: flex;
+  flex-direction:row;
+  max-width: 100%;
+  width:100%;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+.tags {
+  width: 200px;
+}
+.tag_pills{
+  background-color: black;
+  color: white;
+  font-size: 12px;
+  border-radius: 20px;
+  padding: 5px;
+  margin-right: 3px;
+  background: #5a5959;
+}
+.question {
+  position: absolute;
+  bottom: 15px !important;
+  right: 10px;
+}
+.title {
+  width: 100%;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+.date {
+  position: relative;
+  left: 10px;
+}
+.location {
+  width: 90%;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  overflow-wrap: break-word;
+}
+.card:hover{
+    box-shadow: 0px 0px 1px rgba(0,0,0,0.5);
+    transform: scale(1.03);
+} 
 }
 
  @media (min-width: 768px) and (max-width: 991.98px) { 
@@ -288,9 +299,8 @@ flex-grow: 1;
 #navlink b{
  margin-left: 50px;
  padding-right: 10px;
-border-right: 1px solid #000000;
-color: #ffffff;
-
+ border-right: 1px solid #000000;
+ color: #ffffff;
 }
 #nav_img{
    color: #fff;
@@ -307,7 +317,6 @@ font-size: 22px;
 flex-grow: 1;
 }
 .img_btn{
-flex-basis: 150px;
 margin-right: 10px;
 order: 4;    
 }
@@ -354,87 +363,11 @@ display: block;
 }
 .dashboard-container{
   display: flex;
-  width: 95% !important;
+  width: 100% !important;
   height: auto;
   margin: 0 auto;
   flex-direction: column;
   flex-wrap: wrap;
-}
-.top-dash{
-display: flex;
-display: -webkit-flex;
-flex-wrap: wrap;
-flex-direction: row;
-justify-content: space-between;
-margin: 15px;
-align-items: center;
-}
-.box{
-  flex-basis: 200px;
-  justify-content: space-between;
-  font-family:Montserrat-Regular;
-}
-.box-1{
-  order: 3;
-  font-size:22px;
-  font-family:Montserrat-Regular;
-  font-weight: bold;
-  color:#25274d;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  flex-basis: 350px;
-}
-.box-2{
-    order: 1;
-    display: flex;
-    flex-direction: row;
-}
-.box-3{
-  flex-basis: 150px;
-  margin-right:20px;
-    order: 2;
-   border: 1px solid rgb(37, 39, 77,0.5);
-   border-radius: 5px;
-   color: rgb(21, 33, 80,1);
-}
-.box-3 .filterBtn i{
-    color: #ffffff;
-}
-#dash_search{
-    outline: none;
-    padding: 20px 10px;
-    font-size: 16px;         
-    width: 400px;
-    border: 2px solid #25274d;
-    border-radius:10px 0px 0px 10px;
-}
-.box-2 .searchBtn {
-   width: 100px;
-   padding: 10px;
-   color: black;
-   font-size: 17px;
-   border: 2px solid #25274d;
-   border-left: none;
-   cursor: pointer;
-   position: relative;
-   right: 10px;
-   border-radius:0px 10px 10px 0px;
-}
-.box-3 .filterBtn{
-   width: 150px;
-   height: 2.5em;
-   border-radius: 5px;
-   font-size: 14px;
-   font-family: raleway-regular;
-    width:150px;
-   cursor: pointer;
-   background: #25274d;
-   color: #ffffff;
-   outline: none;
-}
-
-.filterBtn :hover{
-    border: 1px solid #25274d;
 }
 .meetupBtn{
     width: 100px;
@@ -444,16 +377,17 @@ align-items: center;
  flex-direction: column;
  flex-wrap: wrap;
  width: 100%;
-
+ margin: 0 auto;
 }
 .cardslide{
     display: flex;
     flex-direction: row;
     justify-content: left;
     flex-wrap: wrap;
-    margin: 25px;
     margin:0 auto;
-    }
+    width: 100%;
+    margin-bottom: 40px;
+}
     .card{
       max-width: 350px;
       width: 350px;
@@ -462,11 +396,14 @@ align-items: center;
       display: flex;
       flex-direction:column;
       position: relative;
-      margin: 5px;
+      margin-top: 15px;
+      margin-left: 20px;
+      margin-bottom: 10px;
+      margin-right: 0px; 
     }
     .card_image {
-      max-width: 350px;
-      width:350px;
+      max-width: 100%;
+      width:100%;
       height:170px;
     }
     .card .card_image img{
@@ -478,7 +415,8 @@ align-items: center;
     .card_body {
       display: flex;
       flex-direction:row;
-      max-width: 410px;
+      max-width: 350px;
+      width: 350px;
       height:180px;
     }
     .more_meetups{
@@ -487,19 +425,19 @@ align-items: center;
       margin-bottom: 40px;
       font-size: 25px;
     }
-    
     .body_side{
       display: flex;
       flex-direction:column;
-      width: 300px;
+      max-width: 85%;
+      width: 85%;
+      overflow-wrap: break-word;
     }
     .meetupBtn{
       cursor: pointer;
-    
     }
     .side_date{
       height:180px;
-      width:40px;
+      width:15%;
       display: flex;
       flex-direction:column;
       align-items: center;
@@ -518,30 +456,36 @@ align-items: center;
       display: flex;
       flex-direction:row;
       align-items:center;
-      max-width: 350px;
+      max-width: 100%;
       height:50px;
+      margin-top: 5px;
+      margin-bottom: 5px;
     }
     .card_date {
       display: flex;
       flex-direction:row;
       align-items:center;
-      max-width: 350px;
+      max-width: 100%;
       height:45px;
+      margin-top: 5px;
     }
     .card_location {
       display: flex;
       flex-direction:row;
       align-items:center;
-      max-width: 350px;
+      max-width: 100%;
       height:50px;
+      margin-top: 5px;
+      margin-bottom: 5px;
     }
     .card_question {
       display: flex;
       flex-direction:row;
-      /* justify-content: space-between; */
-      max-width: 350px;
-      width:350px;
+      max-width: 100%;
+      width:100%;
       height:35px;
+      margin-top: 15px;
+      margin-bottom: 5px;
     }
     .question {
       position: absolute;
@@ -559,20 +503,7 @@ align-items: center;
       padding: 5px;
       margin-right: 3px;
       background: #5a5959;
-
     }
-    /* .tag_pills:nth-child(1){
-      background-color: indigo;
-      color: white;
-    }
-    .tag_pills:nth-child(2){
-      background-color: brown;
-      color: white;
-    }
-    .tag_pills:nth-child(3){
-      background-color: #25274d;
-      color: white;
-    } */
     .title {
       position: relative;
       left: 10px;
@@ -592,7 +523,7 @@ align-items: center;
     }
  }
 
-@media (min-width: 992px) and (max-width: 1199.98px){ 
+@media (min-width: 992px) and (max-width: 1199.98px){
   /********************* 
     USER DASHBOARD
  *********************/
@@ -685,98 +616,28 @@ display: block;
 }
 .dashboard-container{
   display: flex;
-  width: 95% !important;
+  width: 100% !important;
   height: auto;
   margin: 0 auto;
   flex-direction: column;
   flex-wrap: wrap;
-}
-.top-dash{
-display: flex;
-display: -webkit-flex;
-flex-wrap: wrap;
-flex-direction: row;
-justify-content: space-between;
-margin: 15px;
-align-items: center;
-}
-.box{
-  flex-basis: 250px;
-  justify-content: space-between;
-  font-family:Montserrat-Regular;
-}
-.box-1{
-  order: 1;
-  font-size:18px;
-  color:#25274d;
-}
-.box-2{
-    order: 2;
-    display: flex;
-    flex-direction: row;
-}
-.box-3{
-  flex-basis: 150px;
-  margin-right:20px;
-    order: 3;
-   border: 1px solid rgb(37, 39, 77,0.5);
-   border-radius: 5px;
-   color: rgb(21, 33, 80,1);
-}
-
-.box-3 .filterBtn i{
-    color: #ffffff;
-}
-#dash_search{
-    outline: none;
-    padding: 20px 10px;
-    font-size: 16px;         
-    width: 400px;
-    border: 2px solid #25274d;
-    border-radius:10px 0px 0px 10px;
-}
-.box-2 .searchBtn {
-   width: 100px;
-   padding: 10px;
-   color: black;
-   font-size: 17px;
-   border: 2px solid #25274d;
-   border-left: none;
-   cursor: pointer;
-   position: relative;
-   right: 10px;
-   border-radius:0px 10px 10px 0px;
-}
-.box-3 .filterBtn{
-   width: 150px;
-   height: 2.5em;
-   border-radius: 5px;
-   font-size: 14px;
-   font-family: raleway-regular;
-    width:150px;
-   cursor: pointer;
-   background: #25274d;
-   color: #ffffff;
-   outline: none;
-}
-
-.filterBtn :hover{
-    border: 1px solid #25274d;
 }
 .meetupBtn{
     width: 100px;
 }
 .bottom_dash{
   display: flex;
- flex-direction: column;
- flex-wrap: wrap;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+  margin: 0 auto;
 }
 .cardslide{
     display: flex;
     flex-direction: row;
     justify-content: left;
     flex-wrap: wrap;
-    margin: 30px;
+    margin: 0 auto;
     }
     .card{
       max-width: 410px;
@@ -786,6 +647,7 @@ align-items: center;
       position: relative;
       flex-direction:column;
       margin: 20px;
+      margin-left: 50px;
     }
     .card_image {
       max-width: 410px;

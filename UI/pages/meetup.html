@@ -5,15 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Meetup</title>
+    <title></title>
     <link rel="stylesheet" href="../css/meetup.css">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/responsive/meetup.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+     integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-
 <body>
     <header>
         <nav>
@@ -29,13 +28,13 @@
             </li>
             <div class="dropdown img_btn">
                 <button class="dropbtn ">
-                    <span id="nav_img">UN</span>
+                    <span id="nav_img"></span>
                     <i class="fa fa-caret-down fa-lg" id="img_icon"></i>
                 </button>
                 <div class="dropdown-content">
                     <a href="user-profile.html" class="icon user">Your Profile
                     </a>
-                    <a href="../../index.html" class="icon signout">Sign Out
+                    <a class="icon signout">Sign Out
                     </a>
                 </div>
             </div>
@@ -45,18 +44,14 @@
         <div class="subcontainer">
             <div class="subcontainer_top">
                 <div class="meetup_img">
-                    <img src="../resources/img/event.jpg" alt="meetup image">
                 </div>
                 <div class="meetup_body">
                     <p class="title_body">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec
-                        odio. Praesent libero
                     </p>
                     <div class="meetup_components">
                         <div class="date">
                             <p class="date_title">
                                 <img src="../resources/svg/calendar.svg" alt="" width="40px" height="40px">
-                                1st Febuary, 2019
                             </p>
                         </div>
                         <div class="venue">
@@ -65,8 +60,6 @@
                                     <img src="../resources/svg/location.svg" alt="" width="40px" height="40px">
                                 </div>
                                 <div class="venue_body">
-                                    venue
-                                    venue
                                 </div>
                             </div>
                         </div>
@@ -75,9 +68,6 @@
                                 RSVP
                             </div>
                             <div class="rsvp_body">
-                                <button class="rsvpBtn1">Yes</button>
-                                <button class="rsvpBtn2">No</button>
-                                <button class="rsvpBtn3">Maybe</button>
                             </div>
                         </div>
                         <div class="tags">
@@ -85,10 +75,6 @@
                                 Tags
                             </div>
                             <div class="tags_body">
-                                <div class="tags_pill">technology</div>
-                                <div class="tags_pill">lifestyle</div>
-                                <div class="tags_pill">block chain</div>
-                                <div class="tags_pill">AI</div>
                             </div>
                         </div>
                         <div class="question">
@@ -105,47 +91,57 @@
                         <div class="questions">
                             <div class="question_asked">
                                 <p id="q_head">Questions<p>
-                                        <ul id='ques_list'>
-                                            <li class='question_tab'>
+                                        <ul class='ques_list'>
+                                            <!-- <li class='question_tab'>
                                                 <div class="vote">
                                                     <button class="voteBtn" data-action='up'>
-                                                        <i class="fa fa-caret-up fa-3x" id="up"></i></button>
-                                                    <div id="count">
-                                                        <input type='number' min=0 id="num" value="0" disabled />
+                                                        <i class="fa fa-caret-up fa-3x" id="up" ></i>
+                                                    </button>
+                                                    <div id="count" >
+                                                        <span class="num">
+                                                            0
+                                                        </span>
                                                     </div>
                                                     <button class="voteBtn" data-action='down'>
-                                                        <i class="fa fa-caret-down fa-3x" id="down"></i></button>
+                                                        <i class="fa fa-caret-down fa-3x" id="down"></i>
+                                                    </button>
                                                 </div>
                                                 <div class="question_sess">
+                                                    <div class="quesTitle">
+                                                            Lorem ipsum dolor sit
+                                                            amet, consectetur
+                                                            adipiscing elit
+                                                    </div>
                                                     <div class='postQues'>
                                                         Lorem ipsum dolor sit
                                                         amet, consectetur
                                                         adipiscing elit.
                                                         Integer nec
-                                                        odio. Praesent libero.
-                                                        Sed cursus ante dapibus
-                                                        diam. Sed nisi. Nulla
-                                                        quis sem at nibh
-                                                        elementum imperdiet.
-                                                        Duis sagittis ipsum.
-                                                        Praesent
-                                                        mauris.
+                                                        odio.
                                                     </div>
-                                                    <div id="commentPost">
-                                                    </div>
-                                                    <div>
-                                                        <div class="comment">
-                                                            <a class='commentBtn' id="commentBtn" class="postC"
-                                                                data-action='addComment'>add
-                                                                a
-                                                                comment
-                                                                <i class='fa fa-comments fa-lg'></i></a>
-                                                            <textarea class='commentBox' id='commentBox'></textarea>
-                                                            <button class="btn btn-primary" id='postCom' data-action='postCom'>
-                                                                submit</button>
+                                                    <div class="quesDetail">
+                                                        <div class="detailTop"> 
+                                                            asked <span class="quesDate">Jan 13 at 19:38</span>
+                                                        </div>
+                                                        <div class="detailBottom">
+                                                            username
                                                         </div>
                                                     </div>
-                                            </li>
+                                                    <div id="commentPost">
+
+                                                    </div>
+                                                    <div class="comment">
+                                                        <a class="commentBtn" id="commentBtn" class="postC"
+                                                            data-action='addComment'>add a comment
+                                                            <i class='fa fa-comments fa-lg'></i>
+                                                        </a>
+                                                        <div class="commentBox">
+                                                                <textarea id='commentText' name="comment" ></textarea>
+                                                                <input type="submit" class="btn btn-primary" id='postCom' data-action='postCom' value="post" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li> -->
                                         </ul>
                             </div>
                         </div>
@@ -158,19 +154,19 @@
     <div class="modal">
         <div class="modal-content">
             <span class="close-button">&times;</span>
-
             <div class="question_container">
-                <div class="question_title">
-                    <p>Ask a Question</p>
-                    <input type="text" placeholder="Title" id="title" />
-                </div>
-                <div class="question_body">
-                    <textarea class="body" rows="10" id="question" placeholder="Question">
-        </textarea>
-                </div>
-                <div class="question_btn">
-                    <button id="Btn" class="btnAsk">Post</button>
-                </div>
+                <form method="post" name="post-question">
+                    <div class="question_title">
+                            <p>Ask a Question</p>
+                            <input type="text" placeholder="Question Title" class="title" name="title" />
+                        </div>
+                        <div class="question_body">
+                            <textarea name="body" class="body" rows="8" id="question" placeholder="Question Body"></textarea>
+                        </div>
+                        <div class="question_btn">
+                            <input type="submit" id="Btn" class="btn btn-primary btnAsk" value="Post" />
+                        </div>
+                </form>
             </div>
         </div>
     </div>
@@ -179,8 +175,10 @@
             <p>Created with <i class="fa fa-heart fa-sm"></i> by Okonji Chukwunonso</p>
         </div>
     </footer>
+    <script src="https://unpkg.com/moment"></script>
     <script src="../js/modal.js"></script>
-    <script src="../js/comments.js"></script>
+    <script src="../js/meetup.js"></script>
+    <script src="../js/signout.js"></script>
 </body>
 
 </html>
