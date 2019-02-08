@@ -21,12 +21,12 @@ class Questioner {
    */
   static getRequiredFields(meetups, filtered) {
     meetups.map((meet) => {
-      const formated = moment(meet.happeningon).format('dddd, MMMM Do YYYY');
+      // const formated = moment(meet.happeningon).format('dddd, MMMM Do YYYY');
       const meetup = {
         id: meet.id,
         title: meet.topic,
         location: meet.location,
-        happeningOn: formated,
+        happeningOn: meet.happeningon,
         tags: meet.tags,
         images: meet.images,
       };
@@ -229,7 +229,7 @@ class Questioner {
                   VALUES ($1,$2,$3,$4) RETURNING *`;
     const values = [
       req.user.id,
-      req.body.meetup || 1,
+      req.body.meetupId,
       req.body.title,
       req.body.body,
     ];
@@ -409,7 +409,7 @@ class Questioner {
 
     return res.status(200).json({
       status: 200,
-      data: `meetup with title, ${rows[0].topic} has been deleted`,
+      data: `${rows[0].topic} meet up has been deleted`,
     });
   }
 
