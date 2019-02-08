@@ -1,4 +1,5 @@
 import validator from 'validator';
+import cloudinary from 'cloudinary';
 import Validation from './validationhelper';
 import db from '../config/db';
 
@@ -268,9 +269,9 @@ class Validate {
     const text = 'SELECT * FROM question WHERE id = $1';
     const { rowCount } = await db.query(text, [id]);
     if (rowCount !== 0) {
-      return next();
+      return Validation.validID(res, ['question', id]);
     }
-    return Validation.validID(res, ['question', id]);
+    return next();
   }
   /**
    * patch downvote middleware
@@ -366,11 +367,21 @@ class Validate {
    */
 
   static async deleteMeetup(req, res, next) {
+    cloudinary.config({
+      cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+      api_key: process.env.CLOUDINARY_API_KEY,
+      api_secret: process.env.CLOUDINARY_API_SECRET,
+    });
     const id = parseInt(req.params.id, 10);
     const text = 'SELECT * FROM meetup WHERE id = $1';
     const { rows, rowCount } = await db.query(text, [id]);
     if (!rows[0] && rowCount === 0) {
       return Validation.validID(res, ['meetup', id]);
+    }
+    if (rows[0].images !== null) {
+      const imageurl = rows[0].images[0];
+      const publicid = imageurl.slice(58, 89);
+      cloudinary.v2.uploader.destroy(publicid);
     }
     return next();
   }

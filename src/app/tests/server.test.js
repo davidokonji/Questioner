@@ -867,6 +867,7 @@ describe('POST /api/v1/questions', () => {
     chai.request(app)
       .post('/api/v1/questions')
       .send({
+        meetupId: 2,
         title: 'this is a valid question',
         body: 'this body cannot be empty',
       })
