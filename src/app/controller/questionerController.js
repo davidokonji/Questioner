@@ -141,6 +141,7 @@ class Questioner {
     return res.status(201).json({
       status: 201,
       data: [{
+        id: rows[0].id,
         topic: rows[0].topic,
         location: rows[0].location,
         happeningOn: formated,
@@ -248,27 +249,40 @@ class Questioner {
   }
 
   /**
-   * get one question (only oin test environment)
+   * get questions by meetupid
    * @param {object} req
    * @param {object} res
-   * @returns {object} single queston object
+   * @returns {object} questions object
    */
-  // static async getQuestionById(req, res) {
-  //   const text = 'SELECT * FROM question WHERE id= $1 RETURNING *';
-  //   const id = parseInt(req.params.id, 10);
-  //   try {
-  //     const { rows } = await db.query(text, [id]);
-  //     return res.status(200).json({
-  //       status: 200,
-  //       data: rows,
-  //     });
-  //   } catch (error) {
-  //     return res.status(404).json({
-  //       status: 404,
-  //       meesage: 'unable to find question',
-  //     });
-  //   }
-  // }
+  static async getQuestions(req, res) {
+    const text = 'select * from question where meetupid = $1';
+    const id = parseInt(req.params.id, 10);
+    const { rows } = await db.query(text, [id]);
+    return res.status(200).json({
+      status: 200,
+      data: [
+        rows,
+      ],
+    });
+  }
+
+  /**
+   * get comments by questionid
+   * @param {object} req
+   * @param {object} res
+   * @returns {object} comments object
+   */
+  static async getComments(req, res) {
+    const text = 'select * from comments where questionid = $1';
+    const id = parseInt(req.params.id, 10);
+    const { rows } = await db.query(text, [id]);
+    return res.status(200).json({
+      status: 200,
+      data: [
+        rows,
+      ],
+    });
+  }
 
   /**
    *  increasing upvote by 1

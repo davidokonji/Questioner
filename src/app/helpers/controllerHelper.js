@@ -29,10 +29,10 @@ class Helper {
       ];
       const { rows } = await db.query(text, values);
       const formated = moment(rows[0].happeningon).format('dddd, MMMM Do YYYY');
-
       return res.status(201).json({
         status: 201,
         data: [{
+          id: rows[0].id,
           topic: rows[0].topic,
           location: rows[0].location,
           happeningOn: formated,

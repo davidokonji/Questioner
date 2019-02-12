@@ -166,17 +166,10 @@ class Validate {
 
   static async GetOneMeetup(req, res, next) {
     const id = parseInt(req.params.id, 10);
-    try {
-      const text = 'SELECT * FROM meetup WHERE id = $1';
-      const { rowCount } = await db.query(text, [id]);
-      if (rowCount === 0) {
-        return Validation.validID(res, ['meetup', id]);
-      }
-    } catch (error) {
-      return res.status(400).json({
-        status: 400,
-        message: 'meetup does not exist',
-      });
+    const text = 'SELECT * FROM meetup WHERE id = $1';
+    const { rowCount } = await db.query(text, [id]);
+    if (rowCount === 0) {
+      return Validation.validID(res, ['meetup', id]);
     }
     return next();
   }
@@ -365,7 +358,6 @@ class Validate {
    * @param {object} next
    * @return  {object} error or pass object
    */
-
   static async deleteMeetup(req, res, next) {
     cloudinary.config({
       cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -382,6 +374,43 @@ class Validate {
       const imageurl = rows[0].images[0];
       const publicid = imageurl.slice(58, 89);
       cloudinary.v2.uploader.destroy(publicid);
+    }
+    return next();
+  }
+
+  /**
+   * get all questions by meetup id middleware
+   * @param {object} req
+   * @param {object} res
+   * @param {object} next
+   * @return  {object} error or pass object
+   */
+  static async getQuestions(req, res, next) {
+    const id = parseInt(req.params.id, 10);
+    const text = 'SELECT * FROM meetup WHERE id = $1';
+    const { rows, rowCount } = await db.query(text, [id]);
+    if (!rows[0] && rowCount === 0) {
+      return Validation.validID(res, ['meetup', id]);
+    }
+    return next();
+  }
+
+  /**
+   * get all comments by question id middleware
+   * @param {object} req
+   * @param {object} res
+   * @param {object} next
+   * @return  {object} error or pass object
+   */
+  static async getComments(req, res, next) {
+    const id = parseInt(req.params.id, 10);
+    const text = 'SELECT * FROM question WHERE id = $1';
+    const { rows, rowCount } = await db.query(text, [id]);
+    if (!rows[0] && rowCount === 0) {
+      return res.status(404).send({
+        status: 404,
+        error: `unable to find question with ID ${id}`,
+      });
     }
     return next();
   }
