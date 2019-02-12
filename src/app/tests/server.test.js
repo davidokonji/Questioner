@@ -977,6 +977,37 @@ describe('POST /api/v1/questions', () => {
       });
   });
 });
+describe('GET /api/v1/meetups/:id/questions', () => {
+  it('should get questions relating to a meetup', (done) => {
+    const id = '2';
+    chai.request(app)
+      .get(`/api/v1/meetups/${id}/questions`)
+      .set('x-access-token', token)
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.be.status(200);
+        expect(res).to.be.a('object');
+        return done();
+      });
+  });
+  it('should return 404 if ID is not found', (done) => {
+    const id = 100;
+    chai.request(app)
+      .get(`/api/v1/meetups/${id}/questions`)
+      .set('x-access-token', token)
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.have.status(404);
+        return done();
+      });
+  });
+});
 describe('POST /api/v1/comments/', () => {
   it('should post comment to question', (done) => {
     chai.request(app)

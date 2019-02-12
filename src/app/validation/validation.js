@@ -166,17 +166,10 @@ class Validate {
 
   static async GetOneMeetup(req, res, next) {
     const id = parseInt(req.params.id, 10);
-    try {
-      const text = 'SELECT * FROM meetup WHERE id = $1';
-      const { rowCount } = await db.query(text, [id]);
-      if (rowCount === 0) {
-        return Validation.validID(res, ['meetup', id]);
-      }
-    } catch (error) {
-      return res.status(400).json({
-        status: 400,
-        message: 'meetup does not exist',
-      });
+    const text = 'SELECT * FROM meetup WHERE id = $1';
+    const { rowCount } = await db.query(text, [id]);
+    if (rowCount === 0) {
+      return Validation.validID(res, ['meetup', id]);
     }
     return next();
   }
@@ -300,7 +293,7 @@ class Validate {
 
   static async createRsvp(req, res, next) {
     if (!req.body.response) {
-      return res.status(400).send({
+      return res.status(400).json({
         status: 400,
         message: 'response is required',
       });
@@ -311,9 +304,17 @@ class Validate {
     if (rowCount === 0) {
       return Validation.validID(res, ['meetup', id]);
     }
+    const checkrsvp = 'select * from rsvp where meetupid = $1';
+    const response = await db.query(checkrsvp, [id]);
+    if (response.rowCount !== 0) {
+      return res.status(400).json({
+        status: 400,
+        message: 'meetup cannot be RSVP more than once',
+      });
+    }
     const validResponse = Validation.validResponse(req.body.response);
     if (!validResponse) {
-      return res.status(400).send({
+      return res.status(400).json({
         status: 400,
         error: `response value '${req.body.response}' is not valid  `,
       });
@@ -365,7 +366,6 @@ class Validate {
    * @param {object} next
    * @return  {object} error or pass object
    */
-
   static async deleteMeetup(req, res, next) {
     cloudinary.config({
       cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -382,6 +382,23 @@ class Validate {
       const imageurl = rows[0].images[0];
       const publicid = imageurl.slice(58, 89);
       cloudinary.v2.uploader.destroy(publicid);
+    }
+    return next();
+  }
+
+  /**
+   * get all questions by meetup id middleware
+   * @param {object} req
+   * @param {object} res
+   * @param {object} next
+   * @return  {object} error or pass object
+   */
+  static async getQuestions(req, res, next) {
+    const id = parseInt(req.params.id, 10);
+    const text = 'SELECT * FROM meetup WHERE id = $1';
+    const { rows, rowCount } = await db.query(text, [id]);
+    if (!rows[0] && rowCount === 0) {
+      return Validation.validID(res, ['meetup', id]);
     }
     return next();
   }

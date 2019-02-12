@@ -141,6 +141,7 @@ class Questioner {
     return res.status(201).json({
       status: 201,
       data: [{
+        id: rows[0].id,
         topic: rows[0].topic,
         location: rows[0].location,
         happeningOn: formated,
@@ -238,37 +239,48 @@ class Questioner {
       status: 201,
       data: [
         {
+          id: rows[0].id,
           user: rows[0].createdby,
           meetup: rows[0].meetupid,
           title: rows[0].title,
           body: rows[0].body,
+          createdon: rows[0].createdon,
+          vote: rows[0].vote,
         },
       ],
     });
   }
 
   /**
-   * get one question (only oin test environment)
+   * get questions by meetupid
    * @param {object} req
    * @param {object} res
-   * @returns {object} single queston object
+   * @returns {object} questions object
    */
-  // static async getQuestionById(req, res) {
-  //   const text = 'SELECT * FROM question WHERE id= $1 RETURNING *';
-  //   const id = parseInt(req.params.id, 10);
-  //   try {
-  //     const { rows } = await db.query(text, [id]);
-  //     return res.status(200).json({
-  //       status: 200,
-  //       data: rows,
-  //     });
-  //   } catch (error) {
-  //     return res.status(404).json({
-  //       status: 404,
-  //       meesage: 'unable to find question',
-  //     });
-  //   }
-  // }
+  static async getQuestions(req, res) {
+    const text = 'select * from question where meetupid = $1';
+    const comments = 'select * from comments';
+    const id = parseInt(req.params.id, 10);
+    const { rows } = await db.query(text, [id]);
+    const comment = await db.query(comments);
+    const questions = [];
+    rows.map(async (row) => {
+      const question = {
+        id: row.id,
+        createdon: row.createdon,
+        createdby: row.createdby,
+        title: row.title,
+        comments: comment.rows.filter(item => item.questionid === row.id),
+        body: row.body,
+        vote: row.vote,
+      };
+      questions.push(question);
+    });
+    return res.status(200).json({
+      status: 200,
+      data: questions,
+    });
+  }
 
   /**
    *  increasing upvote by 1
@@ -358,6 +370,7 @@ class Questioner {
     return res.status(201).json({
       status: 201,
       data: [{
+        userid: response.rows[0].userid,
         meetup: response.rows[0].meetupid,
         topic: rows[0].topic,
         status: response.rows[0].response,
