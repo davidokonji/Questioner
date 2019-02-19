@@ -48,8 +48,6 @@ app.patch('/api/v1/questions/:id/downvote', [cors(), Auth, Validation.patchDownv
 
 app.get('/api/v1/meetups/:id/questions', [cors(), Auth, Validation.getQuestions], Questioner.getQuestions);
 
-app.get('/api/v1/questions/:id/comments', [cors(), Auth, Validation.getComments], Questioner.getComments);
-
 app.post('/api/v1/meetups/:id/rsvps', [cors(), Auth, Validation.createRsvp], Questioner.createRSVP);
 
 app.post('/api/v1/auth/signup', [cors(), Validation.createUser], Questioner.createUser);

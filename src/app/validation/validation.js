@@ -293,7 +293,7 @@ class Validate {
 
   static async createRsvp(req, res, next) {
     if (!req.body.response) {
-      return res.status(400).send({
+      return res.status(400).json({
         status: 400,
         message: 'response is required',
       });
@@ -304,9 +304,17 @@ class Validate {
     if (rowCount === 0) {
       return Validation.validID(res, ['meetup', id]);
     }
+    const checkrsvp = 'select * from rsvp where meetupid = $1';
+    const response = await db.query(checkrsvp, [id]);
+    if (response.rowCount !== 0) {
+      return res.status(400).json({
+        status: 400,
+        message: 'meetup cannot be RSVP more than once',
+      });
+    }
     const validResponse = Validation.validResponse(req.body.response);
     if (!validResponse) {
-      return res.status(400).send({
+      return res.status(400).json({
         status: 400,
         error: `response value '${req.body.response}' is not valid  `,
       });
@@ -391,26 +399,6 @@ class Validate {
     const { rows, rowCount } = await db.query(text, [id]);
     if (!rows[0] && rowCount === 0) {
       return Validation.validID(res, ['meetup', id]);
-    }
-    return next();
-  }
-
-  /**
-   * get all comments by question id middleware
-   * @param {object} req
-   * @param {object} res
-   * @param {object} next
-   * @return  {object} error or pass object
-   */
-  static async getComments(req, res, next) {
-    const id = parseInt(req.params.id, 10);
-    const text = 'SELECT * FROM question WHERE id = $1';
-    const { rows, rowCount } = await db.query(text, [id]);
-    if (!rows[0] && rowCount === 0) {
-      return res.status(404).send({
-        status: 404,
-        error: `unable to find question with ID ${id}`,
-      });
     }
     return next();
   }

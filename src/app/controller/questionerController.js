@@ -239,10 +239,13 @@ class Questioner {
       status: 201,
       data: [
         {
+          id: rows[0].id,
           user: rows[0].createdby,
           meetup: rows[0].meetupid,
           title: rows[0].title,
           body: rows[0].body,
+          createdon: rows[0].createdon,
+          vote: rows[0].vote,
         },
       ],
     });
@@ -256,31 +259,26 @@ class Questioner {
    */
   static async getQuestions(req, res) {
     const text = 'select * from question where meetupid = $1';
+    const comments = 'select * from comments';
     const id = parseInt(req.params.id, 10);
     const { rows } = await db.query(text, [id]);
-    return res.status(200).json({
-      status: 200,
-      data: [
-        rows,
-      ],
+    const comment = await db.query(comments);
+    const questions = [];
+    rows.map(async (row) => {
+      const question = {
+        id: row.id,
+        createdon: row.createdon,
+        createdby: row.createdby,
+        title: row.title,
+        comments: comment.rows.filter(item => item.questionid === row.id),
+        body: row.body,
+        vote: row.vote,
+      };
+      questions.push(question);
     });
-  }
-
-  /**
-   * get comments by questionid
-   * @param {object} req
-   * @param {object} res
-   * @returns {object} comments object
-   */
-  static async getComments(req, res) {
-    const text = 'select * from comments where questionid = $1';
-    const id = parseInt(req.params.id, 10);
-    const { rows } = await db.query(text, [id]);
     return res.status(200).json({
       status: 200,
-      data: [
-        rows,
-      ],
+      data: questions,
     });
   }
 
@@ -372,6 +370,7 @@ class Questioner {
     return res.status(201).json({
       status: 201,
       data: [{
+        userid: response.rows[0].userid,
         meetup: response.rows[0].meetupid,
         topic: rows[0].topic,
         status: response.rows[0].response,
