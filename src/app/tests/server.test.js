@@ -1098,37 +1098,6 @@ describe('POST /api/v1/comments/', () => {
       });
   });
 });
-describe('GET /api/v1/questions/:id/comments/', () => {
-  it('should get comments relating to question', (done) => {
-    const id = '2';
-    chai.request(app)
-      .get(`/api/v1/questions/${id}/comments/`)
-      .set('x-access-token', token)
-      .end((err, res) => {
-        if (err) {
-          expect(res).to.throw(err);
-          return done(err);
-        }
-        expect(res).to.be.status(200);
-        expect(res).to.be.a('object');
-        return done();
-      });
-  });
-  it('should return 404 if ID is not found', (done) => {
-    const id = 100;
-    chai.request(app)
-      .get(`/api/v1/questions/${id}/comments/`)
-      .set('x-access-token', token)
-      .end((err, res) => {
-        if (err) {
-          expect(res).to.throw(err);
-          return done(err);
-        }
-        expect(res).to.have.status(404);
-        return done();
-      });
-  });
-});
 describe('POST /api/v1/meetups/:id/rsvps', () => {
   it('should rsvp for a meetup', (done) => {
     const id = '2';
