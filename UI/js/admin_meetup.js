@@ -19,18 +19,12 @@ function getid(d){
 }
 meetupform.addEventListener('submit', (event) => Meetup.createMeetup(event, meetupform));
 
-setTimeout(()=>{
-  window.onload = function() {
-    Meetup.getallMeetup();
-  }
-}, 5000)
 window.onload = function() {
   Meetup.getallMeetup();
 }
 
 class Meetup {
   static createMeetup (event, form) {
-
     event.preventDefault();
     let formData = new FormData();
     formData.append('topic',form.topic.value);
@@ -48,7 +42,32 @@ class Meetup {
     .then(response => response.json())
     .then(data => {
        modal.classList.toggle("show-modal");
-       Meetup.getallMeetup();
+          let rows = `<tr>
+          <td class="topic">
+            <p class="title">
+              ${data.data[0].topic}
+            </p>
+            <div class="title_section">
+              <p class="date">
+              <span><img src="../resources/svg/calendar.svg" alt="" width="20px"
+                height="20px"> ${data.data[0].happeningOn}
+              </span>
+              </p>
+              <p class="location">
+                <span>
+                    <img src="../resources/svg/location.svg" alt="" width="20px"
+                    height="20px">
+                    ${data.data[0].location}
+                </span> 
+              </p>
+            </div>
+          </td>
+          <td class="operation">
+            <button class="btn operationBtn delete" data-id='${data.data[0].id}' onclick="getid(this)">Delete</button>
+            <button class="btn operationBtn view" data-id='${data.data[0].id}'>View</button>
+          </td>
+        </tr>`;
+        meetupTable.innerHTML += rows;
     })
 		.catch(error => console.log(error));
 
@@ -62,8 +81,10 @@ class Meetup {
     })
     .then((response) => response.json())
     .then(data => {
-      window.location.reload(true);
-      Meetup.getallMeetup();
+      if (data.status === 200) {
+        window.location.reload(true);
+        Meetup.getallMeetup();
+      }
     })
     .catch((error) => console.log(error))
   }
@@ -88,7 +109,7 @@ class Meetup {
           <div class="title_section">
             <p class="date">
              <span><img src="../resources/svg/calendar.svg" alt="" width="20px"
-              height="20px"> ${item.happeningOn}
+              height="20px"> ${moment(item.happeningOn).format('dddd, MMMM Do YYYY')}
             </span>
             </p>
             <p class="location">

@@ -32,6 +32,7 @@
 #nav_img{
     color: #fff;
     padding-bottom: 20px;
+    text-transform: capitalize;
 }
 .logo{
  flex-grow: 1;
@@ -111,145 +112,158 @@
     flex-direction: row;
     justify-content: left;
     flex-wrap: wrap;
-    /* margin: 30px; */
-    }
-    .card{
-      max-width: 410px;
-      height: 350px;
-      border-radius: 15px;
-      display: flex;
-      flex-direction:column;
-      /* margin-bottom: 30px; */
-      box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.2);
-      font-family:Montserrat-Regular;
-      /* margin: 20px; */
-    }
-    .card_image {
-      max-width: 410px;
-      width:410px;
-      height:170px;
-    }
-    .card .card_image img{
-      width:100%;
-      height:100%;
-      object-fit: cover;
-      cursor: pointer;
-    }
-    .card_body {
-      display: flex;
-      flex-direction:row;
-      max-width: 410px;
-      height:180px;
-    }
-    .more_meetups{
-      margin: 0 auto;
-      margin-top:30px;
-      margin-bottom: 40px;
-      font-size: 25px;
-    }
-    
-    .body_side{
-      display: flex;
-      flex-direction:column;
-      width: 350px;
-    }
-    .meetupBtn{
-      cursor: pointer;
-      margin-bottom: 50px;
-    }
-    .side_date{
-      height:180px;
-      width:60px;
-      display: flex;
-      flex-direction:column;
-      align-items: center;
-      background-color: #e5e2e2;
-      border-bottom-left-radius: 15px;
-      margin-right: 10px;
-    }
-    .month{
+    margin: 0 auto;
+    margin-bottom: 50px !important;
+  }
+  .card{
+    max-width: 410px;
+    width: 410px;
+    height: 350px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction:column;
+    box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.2);
+    font-family:Montserrat-Regular;
+    overflow-wrap: break-word;
+  }
+  .card_image {
+    max-width: 410px;
+    width:410px;
+    height:170px;
+  }
+  .card .card_image img{
+    width:100%;
+    height:100%;
+    object-fit: cover;
+    cursor: pointer;
+  }
+  .card_body {
+    display: flex;
+    flex-direction:row;
+    max-width: 410px;
+    width: 410px;
+    height:180px;
+  }
+  .more_meetups{
+    margin: 0 auto;
+    margin-top:30px;
+    margin-bottom: 40px;
+    font-size: 25px;
+    display: none;
+  }
+  .body_side{
+    display: flex;
+    flex-direction:column;
+    max-width: 350px;
+    width: 350px;
+    overflow-wrap: break-word;
+  }
+  .meetupBtn{
+    cursor: pointer;
+    margin-bottom: 50px;
+  }
+  .side_date{
+    height:180px;
+    width:60px;
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    background-color: #e5e2e2;
+    border-bottom-left-radius: 15px;
+    margin-right: 10px;
+  }
+  .month{
+    position:relative;
+    top:55px;
+    font-size: 24px;
+  }
+  .day{
       position:relative;
-      top:55px;
-      font-size: 24px;
-    }
-    .day{
-       position:relative;
-       top:65px;
-      font-size: 24px;
-    }
-    .card_title {
-      display: flex;
-      flex-direction:row;
-      align-items:center;
-      max-width: 350px;
-      height:50px;
-    }
-    .card_title a {
-      cursor: pointer;
-      color: #25274d;
-      text-transform: uppercase;
-    }
-    .card_date {
-      display: flex;
-      flex-direction:row;
-      align-items:center;
-      max-width: 350px;
-      height:45px;
-      font-size: 14px;
-    }
-    .card_location {
-      display: flex;
-      flex-direction:row;
-      align-items:center;
-      max-width: 350px;
-      height:50px;
-      font-size: 14px;
-    }
-    .card_question {
-      display: flex;
-      flex-direction:row;
-      /* justify-content: space-between; */
-      max-width: 410px;
-      width:410px;
-      height:35px;
-      font-size: 14px;
-    }
-    .tags {
-      width: 250px;
-    }
-    .tag_pills{
-      background-color: black;
-      color: white;
-      font-size: 12px;
-      border-radius: 20px;
-      padding: 5px;
-      margin-right: 3px;
-      background: #5a5959;
-
-    }
-    .question {
-       position:relative;
-      font-size: 12px;
-      color: darkgray;
-    }
-    .title {
-      position: relative;
-      left: 10px;
-      cursor: pointer;
-    }
-    .date {
-      position: relative;
-      left: 10px;
-      color: #25274d;
-      text-transform: capitalize;
-    }
-    .location {
-      position: relative;
-      left: 10px;
-      color: #25274d;
-      text-transform: capitalize;
-    }
-    .card:hover{
-        box-shadow: 0px 0px 1px rgba(0,0,0,0.5);
-        transform: scale(1.03);
-    }
+      top:65px;
+    font-size: 24px;
+  }
+  .card_title {
+    display: flex;
+    flex-direction:row;
+    align-items:center;
+    max-width: 350px;
+    width: 350px;
+    overflow-wrap: break-word;  
+    height:50px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  .card_title a {
+    cursor: pointer;
+    color: #25274d;
+    text-transform: uppercase;
+  }
+  .card_date {
+    display: flex;
+    flex-direction:row;
+    align-items:center;
+    max-width: 350px;
+    height:45px;
+    font-size: 14px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  .card_location {
+    display: flex;
+    flex-direction:row;
+    align-items:center;
+    max-width: 350px;
+    width: 350px;
+    overflow-wrap: break-word;
+    height:50px;
+    font-size: 14px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  .card_question {
+    display: flex;
+    flex-direction:row;
+    max-width: 410px;
+    width:410px;
+    height:35px;
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+  }
+  .tags {
+    width: 250px;
+  }
+  .tag_pills{
+    background-color: black;
+    color: white;
+    font-size: 12px;
+    border-radius: 20px;
+    padding: 5px;
+    margin-right: 3px;
+    background: #5a5959;
+  }
+  .question {
+    font-size: 12px;
+    color: darkgray;
+  }
+  .title {
+    cursor: pointer;
+    width: 95%;
+    margin-top: 15px;
+    margin-bottom: 5px;
+  }
+  .date {
+    color: #25274d;
+    text-transform: capitalize;
+  }
+  .location {
+    color: #25274d;
+    text-transform: capitalize;
+    width: 90%;
+    margin-top: 15px;
+    margin-bottom: 5px;
+  }
+  .card:hover{
+      box-shadow: 0px 0px 1px rgba(0,0,0,0.5);
+      transform: scale(1.03);
+  }

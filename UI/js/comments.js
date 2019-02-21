@@ -41,7 +41,6 @@ function addQuestion(e) {
         <button class="voteBtn" data-action = 'down'> <i class="fa fa-caret-down fa-3x" id="down" ></i></button>
       </div>
       <div class="question_sess" >
-        <!--modified here make changes in javascript -->
         <div class = 'postQues'> 
             ${ques}
         </div>

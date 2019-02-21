@@ -26,6 +26,7 @@ color: #ffffff;
 #nav_img{
  color: #ffffff;
  padding-bottom: 20px;
+ text-transform: capitalize;
 }
 .logo{
 flex-grow: 1;
@@ -122,12 +123,14 @@ display: block;
 .meetup_img{
   width:50%;
   height: 600px;
+  background-color: #f6f8f5;
+  padding: 10px;
 }
 .meetup_img img{
   width:100%;
   height:100%;
-    object-fit: cover;
-    cursor: pointer;
+  object-fit: contain;
+  cursor: pointer;
 }
 .meetup_body{
   width:50%;
@@ -141,6 +144,7 @@ display: block;
   margin-top: 50px;
   margin-left: 50px; 
   width: 80%;
+  font-size: 22px;
   line-height: 20px;
   text-transform: uppercase;
   font-family:Montserrat-Regular;
@@ -276,20 +280,7 @@ display: block;
   font-family: raleway-regular;
   font-size: 14px;
   background: #5a5959;
-
 }
-/* .tags_pill:nth-child(1){
-  background: #5a5959;
-}
-.tags_pill:nth-child(2){
-  background: #122742;
-}
-.tags_pill:nth-child(3){
-  background: #4d0b0b;
-}
-.tags_pill:nth-child(4){
-  background: #0d2c2b;
-} */
 .btn_question{
   width:80%;
   padding: 20px 10px;
@@ -299,9 +290,202 @@ display: block;
   background: #25274d;
   outline: none;
   color: #ffffff;
-  margin:20px;
-  margin-left: 50px;
   border-radius: 15px;
+}
+.questions{
+  margin-left: 60px;
+  width: 100%;
+  overflow-wrap: break-word;
+  min-height: 150px;
+  margin-bottom: 50px;
+}
+#q_head{
+  font-size: 18px;
+  padding-left:18px;
+  padding-top: 20px; 
+  padding-bottom: 10px;
+  font-family: Montserrat-Regular;
+  font-weight: bold;
+}
+.questionFeedback{
+  font-size: 18px;
+  padding-left:18px;
+  padding-top: 20px; 
+  padding-bottom: 10px;
+  font-family: Montserrat-Regular;
+  font-weight: bold;
+}
+.vote {
+display: flex;
+flex-direction: column;
+font-size: large;
+padding: 20px;
+}
+.vote i {
+color: #25274d;
+}
+.voteBtn {
+width: 45px;
+border: 2px solid #25274d;
+outline: none;
+cursor: pointer;
+}
+.voteBtn:hover {
+border: 1px solid #25274d;
+}
+#count {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-left: 13px;
+  background-color: rgba(248, 248, 250, 0.5);
+}
+.num {
+font-size: 16px;
+font-family: roboto-regular;
+font-weight: bold;
+outline: none;
+}
+.question_tab {
+display: flex;
+flex-direction: row;
+}
+.question_sess {
+display: flex;
+flex-direction: column;
+flex-wrap: wrap; 
+padding-left: 30px;
+line-height: 20px;
+padding-top: 20px;
+padding-bottom: 40px;
+padding-right: 10px;
+flex-basis: 100%;
+max-width: 700px;
+overflow-wrap: break-word;
+}
+.comment {
+display: flex;
+flex-direction: column;
+padding-top: 5px;
+}
+.commentBtn {
+margin-bottom: 10px;
+font-family: raleway-regular;
+cursor: pointer;
+}
+.commentBtn:hover {
+color: #25274d;
+}
+.commentBox {
+  margin-left: 10px;
+  border-radius: 5px;
+  flex-basis: 100px;
+  padding:10px;
+  margin-right:10px;
+  display: none;
+  flex-direction: column;
+}
+.commentText {
+resize: none;
+outline: none;
+margin-left: 0px;
+border-radius: 5px;
+padding:10px;
+margin-right:15px;
+width: 100%;
+font-family: raleway-regular;
+display: block !important;
+}
+.commentDetails{
+  margin-top: 5px;
+  color: #7c7a7a;
+}
+.commentDate{
+  font-family: raleway-regular;
+  font-size: 1em;
+  margin-left: 1em;
+  text-transform: lowercase;
+}
+.commentUser{
+  font-family: Catamaran-regular;
+  font-size: 1em;
+  color: #25274d;
+}
+#postCom {
+text-align: center;
+align-self: flex-end;
+display: block !important;
+margin-top: 10px;
+margin-right:0px ;
+}
+.postC {
+width: 100px;
+flex-basis: 20px;
+align-self: flex-end;
+display: none;
+margin-top: 10px;
+}
+.commentPost {
+display: flex;
+flex-direction: column;
+width: 95%;
+overflow-wrap: break-word;
+margin-top: 5px;
+padding: 10px;
+padding-bottom: 5px;
+font-family: raleway-regular;
+line-height: 18px;
+font-size: 1em;
+border-bottom: 1px solid rgb(124, 122, 122,0.5);
+}
+#commentPost {
+display: flex;
+flex-direction: column;
+width: 95%;
+overflow-wrap: break-word;
+margin-top: 5px;
+padding: 10px;
+padding-bottom: 5px;
+border-bottom: 1px solid #7c7a7a;
+display: none;
+}
+.postQues {
+display: flex;
+flex-direction: column;
+flex-wrap: wrap;
+overflow-wrap: break-word;
+font-family: Montserrat-Regular;
+color: #7c7a7a;
+line-height: 21px;
+font-size: 14px;
+width: 95%;
+}
+.quesTitle{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  overflow-wrap: break-word;
+  font-family: roboto-regular;
+  line-height: 21px;
+  font-size: 16px;
+  border-bottom: 1px solid #7c7a7a;
+  margin-bottom: 5px;
+  width: 95%;
+}
+.quesDetail{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 10px;
+  color: #3f3e3e;
+  font-family: Catamaran-regular;
+  text-transform: lowercase;
+  font-size: 16px;
+}
+.rsvpResponse{
+  color: #25274d;
+  font-family: Catamaran-regular;
+  font-size: 16px;
 }
 /*
   Add question modal 
@@ -346,7 +530,6 @@ display: block;
   transform: scale(1.0);
   transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
 }
-
 .question_container{
 width: 600px;
 height: 100%;
@@ -356,183 +539,31 @@ display:flex;
 flex-direction: column;
 clear:both;
 }
-.question_title{
-margin-top: 20px;
-margin-left:30px;
-}
 .question_title p{
 font-size: 18px;
 color: #25274d;
 margin-bottom: 20px;
 }
-#title{
-width:90%;
+.title{
+width:100%;
 padding: 10px 15px;
 font-size: 16px;
+font-family: raleway-regular;
 border: 2px solid #25274d;
+outline: none;
 }
 .question_body{
 margin-top:20px;
-margin-left:30px;
 }
 .body{
-width:90%;
+width:100%;
 resize:none;
-padding:5px;
+padding:10px 15px;
+font-size: 16px;
+font-family: raleway-regular;
 border: 2px solid #25274d;
+outline: none;
 }
 .question_btn{
 margin-top:20px;
-margin-left:30px;
-}
-#quesBtn{
-width: 100px;
-padding: 10px 20px;
-font-size: 16px;
-border-radius: 10px;
-cursor: pointer;
-color:white;
-background: #25274d;
-outline: none;
-}
-#quesBtn:hover{
-color:#25274d;
-background: white;
-border: 2px solid #25274d;
-}
-.questions{
-  margin-left: 60px;
-  width: 100%;
-  overflow-wrap: break-word;
-  min-height: 150px;
-  margin-bottom: 50px;
-}
-#q_head{
-  font-size: 18px;
-  padding-left:18px;
-  padding-top: 20px; 
-  padding-bottom: 10px;
-  font-family: Montserrat-Regular;
-  font-weight: bold;
-
-}
-.vote {
-display: flex;
-flex-direction: column;
-font-size: large;
-padding: 20px;
-}
-.vote i {
-color: #25274d;
-}
-.voteBtn {
-width: 45px;
-border: 2px solid #25274d;
-outline: none;
-cursor: pointer;
-}
-.voteBtn:hover {
-border: 1px solid #25274d;
-}
-#count {
-flex-basis: 40px;
-padding-left: 13px;
-background-color: rgba(248, 248, 250, 0.5);
-}
-#num {
-width: 35px;
-border: none;
-font-size: 16px;
-padding-top: 10px;
-outline: none;
-}
-.question_tab {
-display: flex;
-flex-direction: row;
-}
-.question_sess {
-display: flex;
-flex-direction: column;
-flex-wrap: wrap; 
-padding-left: 30px;
-line-height: 20px;
-padding-top: 20px;
-padding-bottom: 40px;
-padding-right: 10px;
-flex-basis: 100%;
-max-width: 700px;
-overflow-wrap: break-word;
-}
-.comment {
-display: flex;
-flex-direction: column;
-padding-top: 15px;
-}
-.commentBtn {
-margin-bottom: 10px;
-cursor: pointer;
-}
-.commentBtn:hover {
-color: #25274d;
-}
-.commentBox {
-resize: none;
-flex-basis: 100px;
-outline: none;
-margin-left: 15px;
-border-radius: 5px;
-padding:10px;
-margin-right:10px;
-display: none;
-}
-#postCom {
-width: 100px;
-flex-basis: 20px;
-align-self: flex-end;
-display: none;
-margin-top: 10px;
-margin-right:10px;
-}
-.postC {
-width: 100px;
-flex-basis: 20px;
-align-self: flex-end;
-display: none;
-margin-top: 10px;
-}
-.commentPost {
-display: flex;
-flex-direction: column;
-width: 100%;
-overflow-wrap: break-word;
-max-width: 500px;
-padding-left: 30px;
-margin-top: 20px;
-padding-top: 20px;
-padding-bottom: 20px;
-border-top: 1px solid #7c7a7a;
-border-bottom: 1px solid #7c7a7a;
-}
-#commentPost {
-display: flex;
-flex-direction: column;
-width: 100%;
-overflow-wrap: break-word;
-max-width: 500px;
-padding-left: 30px;
-margin-top: 20px;
-padding-top: 20px;
-padding-bottom: 20px;
-border-top: 1px solid #7c7a7a;
-border-bottom: 1px solid #7c7a7a;
-display: none;
-}
-.postQues {
-display: flex;
-flex-direction: column;
-flex-wrap: wrap;
-overflow-wrap: break-word;
-font-family: raleway-regular;
-line-height: 21px;
-font-size: 16px;
 }
