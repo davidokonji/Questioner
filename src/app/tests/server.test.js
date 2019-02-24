@@ -1467,3 +1467,67 @@ describe('DELETE /api/v1/meetups/:id', () => {
       });
   });
 });
+describe('GET /api/v1/user/', () => {
+  it('should get a single user using id from token', (done) => {
+    chai.request(app)
+      .get('/api/v1/user/')
+      .set('x-access-token', token)
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.be.status(200);
+        expect(res).to.be.a('object');
+        return done();
+      });
+  });
+});
+describe('GET /api/v1/user/questions', () => {
+  it('should get the count of questions posted by user', (done) => {
+    chai.request(app)
+      .get('/api/v1/user/questions')
+      .set('x-access-token', token)
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.be.status(200);
+        expect(res).to.be.a('object');
+        return done();
+      });
+  });
+});
+describe('GET /api/v1/user/questions/comments', () => {
+  it('should get the count of comments posted by user', (done) => {
+    chai.request(app)
+      .get('/api/v1/user/questions/comments')
+      .set('x-access-token', token)
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.be.status(200);
+        expect(res).to.be.a('object');
+        return done();
+      });
+  });
+});
+describe('GET /api/v1/meetups/rsvp/topquestions', () => {
+  it('should get the top questions feed for meetups user rsvped', (done) => {
+    chai.request(app)
+      .get('/api/v1/meetups/rsvp/topquestions')
+      .set('x-access-token', token)
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.be.status(200);
+        expect(res).to.be.a('object');
+        return done();
+      });
+  });
+});
