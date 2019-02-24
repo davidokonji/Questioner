@@ -76,6 +76,59 @@ class Questioner {
       }],
     });
   }
+
+  /**
+   * Get a user by id
+   * @param {object} req
+   * @param {object} res
+   */
+  static async getSingleUser(req, res) {
+    const text = 'SELECT * FROM users where id = $1';
+    const { rows } = await db.query(text, [req.user.id]);
+    return res.status(200).json({
+      status: 200,
+      data: [{
+        id: rows[0].id,
+        firstname: rows[0].firstname,
+        lastname: rows[0].lastname,
+        othername: rows[0].othername,
+        email: rows[0].email,
+        phonenumber: rows[0].phonenumber,
+        username: rows[0].username,
+      }],
+    });
+  }
+
+  /**
+   * Get question count for user
+   * @param {Object} req
+   * @param {Object} res
+   */
+  static async getQuestionCount(req, res) {
+    const text = 'SELECT * FROM question WHERE createdby = $1 order by vote desc';
+    const { rows, rowCount } = await db.query(text, [req.user.id]);
+    return res.status(200).json({
+      status: 200,
+      questionCount: rowCount,
+      data: rows,
+    });
+  }
+
+  /**
+   * Get questions commented on by user
+   * @param {object} req
+   * @param {object} res
+   */
+  static async getQuestionCommentCount(req, res) {
+    const text = `select count (*) from comments as c
+    right join question as q on c.questionid = q.id where c.userid = $1`;
+    const { rows } = await db.query(text, [req.user.id]);
+    return res.status(200).json({
+      status: 200,
+      commentCount: rows[0].count,
+    });
+  }
+
   /**
    *  Login user
    * @param {object} req
@@ -258,19 +311,34 @@ class Questioner {
    * @returns {object} questions object
    */
   static async getQuestions(req, res) {
-    const text = 'select * from question where meetupid = $1';
+    const text = 'select * from question where meetupid = $1 ORDER BY vote DESC';
     const comments = 'select * from comments';
+    const users = 'select * from users';
     const id = parseInt(req.params.id, 10);
-    const { rows } = await db.query(text, [id]);
+    const { rows, rowCount } = await db.query(text, [id]);
     const comment = await db.query(comments);
+    const user = await db.query(users);
     const questions = [];
     rows.map(async (row) => {
+      const createdby = user.rows.filter(post => post.id === row.createdby);
+      const questioncomments = comment.rows.filter(item => (item.questionid === row.id));
+      const updatecomments = questioncomments.map((comm) => {
+        const createdbycomment = user.rows.filter(creator => creator.id === comm.userid);
+        const update = {
+          id: comm.id,
+          questionid: comm.questionid,
+          comment: comm.comment,
+          userid: createdbycomment[0].username,
+          createdon: comm.createdon,
+        };
+        return update;
+      });
       const question = {
         id: row.id,
         createdon: row.createdon,
-        createdby: row.createdby,
+        createdby: createdby[0].username,
         title: row.title,
-        comments: comment.rows.filter(item => item.questionid === row.id),
+        comments: updatecomments,
         body: row.body,
         vote: row.vote,
       };
@@ -278,6 +346,7 @@ class Questioner {
     });
     return res.status(200).json({
       status: 200,
+      questionCount: rowCount,
       data: questions,
     });
   }
@@ -379,6 +448,27 @@ class Questioner {
   }
 
   /**
+   * Get Top question feed for upcoming meetup
+   * @param {Object} req
+   * @param {Object} res
+   */
+  static async getTopQuestion(req, res) {
+    const text = `SELECT * FROM rsvp WHERE userid = $1 
+                  AND (response = 'yes' OR response = 'maybe')`;
+    const { rows } = await db.query(text, [req.user.id]);
+    const question = 'select * from question order by vote desc';
+    const response = await db.query(question);
+    const topquestions = rows.map((row) => {
+      const filtered = response.rows.filter(resp => resp.meetupid === row.meetupid);
+      return filtered;
+    });
+    return res.status(200).json({
+      status: 200,
+      data: topquestions,
+    });
+  }
+
+  /**
    *  post comments
    * @param {object} req
    * @param {object} res
@@ -403,6 +493,8 @@ class Questioner {
           title: req.question.title,
           body: req.question.body,
           comment: rows[0].comment,
+          userid: rows[0].userid,
+          createdon: rows[0].createdon,
         },
       ],
     });

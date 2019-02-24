@@ -34,6 +34,8 @@ app.post('/api/v1/meetups', [cors(), Auth, isadmin, cloudinaryConfig, multerUplo
 
 app.get('/api/v1/meetups/upcoming/', [cors(), Auth, Validation.GetUpcoming], Questioner.getUpcoming);
 
+app.get('/api/v1/meetups/rsvp/topquestions', [cors(), Auth], Questioner.getTopQuestion);
+
 app.get('/api/v1/meetups/:id', [cors(), Auth, Validation.GetOneMeetup], Questioner.getMeetupById);
 
 app.get('/api/v1/meetups/', [cors(), Auth, Validation.GetAllMeetups], Questioner.getMeetups);
@@ -53,6 +55,12 @@ app.post('/api/v1/meetups/:id/rsvps', [cors(), Auth, Validation.createRsvp], Que
 app.post('/api/v1/auth/signup', [cors(), Validation.createUser], Questioner.createUser);
 
 app.post('/api/v1/auth/login', [cors(), Validation.loginUser], Questioner.loginUser);
+
+app.get('/api/v1/user/', [cors(), Auth], Questioner.getSingleUser);
+
+app.get('/api/v1/user/questions', [cors(), Auth], Questioner.getQuestionCount);
+
+app.get('/api/v1/user/questions/comments', [cors(), Auth], Questioner.getQuestionCommentCount);
 
 app.delete('/api/v1/meetups/:id', [cors(), Auth, isadmin, Validation.deleteMeetup], Questioner.deleteMeetup);
 
