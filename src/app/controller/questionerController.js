@@ -313,17 +313,32 @@ class Questioner {
   static async getQuestions(req, res) {
     const text = 'select * from question where meetupid = $1 ORDER BY vote DESC';
     const comments = 'select * from comments';
+    const users = 'select * from users';
     const id = parseInt(req.params.id, 10);
     const { rows, rowCount } = await db.query(text, [id]);
     const comment = await db.query(comments);
+    const user = await db.query(users);
     const questions = [];
     rows.map(async (row) => {
+      const createdby = user.rows.filter(post => post.id === row.createdby);
+      const questioncomments = comment.rows.filter(item => (item.questionid === row.id));
+      const updatecomments = questioncomments.map((comm) => {
+        const createdbycomment = user.rows.filter(creator => creator.id === comm.userid);
+        const update = {
+          id: comm.id,
+          questionid: comm.questionid,
+          comment: comm.comment,
+          userid: createdbycomment[0].username,
+          createdon: comm.createdon,
+        };
+        return update;
+      });
       const question = {
         id: row.id,
         createdon: row.createdon,
-        createdby: row.createdby,
+        createdby: createdby[0].username,
         title: row.title,
-        comments: comment.rows.filter(item => item.questionid === row.id),
+        comments: updatecomments,
         body: row.body,
         vote: row.vote,
       };
