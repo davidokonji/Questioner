@@ -58,6 +58,8 @@ app.post('/api/v1/auth/login', [cors(), Validation.loginUser], Questioner.loginU
 
 app.get('/api/v1/user/', [cors(), Auth], Questioner.getSingleUser);
 
+app.get('/api/v1/user/upcomingmeetups', [cors(), Auth], Questioner.getUserUpcoming);
+
 app.get('/api/v1/user/questions', [cors(), Auth], Questioner.getQuestionCount);
 
 app.get('/api/v1/user/questions/comments', [cors(), Auth], Questioner.getQuestionCommentCount);

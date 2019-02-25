@@ -272,6 +272,28 @@ class Questioner {
   }
 
   /**
+   * Get upcoming meetup for user
+   * @param {*} req
+   * @param {*} res
+   */
+  static async getUserUpcoming(req, res) {
+    const text = `SELECT * FROM rsvp WHERE userid = $1 
+    AND (response = 'yes' OR response = 'maybe')`;
+    const { rows } = await db.query(text, [req.user.id]);
+    const meetup = `select * from meetup where happeningon >= now()
+    order by happeningon asc`;
+    const response = await db.query(meetup);
+    const upcomingMeetups = rows.map((row) => {
+      const filtered = response.rows.filter(resp => resp.id === row.meetupid);
+      return filtered;
+    });
+    return res.status(200).json({
+      status: 200,
+      data: upcomingMeetups,
+    });
+  }
+
+  /**
    * creating a question for a meetup
    * @param {object} req
    * @param {object} res
@@ -457,10 +479,26 @@ class Questioner {
                   AND (response = 'yes' OR response = 'maybe')`;
     const { rows } = await db.query(text, [req.user.id]);
     const question = 'select * from question order by vote desc';
+    const meetups = 'select * from meetup where happeningon >= now()';
     const response = await db.query(question);
+    const meetup = await db.query(meetups);
     const topquestions = rows.map((row) => {
       const filtered = response.rows.filter(resp => resp.meetupid === row.meetupid);
-      return filtered;
+      const newfiltered = filtered.map((filter) => {
+        const meetupName = meetup.rows.filter(meet => filter.meetupid === meet.id);
+        const newtop = {
+          id: filter.id,
+          createdon: filter.createdon,
+          createdby: filter.createdby,
+          meetupid: filter.meetupid,
+          meetupTopic: meetupName[0].topic,
+          title: filter.title,
+          body: filter.body,
+          vote: filter.vote,
+        };
+        return newtop;
+      });
+      return newfiltered;
     });
     return res.status(200).json({
       status: 200,

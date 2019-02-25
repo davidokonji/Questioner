@@ -1483,6 +1483,22 @@ describe('GET /api/v1/user/', () => {
       });
   });
 });
+describe('GET /api/v1/user/upcomingmeetups', () => {
+  it('should get all upcoming meetups user rsvp', (done) => {
+    chai.request(app)
+      .get('/api/v1/user/upcomingmeetups')
+      .set('x-access-token', token)
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.be.status(200);
+        expect(res).to.be.a('object');
+        return done();
+      });
+  });
+});
 describe('GET /api/v1/user/questions', () => {
   it('should get the count of questions posted by user', (done) => {
     chai.request(app)
