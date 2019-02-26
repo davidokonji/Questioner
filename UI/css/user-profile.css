@@ -1,6 +1,27 @@
 /**************************
     USER PROFILE
    **************************/
+.footer{
+    position: relative;
+    bottom: 0;
+    height: 50px;
+    width: 100%;
+    margin-top: 50px;
+    font-family:Montserrat-Regular;    
+    box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
+    background-color: #25274d;
+    color: #ffffff;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.footer i{
+    color: #BA1200;
+}
+title{
+  text-transform: capitalize;
+}
    nav{
     display: flex;
     width: 100%;
@@ -24,6 +45,7 @@
   #nav_img{
       color: #fff;
       padding-bottom: 20px;
+      text-transform: capitalize;
   }
   .logo{
    flex-grow: 1;
@@ -82,210 +104,247 @@
   .dropdown:hover .dropdown-content {
    display: block;
   }
-   .container{
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 16px;
+  }
+  #subcontainer{
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    height:auto;
-    width: 100%;
-    justify-content:center;
-}
-.sidebar{
+    margin: 0 auto;
+    width: 90%;
+    margin-top: 6em;
+  }
+  /* 
+    Side Card session
+   */
+  .sidecard{
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
+    margin-right: 2em;
+    box-shadow: 0px 2px 2px 1px rgba(0,0,0,0.2);
+    min-height: 30px;
+    width: 25%;
+  }
+  .usercard{
+    display: flex;
+    flex-direction: column;
+    margin: 1em;
+  }
+  .user_image{
+    display: flex;
+    flex-direction: row;
     justify-content: center;
-    order: 1;
-    margin-left: 20px;
-    padding-bottom: 50px;
-    margin-top:60px;
-    max-width: 100%;
-    margin-right: 10px;
-    /* max-height: 900px; */
-    margin-bottom: 50px;
-    overflow-wrap: break-word;
-    font-family:roboto-regular; 
-}
-.profile_img{
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    margin: 20px;
-    order: 1;
-    margin-bottom: 10px;
-    box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
-}
-.profile_details{
- display: flex;
- flex-direction: column;
- flex-wrap: wrap;
- order: 2;
- margin: 20px;
- margin-top:50px;
- max-width: 280px;
- overflow-wrap: break-word; 
-}
-.profile_name{
-    padding-bottom: 15px;
-    overflow-wrap: break-word;
-}
-.profile_username{
-    padding-bottom: 15px;
-}
-.profile_details p{
- padding-bottom: 20px;
-}
-.profile_details p i{
-    color: #7c7a7a;
-}
-.editBtn{
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 14px;
-    margin-bottom: 10px;
-    outline: none;
-}
-.profile_dash{
+    width: 100%;
+    margin-bottom: 1em;
+  }
+  .user_image img{
+    width: 12em;
+    height: 12em;
+    margin-top: 1em;
+    object-fit: fill;
+    border: 1px solid #e5e2e2;
+  }
+  .card_details{
     display: flex;
     flex-direction: column;
-    flex-wrap:wrap;
-    order: 2;
-    margin-top:70px;
-    margin-bottom: 50px;
-    padding-top:20px;
-    /* padding-left: 10px;  */
-    padding-bottom: 50px;
-    padding-right: 10px;
-    margin-right: 5px;
+  }
+  .user_fullname{
+    width: 100%;
+    overflow-wrap: break-word;
+    margin-left: 2em;
+    margin-bottom: 5px;
+    text-transform: capitalize;
+    font-family:roboto-regular;
+  }
+  .username{
+    width: 100%;
+    overflow-wrap: break-word;
+    margin-left: 2em;
+    color: #9e9a9a;
+    text-transform: lowercase;
+    font-family: Catamaran-regular;
+  }
+  .aboutme{
+    margin-left: 2em;
+    margin-top: 14px;
+    color: #4e4d4d;
+    font-family:roboto-regular;
+  }
+  .editbtn{
+    padding: 10px 20px;
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 1em;
+    outline: none;
+    font-size: 1em;
+    border-radius: 10px;
+  }
+  /* 
+  main body session
+   */
+.mainbody{
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid black; */
+  min-height: 30px;
+  width: 75%;
 }
-.update{
+  /* 
+  user statistics session
+  */
+  .user_stats{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: 0 auto;
+    justify-content: space-evenly;
+    height: 5em;
+  }
+  .comment_stats{
+    font-family: Montserrat-Regular;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #9e9a9a;
+  }
+  .question_stats{
+    font-family: Montserrat-Regular;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #9e9a9a;
+  }
+  .stat_title{
+    margin: 0 auto;
+    margin-top: 0.5em;
+  }
+  .count{
+    font-family: Catamaran-regular;
+    font-size: 18px;
+    letter-spacing: 3px;
+    margin: 0 auto;
+    margin-top: 10px;
+  }
+  /* 
+    user info session
+  */
+  .user_info{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-}
-.upBox{
-    width: 200px;
-    height: 130px;
-    font-size:14px;
-    border-radius: 5px;
-    box-shadow: 0px 1px 5px rgba(0,0,0,0.5);
-    font-family:Montserrat-Regular;
-}
-.update_val{
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  margin-top: 30px;
-  font-size:21px;
-}
-.update_1{
-    padding: 10px;
-    margin-left: 50px;
-}
-.update_2{
-  width: 230px;
- margin-left: 80px;
- padding: 10px;
-}
-.update_3{
- margin-left: 100px;
- margin-right: 70px;
- padding: 10px;
-}
-.schedule{
-    max-height: 300px;
-    margin-top: 30px;
-    margin-right: 15px;
+    flex-wrap: wrap;
+    margin-top: 2em;
+    max-height: 30em;
+    margin-bottom: 4em;
+  }
+  .top_questions{
+    width: 48%;
+    height: 100%;
+    min-height: 100px;
+  }
+  .rsvp{
+    width: 48%;
+    height: 100%;
+    min-height: 100px;
+  }
+  .session_header{
+    font-family: Montserrat-Regular;
+    width: 100%;
+    border-bottom: 1px solid #9e9a9a;
+    padding: 10px 10px;
+    background-color: #f8f8f8;
+    box-shadow: 0px 2px 2px 1px rgba(0,0,0,0.2);
+  }
+  .question_list{
+    width: 100%;
+    box-shadow: 0px 2px 2px 1px rgba(0,0,0,0.2);
+    height: 100%;
+    min-height: 30em;
+    overflow: scroll;
+    background-color: #f8f8f8;
+  }
+  .meetup_list{
+    width: 100%;
+    box-shadow: 0px 2px 2px 1px rgba(0,0,0,0.2);
+    height: 100%;
+    min-height: 30em;
+    overflow: scroll;
+    background-color: #f8f8f8;
+
+  }
+  .list{
+    border-top: 1px solid #9e9a9a;
+    border-bottom: 1px solid #9e9a9a;
+    height: 6em;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    overflow-wrap: break-word;
+    background-color: #ffffff;
+    font-family: raleway-regular;
+  }
+  .feedback_text{
+    font-family: Catamaran-regular;
+    margin: 2em auto;
+  }
+  .list_details{
     display: flex;
     flex-direction: column;
-    overflow: scroll;
-}
-.sch_title{
-    box-shadow: 0px 1px 5px rgba(0,0,0,0.5);
-    padding: 10px 20px !important;
-    margin-top: 50px;
-    margin-right: 18px; 
-}
-.sch_tab{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin:10px !important;
-  margin-top: 0px;
-  padding:10px !important;
-  padding-top:0px; 
-  box-shadow: 0px 1px 5px rgba(0,0,0,0.2);
-
-}
-.sch_tab_img{
- margin-right: 30px;
-}
-.sch_details{
-  display:flex;
-  flex-direction: row;
-}
-.sch_details_title{
-  width: 500px;
-  max-width: 500px;
-  text-overflow: ellipsis;
-  overflow: hidden; 
-  white-space: nowrap;
-}
-.sch_date{
-  width: 100px;
-  max-width: 100px;
-}
-.sch_location{
-  width: 100px;
-  max-width: 100px;
-}
-.topQues{
- max-height: 300px;
- margin-top: 20px;
- margin-right: 15px;
- display: flex;
- flex-direction: column;
-overflow: scroll;
-}
-
-.ques_title{
-  box-shadow: 0px 1px 5px rgba(0,0,0,0.5);
-  padding: 10px 15px;
-  margin-top: 50px;
-  margin-right: 18px; 
-
-}
-.ques_tab{
-display: flex;
-flex-direction: row;
-align-items: center;
-margin:10px;
-padding:10px;
-padding-top:0px; 
-margin-top: 0px;
-box-shadow: 0px 1px 5px rgba(0,0,0,0.2);
-
-}
-.tab_img{
-  border-radius: 50%;
-
-}
-.ques_tab_img{
-margin-right: 50px;
-}
-.ques_details{
-display:flex;
-flex-direction: row;
-}
-.ques_details_title{
-width: 600px;
-max-width: 600px;
-text-overflow: ellipsis;
-overflow: hidden; 
-white-space: nowrap;
-}
-.ques_date{
-width: 100px;
-max-width: 100px;
-}
-
+    width: 80%;
+    padding: 5px 5px;
+  }
+  .vote{
+    width: 20%;
+    color: #4b4a4a;
+    padding: 5px 5px;
+  }
+  .vote span{
+    color: #25274d;
+    font-family: Catamaran-regular;
+    padding-right: 0.2em;
+  }
+  .question{
+    white-space: nowrap;
+    width: 100%;
+    margin-bottom: 1em;
+    padding: 5px;
+    padding-bottom: 0;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    text-transform: capitalize;
+    font-family: Montserrat-Regular;
+    letter-spacing: 0.3px;
+  }
+  .question_view{
+    width: 100%; 
+    overflow-wrap: break-word;
+    margin-bottom: 1em;
+    text-transform: capitalize;
+    font-family: Montserrat-Regular;
+  }
+  .meetup_name{
+    width: 100%;
+    font-family: Catamaran-regular;
+    color: #4b4a4a;
+    padding: 5px;
+    padding-top: 0;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    text-transform: capitalize;
+  }
+  .meetup_location{
+    width: 100%;
+    padding-left: 5px;
+    margin-bottom: 2px;
+    overflow-wrap: break-word;
+    text-transform: capitalize;
+  }
+  .meetup_date{
+    width: 100%;
+    padding-top: 5px;
+    margin-bottom: 2px;
+    padding-left: 5px;
+  }

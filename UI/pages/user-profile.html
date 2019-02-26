@@ -1,150 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>user profile - Questioner</title>
-    <link rel="stylesheet" href="../css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title></title>
 
-    <link rel="stylesheet" href="../css/user-profile.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/user-profile.css">
+  <link rel="stylesheet" href="../css/responsive/user-profile.css">
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
-        crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <link rel="stylesheet" type="text/css" href="./../css/responsive/user-profile.css">
-
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" 
+  integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <header>
-            <nav>
-                    <li class="navlink">
-                        <a href="./dashboard.html" id="navlink">
-                            <b>DashBoard</b>
+        <nav>
+                <li class="navlink">
+                    <a href="./dashboard.html" id="navlink">
+                        <b>DashBoard</b>
+                    </a>
+                </li>
+                <li class="logo">
+                    <a href="./dashboard.html" id="logo">
+                        Questioner
+                    </a>
+                </li>
+                <div class="dropdown img_btn">
+                    <button class="dropbtn ">
+                        <span id="nav_img"></span>
+                        <i class="fa fa-caret-down fa-lg" id="img_icon"></i>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="user-profile.html" class="icon user">Your Profile
                         </a>
-                    </li>
-                    <li class="logo">
-                        <a href="./dashboard.html" id="logo">
-                            Questioner
+                        <a href="../../index.html" class="icon signout">Sign Out
                         </a>
-                    </li>
-                    <div class="dropdown img_btn">
-                        <button class="dropbtn ">
-                            <span id="nav_img">NM</span>
-                            <i class="fa fa-caret-down fa-lg" id="img_icon"></i>
-                        </button>
-                        <div class="dropdown-content">
-                            <a href="user-profile.html" class="icon user">Your Profile
-                            </a>
-                            <a href="../../index.html" class="icon signout">Sign Out
-                            </a>
-                        </div>
                     </div>
-                </nav>
-    </header>
-    <div class="container">
-        <div class="sidebar">
-            <div>
-                <img src="../resources/img/profile-placeholder.png" alt="profile image"  class="profile_img" >
-            </div>
-            <div class="profile_details">
-                <div class="profile_name">John Doe</div>
-                <div class="profile_username">johndoe123</div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec
-                        odio.</p>
-                <p><i class="fas fa-map-marker-alt"></i> location</p>
-                <button class="editBtn btn-primary">Edit Profile <i class="fas fa-edit"></i> </button>
-            </div>
+                </div>
+            </nav>
+</header>
+<div class="container">
+  <div id="subcontainer">
+    <div class="sidecard">
+      <div class="usercard">
+        <div class="user_image">
+            <img src="../resources/img/profile-placeholder.png" alt="profile image"  class="profile_img" >
         </div>
-        <div class="profile_dash">
-            <div class="update">
-                <div class="upBox update_1">
-                    Total questions posted
-                    <b class="update_val">
-                        10
-                    </b>
-                </div>
-                <div class="upBox update_2">
-                    Total questions commented
-                    <b class="update_val">
-                        20
-                    </b>
-                </div>
-                <div class="upBox update_3">
-                    Total meet-up RSVP
-                    <b class="update_val">
-                        30
-                    </b>
-                </div>
-            </div>
-            <div class="sch_title">Scheduled Meet Ups</div>
-            <div class="schedule">
-               <a href="./meetup.html" class="sch_link">
-                    <div class="sch_tab">
-                            <div class="sch_tab_img">
-                                 <img  class= "tab_img" src="../resources/img/event.jpg" width= "50px" height="50px"alt="">
-                            </div>
-                            <div class="sch_details">
-                                <div class="sch_details_title">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec
-                                        odio</div>
-                                <div class="sch_date">date</div>
-                                <div class="sch_location">location</div>
-                            </div>
-                        </div>
-               </a>
-               <a href="./meetup.html" class="sch_link">
-                    <div class="sch_tab">
-                            <div class="sch_tab_img">
-                                 <img  class= "tab_img" src="../resources/img/event.jpg" width= "50px" height="50px"alt="">
-                            </div>
-                            <div class="sch_details">
-                                <div class="sch_details_title">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec
-                                        odio</div>
-                                <div class="sch_date">date</div>
-                                <div class="sch_location">location</div>
-                            </div>
-                        </div>
-               <a href="./meetup.html" class="sch_link">
-                    <div class="sch_tab">
-                            <div class="sch_tab_img">
-                                 <img  class= "tab_img" src="../resources/img/event.jpg" width= "50px" height="50px"alt="">
-                            </div>
-                            <div class="sch_details">
-                                <div class="sch_details_title">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec
-                                        odio</div>
-                                <div class="sch_date">date</div>
-                                <div class="sch_location">location</div>
-                            </div>
-                        </div>
-               </a>
-               
-            </div>
-            <div class="ques_title">Top Questions Feed</div>
-            <div class="topQues">
-               <a href="./meetup.html" class="ques_link">
-                    <div class="ques_tab">
-                            <div class="ques_tab_img">
-                                 <img class= "tab_img" src="../resources/img/event.jpg" width= "50px" height="50px"alt="">
-                            </div>
-                            <div class="ques_details">
-                                <div class="ques_details_title">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec
-                                        odio</div>
-                                <div class="ques_date">Votes</div>
-                            </div>
-                        </div>
-               </a>
-               
-            </div>
+        <div class="card_details">
+          <div class="user_fullname">
+            John doe
+          </div>
+          <div class="username">
+            @ <span class="name"></span>
+          </div>
+          <div class="aboutme">
+          </div>
+          <button class="btn-primary editbtn">
+              Edit profile
+          </button>
         </div>
+      </div>
     </div>
-    <footer class="footer">
-            <div class="footerBottom">
-                <p>created with <i class="fa fa-heart fa-sm"></i> by Okonji Chukwunonso</p>
+    <div class="mainbody">
+      <div class="user_stats">
+        <div class="comment_stats">
+          <div class="stat_title">
+            Question(s) Posted
+          </div>
+          <div class="count">
+          </div>
+        </div>
+        <div class="question_stats">
+          <div class="stat_title">
+           Question(s) Commented
+          </div>
+          <div class="count">
+            100
+          </div>
+        </div>
+      </div>
+      <div class="user_info">
+          <div class="top_questions">
+              <div class="session_header">
+                Top upcoming meet-up Question(s)
+              </div>
+              <ul class="question_list">
+               
+              </ul>
             </div>
-    </footer>
-</body>
-<script src="../js/main.js"></script>
+            <div class="rsvp">
+                <div class="session_header">
+                  upcoming scheduled meet-up(s)
+                </div>
+                <ul class="meetup_list">
+                    <li class="list">
+                        <div class="list_details">
+                          <div class="meetup_name">
+                            meetup name
+                          </div>
+                          <div class="meetup_location">
+                              <img src="../resources/svg/location.svg" alt="" width="15px"
+                              height="15px">
+                              meetup location
+                          </div>
+                          <div class="meetup_date">
+                              <img src="../resources/svg/calendar.svg" alt="" width="15px"
+                              height="15px">
+                              meetup date
+                            </div>
+                        </div>
+                        <div class="vote">
+                          <span>2 </span> vote(s)
+                        </div>
+                      </li>
 
+                </ul>
+              </div>
+      </div>
+  </div>
+    </div>
+  </div>
+</div>
+<footer class="footer">
+        <p>created with <i class="fa fa-heart fa-sm"></i> by Okonji Chukwunonso</p>
+</footer>
+</body>
+<script src="../js/user-profile.js"></script>
+<script src="../js/signout.js"></script>
 </html>
