@@ -33,6 +33,10 @@ class Dashboard {
     })
     .then(response => response.json())
     .then(data => {
+      if(data.status === 401){
+        window.localStorage.clear();
+        window.location.href = '../pages/auth.html';
+      }
       if(data.data.length >= 9){
         moreBtn.style.display = 'block';
       }
