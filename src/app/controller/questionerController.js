@@ -21,7 +21,6 @@ class Questioner {
    */
   static getRequiredFields(meetups, filtered) {
     meetups.map((meet) => {
-      // const formated = moment(meet.happeningon).format('dddd, MMMM Do YYYY');
       const meetup = {
         id: meet.id,
         title: meet.topic,
@@ -51,7 +50,7 @@ class Questioner {
       req.body.firstname,
       req.body.lastname,
       req.body.othername,
-      req.body.email,
+      req.body.email.toLowerCase(),
       hashedPassword,
       req.body.phonenumber,
       req.body.username,
@@ -107,6 +106,12 @@ class Questioner {
   static async getQuestionCount(req, res) {
     const text = 'SELECT * FROM question WHERE createdby = $1 order by vote desc';
     const { rows, rowCount } = await db.query(text, [req.user.id]);
+    if (rowCount === 0) {
+      return res.status(404).json({
+        status: 404,
+        message: 'user has posted no question',
+      });
+    }
     return res.status(200).json({
       status: 200,
       questionCount: rowCount,
@@ -139,7 +144,7 @@ class Questioner {
   static async loginUser(req, res) {
     const text = 'SELECT * FROM users WHERE email = $1 ';
     const values = [
-      req.body.email,
+      req.body.email.toLowerCase(),
     ];
     const { rows } = await db.query(text, values);
     const matchedPassword = hash.verifyPassword(req.body.password, rows[0].password);
@@ -170,6 +175,67 @@ class Questioner {
   }
 
   /**
+   * Edit user details
+   * @param {Object} req
+   * @param {Object} res
+   */
+  static async editUser(req, res) {
+    if (req.file) {
+      return Helper.profileupload(req, res);
+    }
+    const text = `UPDATE users SET username = $1, about = $2 
+                  WHERE id = $3 RETURNING *`;
+    const values = [
+      req.body.username,
+      req.body.about,
+      req.user.id,
+    ];
+    const { rows } = await db.query(text, values);
+
+    return res.status(200).json({
+      status: 200,
+      data: {
+        firstname: rows[0].firstname,
+        lastname: rows[0].lastname,
+        othername: rows[0].othername,
+        email: rows[0].email,
+        phonenumber: rows[0].phonenumber,
+        username: rows[0].username,
+        about: rows[0].about,
+      },
+    });
+  }
+
+  /**
+   * edit user password
+   * @param {Object} req
+   * @param {Object} res
+   */
+  static async editPassword(req, res) {
+    const hashedPassword = hash.hashPassword(req.body.password, 10);
+    const text = `UPDATE users SET password = $1
+                WHERE id = $2 RETURNING *`;
+    const values = [
+      hashedPassword,
+      req.user.id,
+    ];
+    const { rows } = await db.query(text, values);
+
+    return res.status(200).json({
+      status: 200,
+      data: {
+        firstname: rows[0].firstname,
+        lastname: rows[0].lastname,
+        othername: rows[0].othername,
+        email: rows[0].email,
+        phonenumber: rows[0].phonenumber,
+        username: rows[0].username,
+        about: rows[0].about,
+      },
+    });
+  }
+
+  /**
    * create a meetup
    * @param {object} req
    * @param {object} res
@@ -177,7 +243,7 @@ class Questioner {
    */
   static async createMeetup(req, res) {
     if (req.file) {
-      return Helper(req, res);
+      return Helper.uploadimage(req, res);
     }
     const tag = req.body.tags;
     const splited = tag.split(',');
@@ -279,7 +345,13 @@ class Questioner {
   static async getUserUpcoming(req, res) {
     const text = `SELECT * FROM rsvp WHERE userid = $1 
     AND (response = 'yes' OR response = 'maybe')`;
-    const { rows } = await db.query(text, [req.user.id]);
+    const { rows, rowCount } = await db.query(text, [req.user.id]);
+    if (rowCount === 0) {
+      return res.status(404).json({
+        status: 404,
+        message: 'no upcoming meetup for user',
+      });
+    }
     const meetup = `select * from meetup where happeningon >= now()
     order by happeningon asc`;
     const response = await db.query(meetup);
@@ -477,7 +549,13 @@ class Questioner {
   static async getTopQuestion(req, res) {
     const text = `SELECT * FROM rsvp WHERE userid = $1 
                   AND (response = 'yes' OR response = 'maybe')`;
-    const { rows } = await db.query(text, [req.user.id]);
+    const { rows, rowCount } = await db.query(text, [req.user.id]);
+    if (rowCount === 0) {
+      return res.status(404).json({
+        status: 404,
+        message: 'no top question(s) for user',
+      });
+    }
     const question = 'select * from question order by vote desc';
     const meetups = 'select * from meetup where happeningon >= now()';
     const response = await db.query(question);

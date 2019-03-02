@@ -99,7 +99,7 @@ class Validate {
     }
     try {
       const text = 'SELECT * FROM users WHERE email = $1';
-      const { rows } = await db.query(text, [req.body.email]);
+      const { rows } = await db.query(text, [req.body.email.toLowerCase()]);
       if (!rows[0]) {
         return res.status(404).json({
           status: 404,
@@ -113,6 +113,50 @@ class Validate {
       });
     }
 
+    return next();
+  }
+
+  /**
+   * Edit user middle
+   * @param {Object} req
+   * @param {Object} res
+   * @param {Object} next
+   */
+  static async editUser(req, res, next) {
+    if (req.body.username) {
+      const validusername = validator.isAlphanumeric(req.body.username);
+      if (!validusername) {
+        return res.status(400).json({
+          status: 400,
+          error: 'username is invalid',
+        });
+      }
+    }
+    if (req.body.about) {
+      const validaboutme = validator.isAlphanumeric(req.body.about.replace(/\s/g, ''));
+      if (!validaboutme) {
+        return res.status(400).json({
+          status: 400,
+          error: 'about me details are invalid',
+        });
+      }
+    }
+    return next();
+  }
+
+  /**
+   * edit user password middleware
+   * @param {*} req
+   * @param {*} res
+   * @param {*} next
+   */
+  static async editPassword(req, res, next) {
+    if (req.body.password !== req.body.confirmpassword) {
+      return res.status(400).json({
+        status: 400,
+        error: 'passwords are not equal',
+      });
+    }
     return next();
   }
 
@@ -165,13 +209,7 @@ class Validate {
    */
 
   static async GetOneMeetup(req, res, next) {
-    const id = parseInt(req.params.id, 10);
-    const text = 'SELECT * FROM meetup WHERE id = $1';
-    const { rowCount } = await db.query(text, [id]);
-    if (rowCount === 0) {
-      return Validation.validID(res, ['meetup', id]);
-    }
-    return next();
+    return Validation.noMeetup(req, res, next);
   }
   /**
    * get all meetup middleware
@@ -394,14 +432,7 @@ class Validate {
    * @return  {object} error or pass object
    */
   static async getQuestions(req, res, next) {
-    const id = parseInt(req.params.id, 10);
-    const text = 'SELECT * FROM meetup WHERE id = $1';
-    const { rows, rowCount } = await db.query(text, [id]);
-    if (!rows[0] && rowCount === 0) {
-      return Validation.validID(res, ['meetup', id]);
-    }
-    return next();
+    return Validation.noMeetup(req, res, next);
   }
 }
-
 export default Validate;
