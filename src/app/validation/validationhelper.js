@@ -1,4 +1,5 @@
 import moment from 'moment';
+import db from '../config/db';
 
 class Validation {
   /**
@@ -197,20 +198,6 @@ class Validation {
   //   }
   //   return true;
   // }
-  /**
-   * pretty print date
-   * @param {date} date
-   * @returns {string} date string
-   */
-
-  // static formatDate(date) {
-  //   const monthNames = [
-  //     'January', 'February', 'March',
-  //     'April', 'May', 'June', 'July',
-  //     'August', 'September', 'October',
-  //     'November', 'December',
-  //   ];
-
   //   const day = date.getDate();
   //   const monthIndex = date.getMonth();
   //   const year = date.getFullYear();
@@ -230,6 +217,16 @@ class Validation {
       status: 400,
       message: `User, ${data} already exist`,
     });
+  }
+
+  static async noMeetup(req, res, next) {
+    const id = parseInt(req.params.id, 10);
+    const text = 'SELECT * FROM meetup WHERE id = $1';
+    const { rows, rowCount } = await db.query(text, [id]);
+    if (!rows[0] && rowCount === 0) {
+      return Validation.validID(res, ['meetup', id]);
+    }
+    return next();
   }
 }
 

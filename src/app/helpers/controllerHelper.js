@@ -48,5 +48,46 @@ class Helper {
         });
       });
   }
+
+  static async profileupload(req, res) {
+    const file = dataUri.dataUri(req).content;
+    return cloudinary.v2.uploader.upload(file, {
+      folder: 'questioner/userprofile',
+      use_filename: true,
+      resource_type: 'image',
+    }).then(async (result) => {
+      const images = result.url;
+      const splitedImages = images.split(',');
+      const text = `UPDATE users SET username = $1, about = $2, images = $3
+                    WHERE id = $4 RETURNING *`;
+      const values = [
+        req.body.username,
+        req.body.about,
+        splitedImages,
+        req.user.id,
+      ];
+      const { rows } = await db.query(text, values);
+
+      return res.status(200).json({
+        status: 200,
+        data: [{
+          firstname: rows[0].firstname,
+          lastname: rows[0].lastname,
+          othername: rows[0].othername,
+          email: rows[0].email,
+          phonenumber: rows[0].phonenumber,
+          username: rows[0].username,
+          images: rows[0].images,
+          about: rows[0].about,
+        }],
+      });
+    })
+      .catch((err) => {
+        return res.status(400).json({
+          status: 400,
+          message: err.message,
+        });
+      });
+  }
 }
-export default Helper.uploadimage;
+export default Helper;
