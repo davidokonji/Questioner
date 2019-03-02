@@ -16,6 +16,7 @@ const expect = chai.expect;
 chai.should();
 
 let token = '';
+let testToken = '';
 before((done) => {
   chai.request(app)
     .post('/api/v1/auth/login')
@@ -1483,6 +1484,20 @@ describe('GET /api/v1/user/', () => {
       });
   });
 });
+before((done) => {
+  chai.request(app)
+    .post('/api/v1/auth/login')
+    .send({
+      email: 'rhema@gmail.com',
+      password: 'password',
+    }).end((err, res) => {
+      if (err) {
+        return err;
+      }
+      testToken = res.body.data[0].token || '';
+      return done();
+    });
+});
 describe('GET /api/v1/user/upcomingmeetups', () => {
   it('should get all upcoming meetups user rsvp', (done) => {
     chai.request(app)
@@ -1494,6 +1509,20 @@ describe('GET /api/v1/user/upcomingmeetups', () => {
           return done(err);
         }
         expect(res).to.be.status(200);
+        expect(res).to.be.a('object');
+        return done();
+      });
+  });
+  it('should return 404 if user has no upcoming meetup', (done) => {
+    chai.request(app)
+      .get('/api/v1/user/upcomingmeetups')
+      .set('x-access-token', testToken)
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.be.status(404);
         expect(res).to.be.a('object');
         return done();
       });
@@ -1510,6 +1539,20 @@ describe('GET /api/v1/user/questions', () => {
           return done(err);
         }
         expect(res).to.be.status(200);
+        expect(res).to.be.a('object');
+        return done();
+      });
+  });
+  it('should return 404 for no questions posted by user', (done) => {
+    chai.request(app)
+      .get('/api/v1/user/questions')
+      .set('x-access-token', testToken)
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.be.status(404);
         expect(res).to.be.a('object');
         return done();
       });
@@ -1542,6 +1585,155 @@ describe('GET /api/v1/meetups/rsvp/topquestions', () => {
           return done(err);
         }
         expect(res).to.be.status(200);
+        expect(res).to.be.a('object');
+        return done();
+      });
+  });
+  it('should return 404 if user has not rsvp for any meetup', (done) => {
+    chai.request(app)
+      .get('/api/v1/meetups/rsvp/topquestions')
+      .set('x-access-token', testToken)
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.be.status(404);
+        expect(res).to.be.a('object');
+        return done();
+      });
+  });
+});
+
+describe('POST /api/v1/user/edit', () => {
+  it('should edit a user detail with profile image', (done) => {
+    const images = path.join(__dirname, './test.jpg');
+    chai.request(app)
+      .post('/api/v1/user/edit')
+      .set('x-access-token', token)
+      .set('Content-Type', 'multipart/form-data')
+      .field('username', 'devlen0')
+      .field('about', 'i am a software engineer')
+      .attach('images', images)
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.have.status(200);
+        expect(res).to.be.a('object');
+        res.body.should.have.property('status').equal(200);
+        return done();
+      });
+  });
+  it('should get 400 when invalid image type uploaded', (done) => {
+    const images = path.join(__dirname, './test.mp4');
+    chai.request(app)
+      .post('/api/v1/user/edit')
+      .set('x-access-token', token)
+      .set('Content-Type', 'multipart/form-data')
+      .field('username', 'devlen0')
+      .field('about', 'i am a software engineer')
+      .attach('images', images)
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.have.status(400);
+        expect(res).to.be.a('object');
+        res.body.should.have.property('status').equal(400);
+        return done();
+      });
+  });
+  it('should edit a user detail without profile image', (done) => {
+    chai.request(app)
+      .post('/api/v1/user/edit')
+      .set('x-access-token', token)
+      .set('Content-Type', 'multipart/form-data')
+      .field('username', 'devlen0')
+      .field('about', 'i am a software engineer')
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.have.status(200);
+        expect(res).to.be.a('object');
+        res.body.should.have.property('status').equal(200);
+        return done();
+      });
+  });
+  it('should return 400 when invalid username sent', (done) => {
+    chai.request(app)
+      .post('/api/v1/user/edit')
+      .set('x-access-token', token)
+      .set('Content-Type', 'multipart/form-data')
+      .field('username', 'devlen0*')
+      .field('about', 'i am a software engineer')
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.have.status(400);
+        expect(res).to.be.a('object');
+        res.body.should.have.property('status').equal(400);
+        return done();
+      });
+  });
+  it('should return 400 when invalid username sent', (done) => {
+    chai.request(app)
+      .post('/api/v1/user/edit')
+      .set('x-access-token', token)
+      .set('Content-Type', 'multipart/form-data')
+      .field('username', 'devlen0')
+      .field('about', 'i am a software engineer*')
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.have.status(400);
+        expect(res).to.be.a('object');
+        res.body.should.have.property('status').equal(400);
+        return done();
+      });
+  });
+});
+describe('POST /api/v1/user/edit/password', () => {
+  it('should edit user password', (done) => {
+    chai.request(app)
+      .post('/api/v1/user/edit/password')
+      .set('x-access-token', token)
+      .send({
+        password: 'password',
+        confirmpassword: 'password',
+      })
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.have.status(200);
+        expect(res).to.be.a('object');
+        return done();
+      });
+  });
+  it('should return 400 if passwords do not match', (done) => {
+    chai.request(app)
+      .post('/api/v1/user/edit/password')
+      .set('x-access-token', token)
+      .send({
+        password: 'password',
+        confirmpassword: 'pass',
+      })
+      .end((err, res) => {
+        if (err) {
+          expect(res).to.throw(err);
+          return done(err);
+        }
+        expect(res).to.have.status(400);
         expect(res).to.be.a('object');
         return done();
       });

@@ -26,6 +26,8 @@ const createTables = async () => {
             phonenumber VARCHAR(20) NOT NULL,
             username VARCHAR(191) UNIQUE NOT NULL,
             isadmin BOOLEAN DEFAULT FALSE,
+            images TEXT[],
+            about VARCHAR(256),
             registered TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
             );
 
@@ -95,7 +97,7 @@ const createTables = async () => {
             VALUES ('this is a test meetup2','kwara nigeria','2019-04-12', ARRAY['tags1','tag2'] );
 
             INSERT INTO meetup (topic,location,happeningon,tags) 
-            VALUES ('','unique nigeria','2019-05-12', ARRAY['tech','fun'] );
+            VALUES ('this is a unique meetup','unique nigeria','2019-05-12', ARRAY['tech','fun'] );
 
             INSERT INTO question (createdby, meetupid, title, body, vote)
             VALUES (1, 1, 'this is a question from migration', 'question test test', 2);
