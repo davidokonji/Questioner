@@ -2,6 +2,7 @@ import validator from 'validator';
 import cloudinary from 'cloudinary';
 import Validation from './validationhelper';
 import db from '../config/db';
+import hash from '../middleware/hashPassword';
 
 class Validate {
   /**
@@ -151,6 +152,18 @@ class Validate {
    * @param {*} next
    */
   static async editPassword(req, res, next) {
+    const text = 'SELECT * FROM users WHERE id = $1 ';
+    const values = [
+      req.user.id,
+    ];
+    const { rows } = await db.query(text, values);
+    const matchedPassword = hash.verifyPassword(req.body.password, rows[0].password);
+    if (matchedPassword) {
+      return res.status(400).json({
+        status: 400,
+        message: 'password previously used, change it',
+      });
+    }
     if (req.body.password !== req.body.confirmpassword) {
       return res.status(400).json({
         status: 400,
