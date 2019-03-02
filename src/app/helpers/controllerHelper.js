@@ -70,7 +70,7 @@ class Helper {
 
       return res.status(200).json({
         status: 200,
-        data: {
+        data: [{
           firstname: rows[0].firstname,
           lastname: rows[0].lastname,
           othername: rows[0].othername,
@@ -79,7 +79,7 @@ class Helper {
           username: rows[0].username,
           images: rows[0].images,
           about: rows[0].about,
-        },
+        }],
       });
     })
       .catch((err) => {

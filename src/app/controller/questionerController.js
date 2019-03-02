@@ -94,6 +94,8 @@ class Questioner {
         email: rows[0].email,
         phonenumber: rows[0].phonenumber,
         username: rows[0].username,
+        images: rows[0].images,
+        about: rows[0].about,
       }],
     });
   }
@@ -194,15 +196,16 @@ class Questioner {
 
     return res.status(200).json({
       status: 200,
-      data: {
+      data: [{
         firstname: rows[0].firstname,
         lastname: rows[0].lastname,
         othername: rows[0].othername,
         email: rows[0].email,
         phonenumber: rows[0].phonenumber,
         username: rows[0].username,
+        images: rows[0].images,
         about: rows[0].about,
-      },
+      }],
     });
   }
 
@@ -223,7 +226,7 @@ class Questioner {
 
     return res.status(200).json({
       status: 200,
-      data: {
+      data: [{
         firstname: rows[0].firstname,
         lastname: rows[0].lastname,
         othername: rows[0].othername,
@@ -231,7 +234,7 @@ class Questioner {
         phonenumber: rows[0].phonenumber,
         username: rows[0].username,
         about: rows[0].about,
-      },
+      }],
     });
   }
 
